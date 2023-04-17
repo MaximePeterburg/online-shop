@@ -1,6 +1,6 @@
 export const SHOP_DATA = [
   {
-    title: 'Mens',
+    title: 'Мужские',
     items: [
       {
         id: 1,
@@ -35,7 +35,7 @@ export const SHOP_DATA = [
     ]
   },
   {
-    title: 'Womens',
+    title: 'Женские',
     items: [
       {
         id: 6,
