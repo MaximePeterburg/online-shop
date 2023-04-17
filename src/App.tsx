@@ -1,16 +1,19 @@
 import { Route, Routes } from 'react-router-dom';
 import { GlobalStyle } from './global.styles';
 import Home from './routes/home/home';
-import Shop from './routes/home/shop';
+import Navigation from './routes/navigation/navigation';
+import Shop from './routes/shop/shop';
 function App() {
   return (
-    <div>
+    <>
       <GlobalStyle />
       <Routes>
-        <Route index element={<Home />}></Route>
-        <Route path='shop/*' element={<Shop />}></Route>
+        <Route path='/' element={<Navigation />}>
+          <Route index element={<Home />}></Route>
+          <Route path='shop/*' element={<Shop />}></Route>
+        </Route>
       </Routes>
-    </div>
+    </>
   );
 }
 
