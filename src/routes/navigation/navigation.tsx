@@ -15,6 +15,7 @@ function Navigation({}: Props) {
         <LogoContainer to='/'></LogoContainer>
         <NavLinks>
           <NavLink to='/shop'>Каталог</NavLink>
+          <NavLink to='/auth'>Войти</NavLink>
         </NavLinks>
       </NavigationContainer>
       <Outlet />
