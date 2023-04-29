@@ -2,7 +2,9 @@ import { AuthError, AuthErrorCodes } from 'firebase/auth';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signUpStart } from '../../store/user/user.action';
+import Button from '../button/button.component';
 import FormInput from '../form-input/form-input.component';
+import { SignUpFormContainer } from './sign-up-form.styles';
 
 const defaultFormFields = {
   displayName: '',
@@ -40,29 +42,28 @@ function SignUpForm() {
     setFormFields({ ...formFields, [name]: value });
   };
   return (
-    <div>
-      <h2>Don't have an account? </h2>
-      <span>Sign UP with your email and password</span>
+    <SignUpFormContainer>
+      <h2>Зарегистрироваться</h2>
       <form onSubmit={handleSubmit}>
         <FormInput
           type='text'
           onChange={handleChange}
           required
           name='displayName'
-          label='Display Name'
+          label='Имя'
           value={displayName}
         />
         <FormInput
           type='email'
           onChange={handleChange}
           required
-          label='Email'
+          label='E-mail'
           name='email'
           value={email}
         />
         <FormInput
           type='password'
-          label='Password'
+          label='Пароль'
           onChange={handleChange}
           required
           name='password'
@@ -72,13 +73,13 @@ function SignUpForm() {
           type='password'
           onChange={handleChange}
           required
-          label='Confirm Password'
+          label='Подтвердите пароль'
           name='confirmPassword'
           value={confirmPassword}
         />
-        <button type='submit'>Sign Up</button>
+        <Button type='submit'>Зарегистрироваться</Button>
       </form>
-    </div>
+    </SignUpFormContainer>
   );
 }
 export default SignUpForm;
