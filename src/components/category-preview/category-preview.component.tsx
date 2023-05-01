@@ -12,9 +12,11 @@ function CategoryPreview({ title, products }: CategoryPreviewProps) {
     <CategoryPreviewContainer>
       <Title to={title}>{title.toUpperCase()}</Title>
       <Preview>
-        {products.map((product) => (
-          <ProductCard product={product} key={title} />
-        ))}
+        {products
+          .filter((_, idx) => idx < 4)
+          .map((product) => (
+            <ProductCard product={product} key={title} />
+          ))}
       </Preview>
     </CategoryPreviewContainer>
   );

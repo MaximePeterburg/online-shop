@@ -4,7 +4,9 @@ import {
   AdditionalInformation,
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
-  signInAuthUserWithEmailAndPassword
+  getCurrentUser,
+  signInAuthUserWithEmailAndPassword,
+  signOutUser
 } from '../../utils/firebase/firebase.utils';
 import {
   EmailSignInStart,
@@ -12,11 +14,21 @@ import {
   SignUpSuccess,
   signInFailed,
   signInSuccess,
+  signOutFailed,
+  signOutSuccess,
   signUpFailed,
   signUpSuccess
 } from './user.action';
 import { USER_ACTION_TYPES } from './user.types';
-
+export function* isUserAuthenticated() {
+  try {
+    const userAuth = yield* call(getCurrentUser);
+    if (!userAuth) return;
+    yield* call(getSnapshotFromUserAuth, userAuth);
+  } catch (error) {
+    yield* put(signInFailed(error as Error));
+  }
+}
 export function* signUp({ payload: { email, password, displayName } }: SignUpStart) {
   try {
     const userCredential = yield* call(
@@ -69,6 +81,17 @@ export function* signInWithEmail({ payload: { email, password } }: EmailSignInSt
     yield* put(signInFailed(error as Error));
   }
 }
+export function* signOut() {
+  try {
+    yield* call(signOutUser);
+    yield* put(signOutSuccess());
+  } catch (error) {
+    yield* put(signOutFailed(error as Error));
+  }
+}
+export function* onCheckUserSession() {
+  yield* takeLatest(USER_ACTION_TYPES.CHECK_USER_SESSION, isUserAuthenticated);
+}
 export function* onSignUpStart() {
   yield* takeLatest(USER_ACTION_TYPES.SIGN_UP_START, signUp);
 }
@@ -78,6 +101,16 @@ export function* onSignUpSuccess() {
 export function* onSignInWithEmailStart() {
   yield* takeLatest(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, signInWithEmail);
 }
-export function* userSagas() {
-  yield* all([call(onSignUpStart), call(onSignUpSuccess), call(onSignInWithEmailStart)]);
+export function* onSignOutStart() {
+  yield* takeLatest(USER_ACTION_TYPES.SIGN_OUT_START, signOut);
 }
+export function* userSagas() {
+  yield* all([
+    call(onSignOutStart),
+    call(onSignUpStart),
+    call(onSignUpSuccess),
+    call(onSignInWithEmailStart),
+    call(onCheckUserSession)
+  ]);
+}
+// НЕ ОЧИЩАЕТ currentUser ПОСЛЕ ВЫХОДА

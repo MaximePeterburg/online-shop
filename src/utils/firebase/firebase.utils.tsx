@@ -89,11 +89,8 @@ export const signInAuthUserWithEmailAndPassword = async (
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password);
 };
-export const signOutuser = async () => {
+export const signOutUser = async () => {
   await signOut(auth);
-};
-export const onAuthStateChangedListener = (callback: NextOrObserver<User>) => {
-  onAuthStateChanged(auth, callback);
 };
 export const createUserDocumentFromAuth = async (
   userAuth: User,
@@ -116,4 +113,19 @@ export const createUserDocumentFromAuth = async (
     }
   }
   return userSnapshot as QueryDocumentSnapshot<UserData>;
+};
+export const onAuthStateChangedListener = (callback: NextOrObserver<User>) => {
+  onAuthStateChanged(auth, callback);
+};
+export const getCurrentUser = (): Promise<User | null> => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
 };

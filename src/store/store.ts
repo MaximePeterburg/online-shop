@@ -1,6 +1,7 @@
 import createSagaMiddleware from '@redux-saga/core';
 
-import { applyMiddleware, compose, createStore } from 'redux';
+import { Middleware, applyMiddleware, compose, createStore } from 'redux';
+import logger from 'redux-logger';
 
 import { rootReducer } from './root-reducer';
 import { rootSaga } from './root-saga';
@@ -14,7 +15,10 @@ declare global {
 }
 
 const sagaMiddleware = createSagaMiddleware();
-const middleWares = [sagaMiddleware];
+const middleWares = [
+  process.env.NODE_ENV !== 'production' && logger,
+  sagaMiddleware
+].filter((middleware): middleware is Middleware => Boolean(middleware));
 
 const composeEnhancer =
   (process.env.NODE_ENV !== 'production' &&
