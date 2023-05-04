@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { emailSignInStart } from '../../store/user/user.action';
+import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import FormInput from '../form-input/form-input.component';
 import Spinner from '../spinner/spinner.component';
@@ -26,7 +26,14 @@ const SignInForm = () => {
       console.log('user sign in failed', error);
     }
   };
-
+  const handleClick = () => {
+    try {
+      dispatch(googleSignInStart());
+      resetFormFields;
+    } catch (error) {
+      console.log('smthing went wrong ...', error);
+    }
+  };
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
@@ -53,7 +60,10 @@ const SignInForm = () => {
         />
         <ButtonsContainer>
           <Button type='submit'>Войти</Button>
-          <Button type='button' buttonType={BUTTON_TYPE_CLASSES.google}>
+          <Button
+            type='button'
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            onClick={handleClick}>
             Войти, используя Google
           </Button>
         </ButtonsContainer>

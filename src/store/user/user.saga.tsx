@@ -6,10 +6,12 @@ import {
   createUserDocumentFromAuth,
   getCurrentUser,
   signInAuthUserWithEmailAndPassword,
+  signInWithGooglePopup,
   signOutUser
 } from '../../utils/firebase/firebase.utils';
 import {
   EmailSignInStart,
+  GoogleSignInStart,
   SignUpStart,
   SignUpSuccess,
   signInFailed,
@@ -81,6 +83,17 @@ export function* signInWithEmail({ payload: { email, password } }: EmailSignInSt
     yield* put(signInFailed(error as Error));
   }
 }
+export function* signInWithGoogle() {
+  try {
+    const userCredential = yield* call(signInWithGooglePopup);
+    if (userCredential) {
+      const { user } = userCredential;
+      yield* call(getSnapshotFromUserAuth, user);
+    }
+  } catch (error) {
+    yield* put(signInFailed(error as Error));
+  }
+}
 export function* signOut() {
   try {
     yield* call(signOutUser);
@@ -98,6 +111,9 @@ export function* onSignUpStart() {
 export function* onSignUpSuccess() {
   yield* takeLatest(USER_ACTION_TYPES.SIGN_UP_SUCCESS, signInAfterSignUp);
 }
+export function* onSignInWithGoogleStart() {
+  yield* takeLatest(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START, signInWithGoogle);
+}
 export function* onSignInWithEmailStart() {
   yield* takeLatest(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, signInWithEmail);
 }
@@ -106,6 +122,7 @@ export function* onSignOutStart() {
 }
 export function* userSagas() {
   yield* all([
+    call(onSignInWithGoogleStart),
     call(onSignOutStart),
     call(onSignUpStart),
     call(onSignUpSuccess),
