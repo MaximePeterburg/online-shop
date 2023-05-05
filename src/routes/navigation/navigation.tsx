@@ -27,6 +27,7 @@ function Navigation() {
           ) : (
             <NavLink to='/auth'>Войти</NavLink>
           )}
+          <NavLink to='/checkout'>Корзина</NavLink>
         </NavLinks>
       </NavigationContainer>
       <Outlet />

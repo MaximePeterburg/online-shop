@@ -26,7 +26,7 @@ const SignInForm = () => {
       console.log('user sign in failed', error);
     }
   };
-  const handleClick = () => {
+  const signInWithGoogle = () => {
     try {
       dispatch(googleSignInStart());
       resetFormFields;
@@ -63,7 +63,7 @@ const SignInForm = () => {
           <Button
             type='button'
             buttonType={BUTTON_TYPE_CLASSES.google}
-            onClick={handleClick}>
+            onClick={signInWithGoogle}>
             Войти, используя Google
           </Button>
         </ButtonsContainer>

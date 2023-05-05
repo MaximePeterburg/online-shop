@@ -11,7 +11,6 @@ import {
 } from '../../utils/firebase/firebase.utils';
 import {
   EmailSignInStart,
-  GoogleSignInStart,
   SignUpStart,
   SignUpSuccess,
   signInFailed,
