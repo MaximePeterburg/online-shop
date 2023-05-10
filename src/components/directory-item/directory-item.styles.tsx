@@ -9,7 +9,7 @@ export const BackgroundImage = styled.div<BackgroundImageProps>`
   background-position: center;
   background-image: ${({ imageUrl }) => `url(${imageUrl})`};
 `;
-
+export const DirectoryImageContainer = styled.div``;
 export const DirectoryItemContainer = styled.div`
   min-width: 30%;
   height: 300px;
@@ -24,7 +24,7 @@ export const DirectoryItemContainer = styled.div`
   &:hover {
     cursor: pointer;
 
-    & ${BackgroundImage} {
+    & ${BackgroundImage}, img {
       transform: scale(1.1);
       transition: transform 1s cubic-bezier(0.25, 0.45, 0.45, 0.95);
     }

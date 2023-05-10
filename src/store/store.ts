@@ -17,7 +17,7 @@ declare global {
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['user']
+  whitelist: ['user', 'cart']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
