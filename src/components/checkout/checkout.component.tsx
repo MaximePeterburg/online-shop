@@ -13,7 +13,6 @@ const Checkout = () => {
   const total = useSelector(selectCartTotal);
   return (
     <CheckoutContainer>
-      <h2>Корзина</h2>
       <HeaderContainer>
         <HeaderBlock>
           <span>Товар</span>

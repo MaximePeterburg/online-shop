@@ -21,7 +21,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
       <Button onClick={addProductToCart}>Добавить в Корзину</Button>
       <Footer>
         <Name>{name}</Name>
-        <Price>{price}</Price>
+        <Price>{price} &#8381;</Price>
       </Footer>
     </ProductCardContainer>
   );
