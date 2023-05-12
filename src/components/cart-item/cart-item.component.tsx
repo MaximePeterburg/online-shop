@@ -1,5 +1,5 @@
 import { CartItem as TCartItem } from '../../store/cart/cart.types';
-import { CartItemContainer, ItemDetails } from './cart-item.styles';
+import { CartItemContainer, ImageContainer, ItemDetails } from './cart-item.styles';
 export type CartItemProps = {
   cartItem: TCartItem;
 };
@@ -7,7 +7,9 @@ const CartItem = ({ cartItem }: CartItemProps) => {
   const { name, quantity, price, imageUrl } = cartItem;
   return (
     <CartItemContainer>
-      <img src={imageUrl} alt={name}></img>
+      <ImageContainer>
+        <img src={imageUrl} alt={name}></img>
+      </ImageContainer>
       <ItemDetails>
         <span>{name}</span>{' '}
         <span>

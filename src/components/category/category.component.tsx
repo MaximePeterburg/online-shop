@@ -29,10 +29,6 @@ const Category = () => {
           products.map((product) => (
             <ProductCard product={product} key={product.id}></ProductCard>
           ))}
-        {products &&
-          products.map((product) => (
-            <ProductCard product={product} key={product.id}></ProductCard>
-          ))}
       </CategoryContainer>
     </>
   );
