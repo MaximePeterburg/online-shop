@@ -6,7 +6,7 @@ export const CartDropdownContainer = styled.div`
   flex-direction: column;
   position: absolute;
   padding: 20px;
-  width: 240px;
+  width: 400px;
   height: 340px;
   top: 75px;
   right: 40px;
@@ -15,8 +15,15 @@ export const CartDropdownContainer = styled.div`
   z-index: 1;
   ${BaseButton}, ${InvertedButton}, ${GoogleSignInButton} {
     margin-top: auto;
+    width: 100%;
   }
 `;
+export const Footer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+`;
+export const CartTotal = styled.div``;
 export const CartItems = styled.div`
   display: flex;
   flex-direction: column;

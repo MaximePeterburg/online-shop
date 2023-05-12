@@ -13,8 +13,7 @@ export const ProductCardContainer = styled.div`
   align-items: center;
   position: relative;
   img {
-    width: 150px;
-    height: 150px;
+    height: 60%;
     object-fit: cover;
     margin-bottom: 5px;
   }
@@ -22,7 +21,7 @@ export const ProductCardContainer = styled.div`
     width: 80%;
     opacity: 0.7;
     position: absolute;
-    top: 220px;
+    top: 250px;
     display: none;
   }
   &:hover {

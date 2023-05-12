@@ -30,7 +30,7 @@ export const SHOP_DATA = [
         id: 5,
         name: "Prada - L'homme",
         price: 8900,
-        imageUrl: 'https://духи.рф/foto/storefront/12395_source.jpg?version=1679981818'
+        imageUrl: 'https://fraguru.com/mdimg/perfume/375x500.39029.jpg'
       }
     ]
   },

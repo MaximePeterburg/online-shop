@@ -23,7 +23,7 @@ const SignInForm = () => {
       dispatch(emailSignInStart(email, password));
       resetFormFields();
     } catch (error) {
-      console.log('user sign in failed', error);
+      console.log('Ошибка при входе', error);
     }
   };
   const signInWithGoogle = () => {
@@ -31,7 +31,7 @@ const SignInForm = () => {
       dispatch(googleSignInStart());
       resetFormFields;
     } catch (error) {
-      console.log('smthing went wrong ...', error);
+      console.log('Что-то пошло не так ...', error);
     }
   };
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

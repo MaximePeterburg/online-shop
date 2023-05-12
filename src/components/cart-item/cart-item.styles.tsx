@@ -2,12 +2,22 @@ import styled from 'styled-components';
 
 export const CartItemContainer = styled.div`
   display: flex;
+  align-items: center;
   width: 100%;
   /* height: 80px; */
   margin-bottom: 15px;
   img {
     width: 30%;
   }
+`;
+export const DeleteItemButton = styled.div`
+  width: 15%;
+  cursor: pointer;
+`;
+export const CartItemCount = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 `;
 export const ImageContainer = styled.div`
   width: 20%;
@@ -17,7 +27,7 @@ export const ImageContainer = styled.div`
   }
 `;
 export const ItemDetails = styled.div`
-  width: 70%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
