@@ -40,9 +40,11 @@ export const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
       </ImageContainer>
       <BaseSpan>{name}</BaseSpan>
       <Quantity>
-        <Arrow onClick={removeItem}>&#10094;</Arrow>
+        {/* <Arrow onClick={removeItem}>&#10094;</Arrow> */}
+        <Arrow onClick={removeItem}>-</Arrow>
         <BaseSpan>{quantity}</BaseSpan>
-        <Arrow onClick={addItem}> &#10095;</Arrow>
+        {/* <Arrow onClick={addItem}> &#10095;</Arrow> */}
+        <Arrow onClick={addItem}> +</Arrow>
       </Quantity>
       <BaseSpan>{price} &#8381;</BaseSpan>
       <RemoveButton onClick={clearItem}>

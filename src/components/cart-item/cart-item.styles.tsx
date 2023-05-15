@@ -4,15 +4,17 @@ export const CartItemContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  padding: 15px 0px 15px 35px;
   /* height: 80px; */
-  margin-bottom: 15px;
-  img {
-    width: 30%;
+  &:hover {
+    background-color: rgb(220, 223, 232);
   }
 `;
 export const DeleteItemButton = styled.div`
   width: 15%;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
 `;
 export const CartItemCount = styled.div`
   display: flex;
@@ -30,7 +32,6 @@ export const ItemDetails = styled.div`
   width: 80%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: center;
   padding: 10px 20px;
   span {

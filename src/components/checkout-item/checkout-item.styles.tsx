@@ -26,7 +26,14 @@ export const Quantity = styled(BaseSpan)`
   display: flex;
 `;
 export const Arrow = styled.div`
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+  user-select: none;
+  border: 1px solid black;
+  border-radius: 50%;
 `;
 export const RemoveButton = styled.div`
   display: flex;

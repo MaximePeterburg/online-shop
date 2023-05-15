@@ -5,7 +5,7 @@ import {
   ActionWithPayload,
   createAction,
   withMatcher
-} from '../../utils/store/reducer.utils';
+} from '../../utils/reducer/reducer.utils';
 import { USER_ACTION_TYPES } from './user.types';
 
 export type CheckUserSession = Action<USER_ACTION_TYPES.CHECK_USER_SESSION>;

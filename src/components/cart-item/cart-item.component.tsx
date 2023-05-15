@@ -37,10 +37,12 @@ const CartItem = ({ cartItem }: CartItemProps) => {
         <img src={imageUrl} alt={name}></img>
       </ImageContainer>
       <ItemDetails>
-        <span>{name}</span>{' '}
+        <span>{name}</span>
         <CartItemCount>
-          <Arrow onClick={removeItem}> &#10094;</Arrow> {quantity}
-          <Arrow onClick={addItem}>&#10095;</Arrow> {price} &#8381;
+          {/* <Arrow onClick={removeItem}> &#10094;</Arrow> {quantity} */}
+          <Arrow onClick={removeItem}>-</Arrow> {quantity}
+          {/* <Arrow onClick={addItem}>&#10095;</Arrow> {price} &#8381; */}
+          <Arrow onClick={addItem}>+</Arrow> {price} &#8381;
           <DeleteItemButton onClick={clearItem}>X</DeleteItemButton>
         </CartItemCount>
       </ItemDetails>
