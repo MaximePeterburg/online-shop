@@ -22,7 +22,7 @@ export const SHOP_DATA = [
       },
       {
         id: 4,
-        name: 'Encre Noire - Lalique',
+        name: 'Lalique - Encre Noire',
         price: 2000,
         imageUrl: 'https://fraguru.com/mdimg/perfume/375x500.1834.jpg'
       },
@@ -66,6 +66,12 @@ export const SHOP_DATA = [
         name: 'Ex Nihilo - Fleur Narcotique',
         price: 14750,
         imageUrl: 'https://fraguru.com/mdimg/perfume/375x500.27571.jpg'
+      },
+      {
+        id: 11,
+        name: 'Attar Collection - Azora',
+        price: 4750,
+        imageUrl: 'https://fimgs.net/mdimg/perfume/375x500.50343.jpg'
       }
     ]
   }

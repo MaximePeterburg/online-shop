@@ -1,14 +1,21 @@
+import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { RootState } from '../store';
 import { CategoriesState } from './category.reducer';
-import { CategoryMap } from './category.types';
+import { CategoryItem, CategoryMap } from './category.types';
 
-const selectCategoryReducer = (state: RootState): CategoriesState => state.categories;
+export const selectCategoryReducer = (state: RootState): CategoriesState =>
+  state.categories;
 
 export const selectCategories = createSelector(
   [selectCategoryReducer],
   (categoriesSlice) => categoriesSlice.categories
 );
+export const selectProducts = createSelector([selectCategories], (categories) => {
+  const products: CategoryItem[] = [];
+  categories.map((category) => category.items.map((item) => products.push(item)));
+  return products;
+});
 
 export const selectCategoriesMap = createSelector(
   [selectCategories],
