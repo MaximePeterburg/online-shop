@@ -27,7 +27,7 @@ const CartDropdown = () => {
   const cartTotal = useSelector(selectCartTotal);
   return (
     <CartDropdownContainer>
-      <Header>Добалено: 6 шт.</Header>
+      <Header>Добавлено: {cartCount} шт.</Header>
       <CartItems>
         {cartItems.length ? (
           cartItems.map((cartItem) => (

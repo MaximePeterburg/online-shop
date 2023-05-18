@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchCategoriesStart } from '../../store/categories/category.action';
 import { selectCategoriesMap } from '../../store/categories/category.selector';
 import { ProductCard } from '../product-card/product-card.component';
 import { CategoryContainer, Title } from './category.styles';

@@ -4,7 +4,7 @@ export const ProductCardContainer = styled.div`
   border-style: solid;
   border-width: 1px;
   border-color: black;
-  margin: 20px 20px;
+  margin: 20px;
   width: 20%;
   display: flex;
   flex-direction: column;

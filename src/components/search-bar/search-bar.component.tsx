@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { selectProducts } from '../../store/categories/category.selector';
 import { createSearchedItems } from '../../store/search/search.actions';
 import { selectSearchItems } from '../../store/search/search.selector';
@@ -19,9 +20,11 @@ const SearchBar = () => {
   };
   const products = useSelector(selectProducts);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(createSearchedItems(products, search));
+    navigate('/search');
   };
 
   return (

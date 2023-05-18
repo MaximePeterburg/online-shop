@@ -6,10 +6,7 @@ import { fetchCategoriesStart } from '../../store/categories/category.action';
 import CategoriesPreview from '../categories-preview/categories-preview.component';
 
 const Shop = () => {
-  const disapatch = useDispatch();
-  useEffect(() => {
-    disapatch(fetchCategoriesStart());
-  }, []);
+  
   return (
     <Routes>
       <Route index element={<CategoriesPreview />} />
