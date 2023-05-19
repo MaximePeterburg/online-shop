@@ -9,7 +9,7 @@ export type SearchBarInputProps = {
 const SearchBarInput = ({ label, ...otherProps }: SearchBarInputProps) => {
   return (
     <SearchBarGroup>
-      <SearchInput {...otherProps}></SearchInput>
+      <SearchInput autoComplete='off' {...otherProps}></SearchInput>
       {label && (
         <FormInputLabel
           shrink={Boolean(

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Group, Input } from '../form-input/form-input.styles';
+import { Input } from '../form-input/form-input.styles';
 
 export const SearchBarGroup = styled.div`
   position: relative;

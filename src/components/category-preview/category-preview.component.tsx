@@ -10,7 +10,9 @@ type CategoryPreviewProps = {
 function CategoryPreview({ title, products }: CategoryPreviewProps) {
   return (
     <CategoryPreviewContainer>
-      <Title to={title}>{title.toUpperCase()}</Title>
+      <h2>
+        <Title to={title}>{title.toUpperCase()}</Title>
+      </h2>
       <Preview>
         {products
           .filter((_, idx) => idx < 4)

@@ -6,7 +6,7 @@ import {
 import { CategoryItem } from '../categories/category.types';
 import { SEARCH_ACTION_TYPES } from './search.types';
 
-export const createSearchItems = (
+export const filterProducts = (
   products: CategoryItem[],
   searchTerm: string
 ): CategoryItem[] => {
@@ -15,15 +15,15 @@ export const createSearchItems = (
   );
   return searchedProducts;
 };
-export type SetSearchItems = ActionWithPayload<
+export type SetSearchedProducts = ActionWithPayload<
   SEARCH_ACTION_TYPES.SET_SEARCH_ITEMS,
   CategoryItem[]
 >;
-export const setSearchItems = withMatcher(
-  (searchItems: CategoryItem[]): SetSearchItems =>
+export const setSearchedProducts = withMatcher(
+  (searchItems: CategoryItem[]): SetSearchedProducts =>
     createAction(SEARCH_ACTION_TYPES.SET_SEARCH_ITEMS, searchItems)
 );
-export const createSearchedItems = (products: CategoryItem[], searchTerm: string) => {
-  const searchedProducts = createSearchItems(products, searchTerm);
-  return setSearchItems(searchedProducts);
+export const searchProducts = (products: CategoryItem[], searchTerm: string) => {
+  const searchedProducts = filterProducts(products, searchTerm);
+  return setSearchedProducts(searchedProducts);
 };

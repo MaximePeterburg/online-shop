@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectProducts } from '../../store/categories/category.selector';
-import { createSearchedItems } from '../../store/search/search.actions';
+import { searchProducts } from '../../store/search/search.actions';
 import { selectSearchItems } from '../../store/search/search.selector';
 import Button from '../button/button.component';
 import SearchBarInput from '../search-bar-input/search-bar-input.component';
@@ -23,7 +23,7 @@ const SearchBar = () => {
   const navigate = useNavigate();
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(createSearchedItems(products, search));
+    dispatch(searchProducts(products, search));
     navigate('/search');
   };
 
@@ -31,13 +31,13 @@ const SearchBar = () => {
     <SearchBarContainer>
       <form onSubmit={handleSubmit}>
         <SearchBarInput
-          label='search'
+          label='Поиск'
           name='search'
           value={search}
           onChange={handleChange}
           required
           type='search'></SearchBarInput>
-        <Button>Search</Button>
+        <Button>Поиск</Button>
       </form>
     </SearchBarContainer>
   );
