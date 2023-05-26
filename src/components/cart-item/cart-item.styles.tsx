@@ -25,7 +25,6 @@ export const ImageContainer = styled.div`
   width: 20%;
   img {
     width: 100%;
-    height: 100%;
   }
 `;
 export const ItemDetails = styled.div`

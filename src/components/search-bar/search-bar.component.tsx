@@ -26,7 +26,6 @@ const SearchBar = () => {
     dispatch(searchProducts(products, search));
     navigate('/search');
   };
-
   return (
     <SearchBarContainer>
       <form onSubmit={handleSubmit}>

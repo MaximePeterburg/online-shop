@@ -21,7 +21,7 @@ export const ProductCardContainer = styled.div`
     width: 80%;
     /* opacity: 0.7; */
     position: absolute;
-    top: 250px;
+    top: 240px;
     /* display: none; */
   }
   &:hover {
@@ -35,12 +35,16 @@ export const ProductCardContainer = styled.div`
       display: flex;
     }
   }
+  @media screen and (max-width: 800px) {
+    width: 40vw;
+    margin: 0;
+  }
 `;
 
 export const Footer = styled.div`
   width: 100%;
   margin-top: 25%;
-  height: 5%;
+  height: 10%;
   display: flex;
   justify-content: space-between;
   font-size: 18px;
@@ -48,10 +52,8 @@ export const Footer = styled.div`
 
 export const Name = styled.span`
   width: 90%;
-  margin-bottom: 15px;
-  margin-left: 15px;
 `;
 
 export const Price = styled.span`
-  width: 20%;
+  width: 25%;
 `;

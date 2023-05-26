@@ -6,6 +6,8 @@ export const NavigationContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
+  @media screen and (max-width: 800px) {
+  }
 `;
 export const NavLinks = styled.div`
   width: 50%;
@@ -20,7 +22,6 @@ export const NavLink = styled(Link)`
 `;
 export const LogoContainer = styled(Link)`
   height: 100%;
-  width: 70px;
   padding: 25px;
   background-size: cover;
   background-position: center;
