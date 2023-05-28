@@ -1,59 +1,88 @@
 import styled from 'styled-components';
-
 export const ProductCardContainer = styled.div`
-  border-style: solid;
-  border-width: 1px;
-  border-color: black;
-  margin: 20px;
-  width: 20%;
+  /* height: 15rem; */
+  /* width: 10rem; */
   display: flex;
   flex-direction: column;
-  height: 350px;
-  justify-content: center;
-  align-items: center;
-  position: relative;
   img {
-    height: 60%;
     object-fit: cover;
-    margin-bottom: 5px;
+    width: 100%;
   }
   button {
-    width: 80%;
-    /* opacity: 0.7; */
-    position: absolute;
-    top: 240px;
-    /* display: none; */
+    margin-top: auto;
   }
-  &:hover {
-    background-color: rgb(220, 223, 232);
-
-    /* img {
-      opacity: 0.8;
-    } */
-    button {
-      opacity: 0.85;
-      display: flex;
-    }
-  }
-  @media screen and (max-width: 800px) {
-    width: 40vw;
-    margin: 0;
+  :hover img {
+    /* filter: brightness(110%); */
+    transform: scale(1.1);
+    transition: transform 1s cubic-bezier(0.25, 0.45, 0.45, 0.95);
   }
 `;
-
 export const Footer = styled.div`
-  width: 100%;
-  margin-top: 25%;
-  height: 10%;
   display: flex;
   justify-content: space-between;
-  font-size: 18px;
+  margin-top: 20px;
 `;
-
 export const Name = styled.span`
-  width: 90%;
+  width: 70%;
+`;
+export const Price = styled.span`
+  color: #d50032;
 `;
 
-export const Price = styled.span`
-  width: 25%;
-`;
+// export const ProductCardContainer = styled.div`
+//   border-style: solid;
+//   border-width: 1px;
+//   border-color: black;
+//   margin: 20px;
+//   width: 20%;
+//   display: flex;
+//   flex-direction: column;
+//   height: 350px;
+//   justify-content: center;
+//   align-items: center;
+//   position: relative;
+//   img {
+//     height: 60%;
+//     object-fit: cover;
+//     margin-bottom: 5px;
+//   }
+//   button {
+//     width: 80%;
+//     /* opacity: 0.7; */
+//     position: absolute;
+//     top: 240px;
+//     /* display: none; */
+//   }
+//   &:hover {
+//     background-color: rgb(220, 223, 232);
+
+//     /* img {
+//       opacity: 0.8;
+//     } */
+//     button {
+//       opacity: 0.85;
+//       display: flex;
+//     }
+//   }
+//   @media screen and (max-width: 800px) {
+//     width: 40vw;
+//     margin: 0;
+//   }
+// `;
+
+// export const Footer = styled.div`
+//   width: 100%;
+//   margin-top: 25%;
+//   height: 10%;
+//   display: flex;
+//   justify-content: space-between;
+//   font-size: 18px;
+// `;
+
+// export const Name = styled.span`
+//   width: 90%;
+// `;
+
+// export const Price = styled.span`
+//   width: 25%;
+// `;

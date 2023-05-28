@@ -14,6 +14,7 @@ export const BaseButton = styled.button`
   text-transform: uppercase;
   font-weight: bolder;
   border: none;
+  border-radius: 0.375rem;
   cursor: pointer;
   display: flex;
   justify-content: center;

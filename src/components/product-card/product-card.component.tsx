@@ -18,13 +18,14 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   return (
     <ProductCardContainer>
       <img src={imageUrl} alt={name}></img>
-      <Button onClick={addProductToCart} buttonType={BUTTON_TYPE_CLASSES.inverted}>
-        Добавить в Корзину
-      </Button>
+
       <Footer>
         <Name>{name}</Name>
         <Price>{price} &#8381;</Price>
       </Footer>
+      <Button onClick={addProductToCart} buttonType={BUTTON_TYPE_CLASSES.base}>
+        Добавить в Корзину
+      </Button>
     </ProductCardContainer>
   );
 };
