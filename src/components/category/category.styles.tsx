@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const CategoryContainer = styled.div`
   display: grid;
   width: 80%;
-  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
   grid-column-gap: 3rem;
   row-gap: 7%;
   margin: 3rem auto;

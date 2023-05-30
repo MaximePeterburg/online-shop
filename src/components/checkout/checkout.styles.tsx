@@ -6,6 +6,9 @@ export const CheckoutContainer = styled.div`
   flex-direction: column;
   width: 55%;
   margin: 50px auto 0;
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
 `;
 export const HeaderContainer = styled.div`
   width: 100%;

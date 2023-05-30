@@ -42,7 +42,8 @@ const CartItem = ({ cartItem }: CartItemProps) => {
           {/* <Arrow onClick={removeItem}> &#10094;</Arrow> {quantity} */}
           <Arrow onClick={removeItem}>-</Arrow> {quantity}
           {/* <Arrow onClick={addItem}>&#10095;</Arrow> {price} &#8381; */}
-          <Arrow onClick={addItem}>+</Arrow> {price} &#8381;
+          <Arrow onClick={addItem}>+</Arrow>{' '}
+          <span style={{ color: '#d50032' }}>{price} &#8381;</span>
           <DeleteItemButton onClick={clearItem}>X</DeleteItemButton>
         </CartItemCount>
       </ItemDetails>
