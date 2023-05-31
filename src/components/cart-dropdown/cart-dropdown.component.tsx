@@ -1,9 +1,11 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { switchIsCartOpen } from '../../store/cart/cart.actions';
 import {
   selectCartCount,
   selectCartItems,
-  selectCartTotal
+  selectCartTotal,
+  selectIsCartOpen
 } from '../../store/cart/cart.selector';
 import { getGoodsForm } from '../../utils/dictionary/dictionary.utils';
 import Button from '../button/button.component';
@@ -12,6 +14,7 @@ import {
   CartDropdownContainer,
   CartItems,
   CartTotal,
+  CloseDropdown,
   EmptyMessage,
   Footer,
   Header
@@ -19,15 +22,24 @@ import {
 
 const CartDropdown = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isCartOpen = useSelector(selectIsCartOpen);
   const handleNavigation = () => {
+    dispatch(switchIsCartOpen(isCartOpen));
     navigate('/checkout');
+  };
+  const handleClose = () => {
+    dispatch(switchIsCartOpen(isCartOpen));
   };
   const cartCount = useSelector(selectCartCount);
   const cartItems = useSelector(selectCartItems);
   const cartTotal = useSelector(selectCartTotal);
   return (
     <CartDropdownContainer>
-      <Header>Добавлено: {cartCount} шт.</Header>
+      <Header>
+        <span>Добавлено: {cartCount} шт.</span>
+        <CloseDropdown onClick={handleClose}>Закрыть</CloseDropdown>
+      </Header>
       <CartItems>
         {cartItems.length ? (
           cartItems.map((cartItem) => (

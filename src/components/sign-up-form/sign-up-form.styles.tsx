@@ -1,13 +1,4 @@
 import styled from 'styled-components';
+import { SignInFormContainer } from '../sign-in-form/sign-in-form.styles';
 
-export const SignUpFormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 380px;
-  h2 {
-    margin: 10px 0;
-  }
-  button {
-    width: 100%;
-  }
-`;
+export const SignUpFormContainer = styled(SignInFormContainer)``;

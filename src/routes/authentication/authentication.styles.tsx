@@ -5,6 +5,7 @@ export const AuthenticationContainer = styled.div`
   justify-content: space-around;
   width: 100%;
   margin: 2rem auto;
+  max-width: 50rem;
   @media screen and (max-width: 800px) {
     flex-direction: column;
     align-items: center;

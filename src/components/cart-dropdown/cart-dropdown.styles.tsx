@@ -7,9 +7,16 @@ export const Header = styled.div`
   margin: 0.6rem 2rem 0.2rem 2rem;
   padding-bottom: 0.4rem;
   border-bottom: 1px gray solid;
+  display: flex;
+  justify-content: space-between;
   @media screen and (max-width: 800px) {
     margin: 0.8rem;
   }
+`;
+export const CloseDropdown = styled.div`
+  color: #d50032;
+  opacity: 0.9;
+  cursor: pointer;
 `;
 export const CartDropdownContainer = styled.div`
   display: flex;
