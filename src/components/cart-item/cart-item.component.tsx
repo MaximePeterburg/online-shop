@@ -6,7 +6,6 @@ import {
 } from '../../store/cart/cart.actions';
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { CartItem as TCartItem } from '../../store/cart/cart.types';
-import { ItemCount } from '../cart-icon/cart-icon.styles';
 import { Arrow } from '../checkout-item/checkout-item.styles';
 import {
   CartItemContainer,
@@ -39,10 +38,8 @@ const CartItem = ({ cartItem }: CartItemProps) => {
       <ItemDetails>
         <span>{name}</span>
         <CartItemCount>
-          {/* <Arrow onClick={removeItem}> &#10094;</Arrow> {quantity} */}
           <Arrow onClick={removeItem}>-</Arrow> {quantity}
-          {/* <Arrow onClick={addItem}>&#10095;</Arrow> {price} &#8381; */}
-          <Arrow onClick={addItem}>+</Arrow>{' '}
+          <Arrow onClick={addItem}>+</Arrow>
           <span style={{ color: '#d50032' }}>{price} &#8381;</span>
           <DeleteItemButton onClick={clearItem}>X</DeleteItemButton>
         </CartItemCount>

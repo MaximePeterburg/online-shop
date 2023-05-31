@@ -17,7 +17,7 @@ function CategoryPreview({ title, products }: CategoryPreviewProps) {
         {products
           .filter((_, idx) => idx < 4)
           .map((product) => (
-            <ProductCard product={product} key={title} />
+            <ProductCard product={product} key={product.id} />
           ))}
       </Preview>
     </CategoryPreviewContainer>

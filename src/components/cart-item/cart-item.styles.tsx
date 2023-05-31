@@ -4,10 +4,12 @@ export const CartItemContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 15px 0px 15px 35px;
-  /* height: 80px; */
+  padding: 1rem 0px 1rem 2rem;
   &:hover {
     background-color: rgb(220, 223, 232);
+  }
+  @media screen and (max-width: 800px) {
+    padding: 0.2rem 0 0.2rem 0.4rem;
   }
 `;
 export const DeleteItemButton = styled.div`
@@ -22,7 +24,7 @@ export const CartItemCount = styled.div`
   justify-content: space-between;
 `;
 export const ImageContainer = styled.div`
-  width: 20%;
+  width: 25%;
   img {
     width: 100%;
   }
@@ -32,7 +34,7 @@ export const ItemDetails = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 10px 20px;
+  padding: 0.75rem;
   span {
     font-size: 16px;
   }
