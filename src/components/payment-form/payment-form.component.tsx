@@ -48,7 +48,7 @@ const PaymentForm = () => {
       alert(paymentResult.error);
     } else {
       if (paymentResult.paymentIntent.status === 'succeeded') {
-        alert('payment successful');
+        alert('Оплата прошла успешно');
       }
     }
   };

@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import FormInput from '../form-input/form-input.component';
-import Spinner from '../spinner/spinner.component';
 import { ButtonsContainer, SignInFormContainer } from './sign-in-form.styles';
 
 const defaultFormFields = {
@@ -29,7 +28,6 @@ const SignInForm = () => {
   const signInWithGoogle = () => {
     try {
       dispatch(googleSignInStart());
-      resetFormFields;
     } catch (error) {
       console.log('Что-то пошло не так ...', error);
     }

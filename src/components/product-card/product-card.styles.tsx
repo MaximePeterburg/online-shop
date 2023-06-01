@@ -17,7 +17,7 @@ export const ProductCardContainer = styled.div`
   }
 `;
 export const ProductCardCounter = styled(CartItemCount)`
-  height: 100%;
+  height: 3rem;
   max-width: 5rem;
   margin: 0 auto;
   display: flex;
