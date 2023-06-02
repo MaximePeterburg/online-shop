@@ -22,6 +22,7 @@ function Navigation() {
   const isCartOpen = useSelector(selectIsCartOpen);
   useEffect(() => {
     dispatch(fetchCategoriesStart());
+    console.log('categories have been fetched');
   }, []);
   return (
     <>

@@ -4,6 +4,7 @@ export const ProductCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   img {
+    cursor: pointer;
     object-fit: cover;
     width: 100%;
   }
@@ -24,6 +25,7 @@ export const ProductCardCounter = styled(CartItemCount)`
   align-items: center;
 `;
 export const Footer = styled.div`
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   margin-top: 20px;

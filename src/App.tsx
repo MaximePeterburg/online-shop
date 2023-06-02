@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Checkout from './components/checkout/checkout.component';
+import ProductPage from './components/product-page/product-page.component';
 import Search from './components/search/search.component';
 import { GlobalStyle } from './global.styles';
 import Authentication from './routes/authentication/authentication';
@@ -16,7 +17,8 @@ function App() {
           <Route path='shop/*' element={<Shop />} />
           <Route path='auth' element={<Authentication />} />
           <Route path='checkout' element={<Checkout></Checkout>} />
-          <Route path='search' element={<Search></Search>}></Route>
+          <Route path='search' element={<Search></Search>} />
+          <Route path=':id' element={<ProductPage></ProductPage>} />
         </Route>
       </Routes>
     </>
