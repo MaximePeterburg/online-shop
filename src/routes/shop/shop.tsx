@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import Category from '../../components/category/category.component';
-import ProductPage from '../../components/product-page/product-page.component';
+import Category from '../../components/categoryPage/category-page.component';
 import CategoriesPreview from '../categories-preview/categories-preview.component';
 
 const Shop = () => {

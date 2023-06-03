@@ -13,7 +13,6 @@ export const searchReducer = (
   action: AnyAction
 ): SearchState => {
   if (setSearchedProducts.match(action)) {
-    console.log(action.payload);
     return { ...state, searchItems: action.payload };
   }
   return state;

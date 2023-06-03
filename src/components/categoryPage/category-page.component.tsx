@@ -3,14 +3,16 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { selectCategoriesMap } from '../../store/categories/category.selector';
 import { ProductCard } from '../product-card/product-card.component';
-import { CategoryContainer, Title } from './category.styles';
+import { CategoryContainer, Title } from './category-page.styles';
 
-export type CategoryRouteParams = {
+export type CategoryPageRouteParams = {
   category: string;
 };
 
-const Category = () => {
-  const { category } = useParams<keyof CategoryRouteParams>() as CategoryRouteParams;
+const CategoryPage = () => {
+  const { category } = useParams<
+    keyof CategoryPageRouteParams
+  >() as CategoryPageRouteParams;
   // select categories
   const categoriesMap = useSelector(selectCategoriesMap);
   // add state for products from categories
@@ -18,8 +20,6 @@ const Category = () => {
   useEffect(() => {
     setProducts(categoriesMap[category]);
   }, [category, categoriesMap]);
-
-  console.log(products);
   return (
     <>
       <Title>{category.toUpperCase()}</Title>
@@ -33,4 +33,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default CategoryPage;

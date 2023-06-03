@@ -11,11 +11,11 @@ export const selectCategories = createSelector(
   [selectCategoryReducer],
   (categoriesSlice) => categoriesSlice.categories
 );
-export const selectProducts = createSelector([selectCategories], (categories) => {
-  const products: CategoryItem[] = [];
-  categories.map((category) => category.items.map((item) => products.push(item)));
-  return products;
-});
+// export const selectProducts = createSelector([selectCategories], (categories) => {
+//   const products: CategoryItem[] = [];
+//   categories.map((category) => category.items.map((item) => products.push(item)));
+//   return products;
+// });
 
 export const selectCategoriesMap = createSelector(
   [selectCategories],

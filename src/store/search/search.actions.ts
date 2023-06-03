@@ -3,13 +3,14 @@ import {
   createAction,
   withMatcher
 } from '../../utils/reducer/reducer.utils';
-import { CategoryItem } from '../categories/category.types';
+import { CategoryItem, CategoryMap } from '../categories/category.types';
 import { SEARCH_ACTION_TYPES } from './search.types';
 
 export const filterProducts = (
-  products: CategoryItem[],
+  categoryMap: CategoryMap,
   searchTerm: string
 ): CategoryItem[] => {
+  const products = Object.values(categoryMap).flatMap((categoryItems) => categoryItems);
   const searchedProducts = products.filter(({ name }) =>
     name.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())
   );
@@ -23,7 +24,7 @@ export const setSearchedProducts = withMatcher(
   (searchItems: CategoryItem[]): SetSearchedProducts =>
     createAction(SEARCH_ACTION_TYPES.SET_SEARCH_ITEMS, searchItems)
 );
-export const searchProducts = (products: CategoryItem[], searchTerm: string) => {
-  const searchedProducts = filterProducts(products, searchTerm);
+export const searchProducts = (categoryMap: CategoryMap, searchTerm: string) => {
+  const searchedProducts = filterProducts(categoryMap, searchTerm);
   return setSearchedProducts(searchedProducts);
 };

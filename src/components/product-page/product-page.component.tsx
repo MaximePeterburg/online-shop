@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import { addItemToCart, removeItemFromCart } from '../../store/cart/cart.actions';
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { fetchCategoriesStart } from '../../store/categories/category.action';
-import { selectProducts } from '../../store/categories/category.selector';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { Arrow } from '../checkout-item/checkout-item.styles';
 import {
@@ -24,7 +23,6 @@ const ProductPage = () => {
   const { id } = useParams<keyof ProductRouteParams>() as ProductRouteParams;
   useEffect(() => {
     dispatch(fetchCategoriesStart());
-    console.log('categories have been fetched');
   }, []);
   const products = useSelector(selectProducts);
   console.log(products);
