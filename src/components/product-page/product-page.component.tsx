@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { addItemToCart, removeItemFromCart } from '../../store/cart/cart.actions';
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { fetchCategoriesStart } from '../../store/categories/category.action';
+import { selectCategoriesMap } from '../../store/categories/category.selector';
+import { CategoryItem } from '../../store/categories/category.types';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { Arrow } from '../checkout-item/checkout-item.styles';
 import {
@@ -24,12 +26,12 @@ const ProductPage = () => {
   useEffect(() => {
     dispatch(fetchCategoriesStart());
   }, []);
-  const products = useSelector(selectProducts);
-  console.log(products);
+  const categoryMap = useSelector(selectCategoriesMap);
   const cartItems = useSelector(selectCartItems);
+  const products = Object.values(categoryMap).flatMap((categoryItems) => categoryItems);
   const product = products.find((item) => item.id === parseInt(id));
-  const { name, price, imageUrl } = product;
-  const existingCartItem = cartItems.find((item) => item.name === product.name);
+  const { name, price, imageUrl } = product!;
+  const existingCartItem = cartItems.find((item) => item.name === name);
   const dispatch = useDispatch();
   const removeItem = () => {
     existingCartItem && dispatch(removeItemFromCart(cartItems, existingCartItem));
@@ -37,7 +39,7 @@ const ProductPage = () => {
   const addItem = () => {
     existingCartItem && dispatch(addItemToCart(cartItems, existingCartItem));
   };
-  const addProductToCart = () => dispatch(addItemToCart(cartItems, product));
+  const addProductToCart = () => dispatch(addItemToCart(cartItems, product!));
 
   return (
     <ProductPageContainer>

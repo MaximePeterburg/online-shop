@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addItemToCart, removeItemFromCart } from '../../store/cart/cart.actions';
 import { selectCartItems } from '../../store/cart/cart.selector';
-import { CategoryItem } from '../../store/categories/category.types';
+import { selectCategoriesMap } from '../../store/categories/category.selector';
+import { Category, CategoryItem } from '../../store/categories/category.types';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { Arrow } from '../checkout-item/checkout-item.styles';
 import {
@@ -21,7 +22,12 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartItems = useSelector(selectCartItems);
-  const { name, price, imageUrl } = product;
+  const { name, price, imageUrl, id } = product;
+  const categoriesMap = useSelector(selectCategoriesMap);
+  let category: string;
+  Object.keys(categoriesMap).flatMap((title) =>
+    categoriesMap[title].find((item) => item.id === id && (category = title))
+  );
   const existingCartItem = cartItems.find((item) => item.name === product.name);
   const removeItem = () => {
     existingCartItem && dispatch(removeItemFromCart(cartItems, existingCartItem));
@@ -30,9 +36,8 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
     existingCartItem && dispatch(addItemToCart(cartItems, existingCartItem));
   };
   const addProductToCart = () => dispatch(addItemToCart(cartItems, product));
-  const { id } = product;
   const handleNavigation = () => {
-    navigate(`/${id}`);
+    navigate(`/shop/${category}/${id}`);
   };
   return (
     <ProductCardContainer>
