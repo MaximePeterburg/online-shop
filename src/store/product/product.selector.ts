@@ -7,3 +7,7 @@ export const selectProduct = createSelector(
   [selectProductReducer],
   (productSlice) => productSlice.product
 );
+export const selectProductIsLoading = createSelector(
+  [selectProductReducer],
+  (productSlice) => productSlice.isLoading
+);
