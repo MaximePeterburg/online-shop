@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { selectCategoriesMap } from '../../store/categories/category.selector';
+import {
+  selectCategoriesIsLoading,
+  selectCategoriesMap
+} from '../../store/categories/category.selector';
 import { ProductCard } from '../product-card/product-card.component';
+import Spinner from '../spinner/spinner.component';
 import { CategoryContainer, Title } from './category-page.styles';
 
 export type CategoryPageRouteParams = {
@@ -14,6 +18,7 @@ const CategoryPage = () => {
   >() as CategoryPageRouteParams;
   // select categories
   const categoriesMap = useSelector(selectCategoriesMap);
+  const isLoading = useSelector(selectCategoriesIsLoading);
   // add state for products from categories
   const [products, setProducts] = useState(categoriesMap[category]);
   useEffect(() => {
@@ -22,12 +27,16 @@ const CategoryPage = () => {
   return (
     <>
       <Title>{category.toUpperCase()}</Title>
-      <CategoryContainer>
-        {products &&
-          products.map((product) => (
-            <ProductCard product={product} key={product.id}></ProductCard>
-          ))}
-      </CategoryContainer>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <CategoryContainer>
+          {products &&
+            products.map((product) => (
+              <ProductCard product={product} key={product.id}></ProductCard>
+            ))}
+        </CategoryContainer>
+      )}
     </>
   );
 };

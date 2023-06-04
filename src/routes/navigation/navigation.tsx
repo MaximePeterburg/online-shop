@@ -20,15 +20,11 @@ function Navigation() {
   const dispatch = useDispatch();
   const signOutUser = () => dispatch(signOutStart());
   const isCartOpen = useSelector(selectIsCartOpen);
-  useEffect(() => {
-    dispatch(fetchCategoriesStart());
-    console.log('categories have been fetched');
-  }, []);
   return (
     <>
       <NavigationContainer>
         <LogoContainer to='/'></LogoContainer>
-        <SearchBar></SearchBar>
+        <SearchBar />
         <NavLinks>
           <NavLink to='/shop'>КАТАЛОГ</NavLink>
           {currentUser ? (
