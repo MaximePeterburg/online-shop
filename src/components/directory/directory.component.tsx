@@ -23,6 +23,7 @@ const Directory = () => {
       route: 'shop/женские'
     }
   ];
+
   return (
     <DirectoryContainer>
       {categories.map((category) => (

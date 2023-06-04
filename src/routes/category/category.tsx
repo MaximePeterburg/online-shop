@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import CategoryPage from '../../components/categoryPage/category-page.component';
+import CategoryPage from '../../components/category-page/category-page.component';
 import ProductPage from '../../components/product-page/product-page.component';
 
 const Category = () => {

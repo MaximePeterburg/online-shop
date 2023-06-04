@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { addItemToCart, removeItemFromCart } from '../../store/cart/cart.actions';
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { selectCategoriesMap } from '../../store/categories/category.selector';
-import { Category, CategoryItem } from '../../store/categories/category.types';
+import { CategoryItem } from '../../store/categories/category.types';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { Arrow } from '../checkout-item/checkout-item.styles';
 import {
@@ -28,6 +28,9 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   Object.keys(categoriesMap).flatMap((title) =>
     categoriesMap[title].find((item) => item.id === id && (category = title))
   );
+  const handleNavigation = () => {
+    navigate(`/shop/${category}/${id}`);
+  };
   const existingCartItem = cartItems.find((item) => item.name === product.name);
   const removeItem = () => {
     existingCartItem && dispatch(removeItemFromCart(cartItems, existingCartItem));
@@ -36,9 +39,6 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
     existingCartItem && dispatch(addItemToCart(cartItems, existingCartItem));
   };
   const addProductToCart = () => dispatch(addItemToCart(cartItems, product));
-  const handleNavigation = () => {
-    navigate(`/shop/${category}/${id}`);
-  };
   return (
     <ProductCardContainer>
       <img src={imageUrl} alt={name} onClick={handleNavigation}></img>

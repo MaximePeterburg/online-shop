@@ -7,7 +7,7 @@ import {
   selectCartTotal,
   selectIsCartOpen
 } from '../../store/cart/cart.selector';
-import { getGoodsForm } from '../../utils/dictionary/dictionary.utils';
+import { getGoodsForm } from '../../utils/util/util.utils';
 import Button from '../button/button.component';
 import CartItem from '../cart-item/cart-item.component';
 import {

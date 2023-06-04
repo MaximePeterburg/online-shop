@@ -22,7 +22,7 @@ import {
   setDoc,
   writeBatch
 } from 'firebase/firestore';
-import { Category } from '../../store/categories/category.types';
+import { Category, CategoryItem } from '../../store/categories/category.types';
 const firebaseConfig = {
   apiKey: 'AIzaSyC7c5o_BIiIkPfqa3_ksWHJcxdYRfiAWG8',
   authDomain: 'online-shop-b33e0.firebaseapp.com',
@@ -50,12 +50,20 @@ export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
   await batch.commit();
   console.log('done');
 };
-
 export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
   const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map((docSnapshot) => docSnapshot.data() as Category);
+};
+export const getItemFromDocuments = async (id: number): Promise<CategoryItem> => {
+  const collectionRef = collection(db, 'categories');
+  const q = query(collectionRef);
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs
+    .map((docSnapshot) => docSnapshot.data())
+    .flatMap((category) => category.items)
+    .find((item) => item.id === id);
 };
 export type AdditionalInformation = {
   displayName?: string;

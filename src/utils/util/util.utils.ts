@@ -1,3 +1,6 @@
+import { useSelector } from 'react-redux';
+import { selectCategoriesMap } from '../../store/categories/category.selector';
+
 export const getGoodsForm = (goodsCount: number) => {
   let goodsForm;
   switch (goodsCount) {
@@ -14,4 +17,8 @@ export const getGoodsForm = (goodsCount: number) => {
       break;
   }
   return goodsForm;
+};
+export const getProducts = () => {
+  const categoryMap = useSelector(selectCategoriesMap);
+  return Object.values(categoryMap).flatMap((categoryItems) => categoryItems);
 };

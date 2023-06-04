@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { selectSearchItems } from '../../store/search/search.selector';
-import { Title } from '../categoryPage/category-page.styles';
+import { Title } from '../category-page/category-page.styles';
 import { ProductCard } from '../product-card/product-card.component';
 import { ResultsContainer } from './search.styles';
 

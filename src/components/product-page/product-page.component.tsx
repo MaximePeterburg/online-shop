@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addItemToCart, removeItemFromCart } from '../../store/cart/cart.actions';
 import { selectCartItems } from '../../store/cart/cart.selector';
-import { fetchCategoriesStart } from '../../store/categories/category.action';
 import { selectCategoriesMap } from '../../store/categories/category.selector';
 import { CategoryItem } from '../../store/categories/category.types';
+import { getItemFromDocuments } from '../../utils/firebase/firebase.utils';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { Arrow } from '../checkout-item/checkout-item.styles';
 import {
@@ -23,15 +23,14 @@ type ProductRouteParams = {
 
 const ProductPage = () => {
   const { id } = useParams<keyof ProductRouteParams>() as ProductRouteParams;
-  useEffect(() => {
-    dispatch(fetchCategoriesStart());
-  }, []);
-  const categoryMap = useSelector(selectCategoriesMap);
   const cartItems = useSelector(selectCartItems);
-  const products = Object.values(categoryMap).flatMap((categoryItems) => categoryItems);
-  const product = products.find((item) => item.id === parseInt(id));
-  const { name, price, imageUrl } = product!;
-  const existingCartItem = cartItems.find((item) => item.name === name);
+  const productPromise = getItemFromDocuments(parseInt(id));
+  let product: CategoryItem;
+  productPromise.then((item) => {
+    product = item;
+  });
+  const { name, price, imageUrl } = product;
+  const existingCartItem = cartItems.find((item) => item.name === product.name);
   const dispatch = useDispatch();
   const removeItem = () => {
     existingCartItem && dispatch(removeItemFromCart(cartItems, existingCartItem));
@@ -39,8 +38,11 @@ const ProductPage = () => {
   const addItem = () => {
     existingCartItem && dispatch(addItemToCart(cartItems, existingCartItem));
   };
-  const addProductToCart = () => dispatch(addItemToCart(cartItems, product!));
-
+  const addProductToCart = () => {
+    if (product) {
+      dispatch(addItemToCart(cartItems, product));
+    }
+  };
   return (
     <ProductPageContainer>
       <ProductPageImageContainer>

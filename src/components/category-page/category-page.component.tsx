@@ -8,7 +8,6 @@ import { CategoryContainer, Title } from './category-page.styles';
 export type CategoryPageRouteParams = {
   category: string;
 };
-
 const CategoryPage = () => {
   const { category } = useParams<
     keyof CategoryPageRouteParams
