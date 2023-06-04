@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addItemToCart, removeItemFromCart } from '../../store/cart/cart.actions';
 import { selectCartItems } from '../../store/cart/cart.selector';
-import { selectCategoriesMap } from '../../store/categories/category.selector';
-import { CategoryItem } from '../../store/categories/category.types';
-import { getItemFromDocuments } from '../../utils/firebase/firebase.utils';
+import { fetchProductStart } from '../../store/product/product.action';
+import { selectProduct } from '../../store/product/product.selector';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { Arrow } from '../checkout-item/checkout-item.styles';
 import {
@@ -24,12 +23,12 @@ type ProductRouteParams = {
 const ProductPage = () => {
   const { id } = useParams<keyof ProductRouteParams>() as ProductRouteParams;
   const cartItems = useSelector(selectCartItems);
-  const productPromise = getItemFromDocuments(parseInt(id));
-  let product: CategoryItem;
-  productPromise.then((item) => {
-    product = item;
-  });
+  const product = useSelector(selectProduct);
   const { name, price, imageUrl } = product;
+  useEffect(() => {
+    dispatch(fetchProductStart(parseInt(id)));
+    console.log('categories have been fetched');
+  }, []);
   const existingCartItem = cartItems.find((item) => item.name === product.name);
   const dispatch = useDispatch();
   const removeItem = () => {
