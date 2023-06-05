@@ -1,8 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { selectCategoriesMap } from '../../store/categories/category.selector';
-import { searchProducts } from '../../store/search/search.actions';
 import Button from '../button/button.component';
 import SearchBarInput from '../search-bar-input/search-bar-input.component';
 import { SearchBarContainer } from './search-bar.styles';
@@ -17,13 +15,10 @@ const SearchBar = () => {
     const { name, value } = event.target;
     setSearchField({ ...searchField, [name]: value });
   };
-  const categoriesMap = useSelector(selectCategoriesMap);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(searchProducts(categoriesMap, search));
-    navigate('/search');
+    navigate(`/search?q=${search}`);
   };
   return (
     <SearchBarContainer>

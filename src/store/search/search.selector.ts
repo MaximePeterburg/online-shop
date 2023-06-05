@@ -7,3 +7,7 @@ export const selectSearchItems = createSelector(
   [selectSearchReducer],
   (search) => search.searchItems
 );
+export const selectSearchIsLoading = createSelector(
+  [selectSearchReducer],
+  (search) => search.isLoading
+);

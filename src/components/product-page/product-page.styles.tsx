@@ -7,6 +7,7 @@ export const ProductPageContainer = styled.div`
   margin: 5rem 10rem;
   @media screen and (max-width: 800px) {
     margin: 1rem;
+    flex-direction: column;
   }
 `;
 export const ProductPageImageContainer = styled.div`
@@ -16,6 +17,9 @@ export const ProductPageImageContainer = styled.div`
   align-items: center;
   img {
     max-width: 350px;
+    width: 100%;
+  }
+  @media screen and (max-width: 800px) {
     width: 100%;
   }
 `;
@@ -28,6 +32,7 @@ export const ProductDescription = styled.div`
   padding: 2rem;
   @media screen and (max-width: 800px) {
     padding: 0.2rem;
+    width: 100%;
   }
 `;
 export const Price = styled.div`
@@ -46,6 +51,8 @@ export const DescriptionFooter = styled.div`
   @media screen and (max-width: 800px) {
     /* min-width: 5rem; */
     width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 `;
 export const ProductPageCounter = styled(ProductCardCounter)`

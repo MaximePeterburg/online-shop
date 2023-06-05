@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addItemToCart, removeItemFromCart } from '../../store/cart/cart.actions';
 import { selectCartItems } from '../../store/cart/cart.selector';
-import { fetchProductStart } from '../../store/product/product.action';
+import { fetchProductByIdStart } from '../../store/product/product.action';
 import {
   selectProduct,
   selectProductIsLoading
@@ -32,7 +32,8 @@ const ProductPage = () => {
   const { name, price, imageUrl } = product;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchProductStart(parseInt(id)));
+    dispatch(fetchProductByIdStart(parseInt(id)));
+    console.log(id);
   }, []);
   const existingCartItem = cartItems.find((item) => item.name === product.name);
   const removeItem = () =>

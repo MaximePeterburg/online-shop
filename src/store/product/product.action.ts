@@ -6,27 +6,27 @@ import {
 import { CategoryItem } from '../categories/category.types';
 import { PRODUCT_ACTION_TYPES } from './product.types';
 
-export type FetchProductStart = ActionWithPayload<
-  PRODUCT_ACTION_TYPES.FETCH_PRODUCT_START,
+export type FetchProductByIdStart = ActionWithPayload<
+  PRODUCT_ACTION_TYPES.FETCH_PRODUCT_BY_ID_START,
   number
 >;
-export type FetchProductSuccess = ActionWithPayload<
-  PRODUCT_ACTION_TYPES.FETCH_PRODUCT_SUCCESS,
+export type FetchProductByIdSuccess = ActionWithPayload<
+  PRODUCT_ACTION_TYPES.FETCH_PRODUCT_BY_ID_SUCCESS,
   CategoryItem
 >;
-export type FetchProductFailed = ActionWithPayload<
-  PRODUCT_ACTION_TYPES.FETCH_PRODUCT_FAILED,
+export type FetchProductByIdFailed = ActionWithPayload<
+  PRODUCT_ACTION_TYPES.FETCH_PRODUCT_BY_ID_FAILED,
   Error
 >;
-export const fetchProductStart = withMatcher(
-  (id: number): FetchProductStart =>
-    createAction(PRODUCT_ACTION_TYPES.FETCH_PRODUCT_START, id)
+export const fetchProductByIdStart = withMatcher(
+  (id: number): FetchProductByIdStart =>
+    createAction(PRODUCT_ACTION_TYPES.FETCH_PRODUCT_BY_ID_START, id)
 );
-export const fetchProductSuccess = withMatcher(
-  (product: CategoryItem): FetchProductSuccess =>
-    createAction(PRODUCT_ACTION_TYPES.FETCH_PRODUCT_SUCCESS, product)
+export const fetchProductByIdSuccess = withMatcher(
+  (product: CategoryItem): FetchProductByIdSuccess =>
+    createAction(PRODUCT_ACTION_TYPES.FETCH_PRODUCT_BY_ID_SUCCESS, product)
 );
-export const fetchProductFailed = withMatcher(
-  (error: Error): FetchProductFailed =>
-    createAction(PRODUCT_ACTION_TYPES.FETCH_PRODUCT_FAILED, error)
+export const fetchProductByIdFailed = withMatcher(
+  (error: Error): FetchProductByIdFailed =>
+    createAction(PRODUCT_ACTION_TYPES.FETCH_PRODUCT_BY_ID_FAILED, error)
 );

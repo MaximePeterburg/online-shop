@@ -7,3 +7,4 @@ export const ResultsContainer = styled(CategoryContainer)`
     grid-template-columns: 1fr 1fr;
   }
 `;
+export const SearchResults = styled.div``;

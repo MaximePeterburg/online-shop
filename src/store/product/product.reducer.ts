@@ -1,10 +1,9 @@
 import { AnyAction } from 'redux';
-import { fetchCategoriesAsync } from '../categories/category.saga';
 import { CategoryItem } from '../categories/category.types';
 import {
-  fetchProductFailed,
-  fetchProductStart,
-  fetchProductSuccess
+  fetchProductByIdFailed,
+  fetchProductByIdStart,
+  fetchProductByIdSuccess
 } from './product.action';
 
 export type ProductState = {
@@ -22,14 +21,14 @@ export const productReducer = (
   state = PRODUCT_INITIAL_STATE,
   action: AnyAction
 ): ProductState => {
-  if (fetchProductStart.match(action)) {
+  if (fetchProductByIdStart.match(action)) {
     return { ...state, isLoading: true };
   }
-  if (fetchProductSuccess.match(action)) {
+  if (fetchProductByIdSuccess.match(action)) {
     return { ...state, product: action.payload, isLoading: false };
   }
-  if (fetchProductFailed.match(action)) {
-    return { ...state, error: action.payload };
+  if (fetchProductByIdFailed.match(action)) {
+    return { ...state, error: action.payload, isLoading: false };
   }
   return { ...state };
 };

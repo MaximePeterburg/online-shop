@@ -56,7 +56,7 @@ export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map((docSnapshot) => docSnapshot.data() as Category);
 };
-export const getItemFromDocuments = async (id: number): Promise<CategoryItem> => {
+export const getItemFromDocumentsById = async (id: number): Promise<CategoryItem> => {
   const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
@@ -64,6 +64,17 @@ export const getItemFromDocuments = async (id: number): Promise<CategoryItem> =>
     .map((docSnapshot) => docSnapshot.data())
     .flatMap((category) => category.items)
     .find((item) => item.id === id);
+};
+export const getItemsFromDocumentsByTerm = async (
+  term: string
+): Promise<CategoryItem[]> => {
+  const collectionRef = collection(db, 'categories');
+  const q = query(collectionRef);
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs
+    .map((docSnapshot) => docSnapshot.data())
+    .flatMap((category) => category.items)
+    .filter(({ name }) => name.toLocaleLowerCase().includes(term.toLocaleLowerCase()));
 };
 export type AdditionalInformation = {
   displayName?: string;

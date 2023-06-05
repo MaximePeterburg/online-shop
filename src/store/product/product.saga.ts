@@ -1,23 +1,26 @@
 import { all, call, put, takeLatest } from 'typed-redux-saga';
-import { getItemFromDocuments } from '../../utils/firebase/firebase.utils';
+import { getItemFromDocumentsById } from '../../utils/firebase/firebase.utils';
 import {
-  FetchProductStart,
-  fetchProductFailed,
-  fetchProductSuccess
+  FetchProductByIdStart,
+  fetchProductByIdFailed,
+  fetchProductByIdSuccess
 } from './product.action';
 import { PRODUCT_ACTION_TYPES } from './product.types';
 
-export function* fetchProductAsync({ payload }: FetchProductStart) {
+export function* fetchProductByIdAsync({ payload }: FetchProductByIdStart) {
   try {
-    const product = yield* call(getItemFromDocuments, payload);
-    yield* put(fetchProductSuccess(product));
+    const product = yield* call(getItemFromDocumentsById, payload);
+    yield* put(fetchProductByIdSuccess(product));
   } catch (error) {
-    yield* put(fetchProductFailed(error as Error));
+    yield* put(fetchProductByIdFailed(error as Error));
   }
 }
-export function* onFetchProduct() {
-  yield* takeLatest(PRODUCT_ACTION_TYPES.FETCH_PRODUCT_START, fetchProductAsync);
+export function* onFetchProductById() {
+  yield* takeLatest(
+    PRODUCT_ACTION_TYPES.FETCH_PRODUCT_BY_ID_START,
+    fetchProductByIdAsync
+  );
 }
 export function* productSaga() {
-  yield* all([call(onFetchProduct)]);
+  yield* all([call(onFetchProductById)]);
 }

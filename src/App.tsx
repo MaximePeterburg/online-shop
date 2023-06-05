@@ -15,8 +15,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path='shop/*' element={<Shop />} />
           <Route path='auth' element={<Authentication />} />
-          <Route path='checkout' element={<Checkout></Checkout>} />
-          <Route path='search' element={<Search></Search>} />
+          <Route path='checkout' element={<Checkout />} />
+          <Route path='search/*' element={<Search />} />
         </Route>
       </Routes>
     </>
