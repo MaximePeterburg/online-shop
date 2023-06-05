@@ -28,9 +28,7 @@ const CartDropdown = () => {
     dispatch(switchIsCartOpen(isCartOpen));
     navigate('/checkout');
   };
-  const handleClose = () => {
-    dispatch(switchIsCartOpen(isCartOpen));
-  };
+  const handleClose = () => dispatch(switchIsCartOpen(isCartOpen));
   const cartCount = useSelector(selectCartCount);
   const cartItems = useSelector(selectCartItems);
   const cartTotal = useSelector(selectCartTotal);
@@ -50,7 +48,7 @@ const CartDropdown = () => {
         )}
       </CartItems>
       <Footer>
-        Итого ({cartCount} {getGoodsForm(cartCount)}):{' '}
+        Итого ({cartCount} {getGoodsForm(cartCount)}):
         <CartTotal>{cartTotal} &#8381;</CartTotal>
       </Footer>
       <Button onClick={handleNavigation}>Корзина</Button>
