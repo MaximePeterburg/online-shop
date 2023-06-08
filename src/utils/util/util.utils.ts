@@ -30,6 +30,10 @@ export const translatePathPart = (pathPart: string) => {
       return 'Мужская парфюмерия';
     case 'women':
       return 'Женская парфюмерия';
+    case 'search':
+      return 'Поиск';
+    case 'auth':
+      return 'Поиск';
     default:
       return 'ошибка';
   }
