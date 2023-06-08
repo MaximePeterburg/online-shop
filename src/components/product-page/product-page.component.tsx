@@ -30,7 +30,7 @@ const ProductPage = () => {
   const cartItems = useSelector(selectCartItems);
   const isLoading = useSelector(selectProductIsLoading);
   const product = useSelector(selectProduct);
-  const { name, price, imageUrl } = product;
+  const { name, price, imageUrl, description } = product;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProductByIdStart(parseInt(id)));
@@ -52,6 +52,7 @@ const ProductPage = () => {
           </ProductPageImageContainer>
           <ProductDescription>
             <h1>{name}</h1>
+            <p>{description}</p>
             <DescriptionFooter>
               <Price>{price} &#8381;</Price>
               {!existingCartItem ? (

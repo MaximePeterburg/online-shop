@@ -22,8 +22,8 @@ export const getProducts = () => {
   const categoryMap = useSelector(selectCategoriesMap);
   return Object.values(categoryMap).flatMap((categoryItems) => categoryItems);
 };
-export const translatePathPart = (pathPart: string) => {
-  switch (pathPart) {
+export const translateRoutePart = (routePart: string) => {
+  switch (routePart) {
     case 'shop':
       return 'Каталог';
     case 'men':
@@ -31,8 +31,6 @@ export const translatePathPart = (pathPart: string) => {
     case 'women':
       return 'Женская парфюмерия';
     case 'search':
-      return 'Поиск';
-    case 'auth':
       return 'Поиск';
     default:
       return 'ошибка';

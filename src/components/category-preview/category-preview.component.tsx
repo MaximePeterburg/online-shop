@@ -1,5 +1,5 @@
 import { CategoryItem } from '../../store/categories/category.types';
-import { translatePathPart } from '../../utils/util/util.utils';
+import { translateRoutePart } from '../../utils/util/util.utils';
 import { ProductCard } from '../product-card/product-card.component';
 import { CategoryPreviewContainer, Preview, Title } from './category-preview.styles';
 
@@ -12,7 +12,7 @@ function CategoryPreview({ title, products }: CategoryPreviewProps) {
   return (
     <CategoryPreviewContainer>
       <h2>
-        <Title to={title}>{translatePathPart(title).toUpperCase()}</Title>
+        <Title to={title}>{translateRoutePart(title).toUpperCase()}</Title>
       </h2>
       <Preview>
         {products

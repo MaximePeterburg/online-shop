@@ -11,6 +11,15 @@ export const CategoryPreviewContainer = styled.div`
 `;
 export const Title = styled(Link)`
   font-size: 28px;
+  border: 1px solid black;
+  padding: 0.66rem 4rem;
+  border-radius: 3rem;
+  color: white;
+  background-color: black;
+  &:hover {
+    background-color: white;
+    color: black;
+  }
 `;
 export const Preview = styled(CategoryContainer)``;
 // export const Preview = styled.div`

@@ -5,7 +5,7 @@ import {
   selectCategoriesIsLoading,
   selectCategoriesMap
 } from '../../store/categories/category.selector';
-import { translatePathPart } from '../../utils/util/util.utils';
+import { translateRoutePart } from '../../utils/util/util.utils';
 import { ProductCard } from '../product-card/product-card.component';
 import Spinner from '../spinner/spinner.component';
 import { CategoryContainer, Title } from './category-page.styles';
@@ -27,7 +27,7 @@ const CategoryPage = () => {
   }, [category, categoriesMap]);
   return (
     <>
-      <Title>{translatePathPart(category).toUpperCase()}</Title>
+      <Title>{translateRoutePart(category).toUpperCase()}</Title>
       {isLoading ? (
         <Spinner />
       ) : (

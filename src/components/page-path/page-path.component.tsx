@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { selectProduct } from '../../store/product/product.selector';
-import { translatePathPart } from '../../utils/util/util.utils';
+import { translateRoutePart } from '../../utils/util/util.utils';
 import {
-  CurrentPathPart,
+  CurrentRoutePart,
   Division,
   PagePathContainer,
-  PathPartContainer
+  RoutePartContainer
 } from './page-path.styles';
 const PagePath = () => {
   const product = useSelector(selectProduct);
@@ -23,21 +23,23 @@ const PagePath = () => {
     <PagePathContainer>
       <Link to='/'>Главная</Link>
       <Division>&#62;</Division>
-      {pathnames.map((pathPart, index) => {
+      {pathnames.map((routePart, index) => {
         const path = `/${pathnames.slice(0, index + 1).join('/')}`;
-        const translatedPathPart = translatePathPart(pathPart);
+        const translatedRoutePart = translateRoutePart(routePart);
         const isLastItem = index === pathnames.length - 1;
         if (isLastItem) {
-          if (product && parseInt(pathPart)) {
-            return <CurrentPathPart key={pathPart}>{product.name}</CurrentPathPart>;
+          if (product && parseInt(routePart)) {
+            return <CurrentRoutePart key={routePart}>{product.name}</CurrentRoutePart>;
           }
-          return <CurrentPathPart key={pathPart}>{translatedPathPart}</CurrentPathPart>;
+          return (
+            <CurrentRoutePart key={routePart}>{translatedRoutePart}</CurrentRoutePart>
+          );
         }
         return (
-          <PathPartContainer key={pathPart}>
-            <Link to={path}>{translatedPathPart}</Link>
+          <RoutePartContainer key={routePart}>
+            <Link to={path}>{translatedRoutePart}</Link>
             <Division>&#62;</Division>
-          </PathPartContainer>
+          </RoutePartContainer>
         );
       })}
     </PagePathContainer>
