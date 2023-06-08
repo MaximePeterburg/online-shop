@@ -14,13 +14,13 @@ const Directory = () => {
       id: 1,
       title: 'Мужская парфюмерия',
       imageUrl: 'https://духи.рф/design/desktop/img/pic/w6.png?version=1679981818',
-      route: 'shop/мужские'
+      route: 'shop/men'
     },
     {
       id: 2,
       title: 'Женская парфюмерия',
       imageUrl: 'https://духи.рф/design/desktop/img/pic/w1.png?version=1679981818',
-      route: 'shop/женские'
+      route: 'shop/women'
     }
   ];
 

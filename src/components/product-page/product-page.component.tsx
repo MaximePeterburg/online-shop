@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addItemToCart, removeItemFromCart } from '../../store/cart/cart.actions';
@@ -10,6 +10,7 @@ import {
 } from '../../store/product/product.selector';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { Arrow } from '../checkout-item/checkout-item.styles';
+import PagePath from '../page-path/page-path.component';
 import Spinner from '../spinner/spinner.component';
 import {
   DescriptionFooter,
@@ -27,13 +28,12 @@ type ProductRouteParams = {
 const ProductPage = () => {
   const { id } = useParams<keyof ProductRouteParams>() as ProductRouteParams;
   const cartItems = useSelector(selectCartItems);
-  const product = useSelector(selectProduct);
   const isLoading = useSelector(selectProductIsLoading);
+  const product = useSelector(selectProduct);
   const { name, price, imageUrl } = product;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProductByIdStart(parseInt(id)));
-    console.log(id);
   }, []);
   const existingCartItem = cartItems.find((item) => item.name === product.name);
   const removeItem = () =>

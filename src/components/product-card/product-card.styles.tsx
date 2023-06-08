@@ -20,7 +20,7 @@ export const ProductCardContainer = styled.div`
 export const ProductCardCounter = styled(CartItemCount)`
   height: 3rem;
   max-width: 5rem;
-  margin: 0 auto;
+  margin: auto auto 0 auto;
   display: flex;
   align-items: center;
 `;
