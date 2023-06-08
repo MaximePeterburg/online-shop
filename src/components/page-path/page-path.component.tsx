@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { selectProduct } from '../../store/product/product.selector';
+import { translatePathPart } from '../../utils/util/util.utils';
 import {
   CurrentPathPart,
   Division,
@@ -17,21 +18,21 @@ const PagePath = () => {
   return (
     <PagePathContainer>
       <Link to='/'>Главная</Link>
-      <Division>/</Division>
+      <Division>&#62;</Division>
       {pathnames.map((pathPart, index) => {
         const path = `/${pathnames.slice(0, index + 1).join('/')}`;
+        const translatedPathPart = translatePathPart(pathPart);
         const isLastItem = index === pathnames.length - 1;
         if (isLastItem) {
           if (product && parseInt(pathPart)) {
-            console.log(product);
             return <CurrentPathPart key={pathPart}>{product.name}</CurrentPathPart>;
           }
-          return <CurrentPathPart key={pathPart}>{pathPart}</CurrentPathPart>;
+          return <CurrentPathPart key={pathPart}>{translatedPathPart}</CurrentPathPart>;
         }
         return (
           <PathPartContainer key={pathPart}>
-            <Link to={path}>{pathPart}</Link>
-            <Division>/</Division>
+            <Link to={path}>{translatedPathPart}</Link>
+            <Division>&#62;</Division>
           </PathPartContainer>
         );
       })}

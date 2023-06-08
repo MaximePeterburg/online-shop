@@ -22,3 +22,15 @@ export const getProducts = () => {
   const categoryMap = useSelector(selectCategoriesMap);
   return Object.values(categoryMap).flatMap((categoryItems) => categoryItems);
 };
+export const translatePathPart = (pathPart: string) => {
+  switch (pathPart) {
+    case 'shop':
+      return 'Каталог';
+    case 'men':
+      return 'Мужская парфюмерия';
+    case 'women':
+      return 'Женская парфюмерия';
+    default:
+      return 'ошибка';
+  }
+};
