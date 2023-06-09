@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const PagePathContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 export const RoutePartContainer = styled.span`
   display: flex;
