@@ -5,12 +5,13 @@ import {
   selectCategoriesIsLoading,
   selectCategoriesMap
 } from '../../store/categories/category.selector';
+import { CategoriesPreviewContainer } from './categories-preview.styles';
 
 function CategoriesPreview() {
   const categoriesMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectCategoriesIsLoading);
   return (
-    <>
+    <CategoriesPreviewContainer>
       {isLoading ? (
         <Spinner />
       ) : (
@@ -19,7 +20,7 @@ function CategoriesPreview() {
           return <CategoryPreview title={title} key={title} products={products} />;
         })
       )}
-    </>
+    </CategoriesPreviewContainer>
   );
 }
 

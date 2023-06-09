@@ -48,7 +48,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
       </Footer>
       {!existingCartItem ? (
         <Button onClick={addProductToCart} buttonType={BUTTON_TYPE_CLASSES.base}>
-          Добавить в Корзину
+          Купить
         </Button>
       ) : (
         <ProductCardCounter>

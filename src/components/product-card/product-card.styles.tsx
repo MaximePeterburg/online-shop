@@ -7,14 +7,14 @@ export const ProductCardContainer = styled.div`
     cursor: pointer;
     object-fit: cover;
     width: 100%;
+    :hover {
+      filter: brightness(110%);
+      /* transform: scale(1.1); */
+      transition: transform 1s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+    }
   }
   button {
     margin-top: auto;
-  }
-  :hover img {
-    /* filter: brightness(110%); */
-    transform: scale(1.1);
-    transition: transform 1s cubic-bezier(0.25, 0.45, 0.45, 0.95);
   }
 `;
 export const ProductCardCounter = styled(CartItemCount)`
@@ -31,7 +31,10 @@ export const Footer = styled.div`
   margin-top: 20px;
 `;
 export const Name = styled.span`
-  width: 70%;
+  width: 60%;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 export const Price = styled.span`
   color: #d50032;

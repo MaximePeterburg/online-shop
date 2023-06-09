@@ -1,16 +1,38 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { CategoryContainer } from '../category-page/category-page.styles';
 
 export const CategoryPreviewContainer = styled.div`
   display: flex;
+  min-width: 23rem;
+  width: 50%;
   flex-direction: column;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: rgb(220, 223, 232);
+  background-image: linear-gradient(rgb(220, 223, 232), #fbfbfb);
   @media screen and (max-width: 800px) {
+    min-width: 19rem;
+    margin: 1rem 0.1rem;
+    padding: 0 1rem 1rem 1rem;
     align-items: center;
+    width: 100%;
   }
 `;
-export const Title = styled(Link)`
-  font-size: 28px;
+export const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
+export const Title = styled.h2`
+  margin: 0 0 1rem 0;
+  font-size: 2rem;
+  @media screen and (max-width: 800px) {
+    margin: 1rem 0;
+    font-size: 1.4rem;
+  }
+  /* font-size: 28px;
   border: 1px solid black;
   padding: 0.66rem 4rem;
   border-radius: 3rem;
@@ -19,9 +41,21 @@ export const Title = styled(Link)`
   &:hover {
     background-color: white;
     color: black;
+  } */
+`;
+export const CategoryLink = styled(Link)`
+  color: #d50032;
+  font-weight: bold;
+  @media screen and (max-width: 800px) {
+    font-size: 0.8rem;
   }
 `;
-export const Preview = styled(CategoryContainer)``;
+export const Preview = styled.section`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+  grid-gap: 1rem;
+`;
 // export const Preview = styled.div`
 //   display: grid;
 

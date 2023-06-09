@@ -1,7 +1,14 @@
+import { Link } from 'react-router-dom';
 import { CategoryItem } from '../../store/categories/category.types';
 import { translateRoutePart } from '../../utils/util/util.utils';
 import { ProductCard } from '../product-card/product-card.component';
-import { CategoryPreviewContainer, Preview, Title } from './category-preview.styles';
+import {
+  CategoryLink,
+  CategoryPreviewContainer,
+  Header,
+  Preview,
+  Title
+} from './category-preview.styles';
 
 type CategoryPreviewProps = {
   title: string;
@@ -11,9 +18,10 @@ type CategoryPreviewProps = {
 function CategoryPreview({ title, products }: CategoryPreviewProps) {
   return (
     <CategoryPreviewContainer>
-      <h2>
-        <Title to={title}>{translateRoutePart(title).toUpperCase()}</Title>
-      </h2>
+      <Header>
+        <Title>{translateRoutePart(title)}</Title>
+        <CategoryLink to={title}>Показать ещё</CategoryLink>
+      </Header>
       <Preview>
         {products
           .filter((_, idx) => idx < 4)

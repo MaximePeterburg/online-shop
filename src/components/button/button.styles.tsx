@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import { SpinnerContainer } from '../spinner/spinner.styles';
 
 export const BaseButton = styled.button`
-  min-width: 165px;
+  min-width: 8rem;
   width: auto;
   height: 3rem;
   letter-spacing: 0.5px;
-  line-height: 20px;
-  padding: 0 35px 0 35px;
-  font-size: 15px;
+  line-height: 1rem;
+  padding: 0 2rem;
+  font-size: 1rem;
   background-color: black;
   color: white;
   text-transform: uppercase;
