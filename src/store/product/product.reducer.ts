@@ -13,7 +13,7 @@ export type ProductState = {
 };
 
 const PRODUCT_INITIAL_STATE: ProductState = {
-  product: { id: 0, name: '', price: 0, imageUrl: '' },
+  product: { id: 0, name: '', price: 0, imageUrl: '', description: '' },
   isLoading: false,
   error: null
 };
