@@ -18,7 +18,6 @@ import {
 
 function Navigation() {
   const currentUser = useSelector(selectCurrentUser);
-  const productIsLoading = useSelector(selectProductIsLoading);
   const dispatch = useDispatch();
   const signOutUser = () => dispatch(signOutStart());
   const isCartOpen = useSelector(selectIsCartOpen);
@@ -40,7 +39,6 @@ function Navigation() {
         </NavLinks>
         {isCartOpen && <CartDropdown></CartDropdown>}
       </NavigationContainer>
-      {/* {!productIsLoading && <PagePath />} */}
       <Outlet />
     </>
   );
