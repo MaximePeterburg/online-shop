@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { CategoryItem } from '../../store/categories/category.types';
 import { translateRoutePart } from '../../utils/util/util.utils';
 import { ProductCard } from '../product-card/product-card.component';
