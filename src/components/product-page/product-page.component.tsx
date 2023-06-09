@@ -10,7 +10,6 @@ import {
 } from '../../store/product/product.selector';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { Arrow } from '../checkout-item/checkout-item.styles';
-import PagePath from '../page-path/page-path.component';
 import Spinner from '../spinner/spinner.component';
 import {
   DescriptionFooter,

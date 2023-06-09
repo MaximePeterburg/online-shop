@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
 import Checkout from './components/checkout/checkout.component';
-import PagePath from './components/page-path/page-path.component';
 import Search from './components/search/search.component';
 import { GlobalStyle } from './global.styles';
 import Authentication from './routes/authentication/authentication';

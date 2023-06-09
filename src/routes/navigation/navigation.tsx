@@ -40,7 +40,7 @@ function Navigation() {
         </NavLinks>
         {isCartOpen && <CartDropdown></CartDropdown>}
       </NavigationContainer>
-      {!productIsLoading && <PagePath />}
+      {/* {!productIsLoading && <PagePath />} */}
       <Outlet />
     </>
   );

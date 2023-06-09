@@ -12,13 +12,6 @@ const PagePath = () => {
   const product = useSelector(selectProduct);
   const location = useLocation();
   const pathnames = location.pathname.split('/').filter((x) => x);
-  if (
-    location.pathname === '/' ||
-    location.pathname === '/auth' ||
-    location.pathname === '/checkout'
-  ) {
-    return null;
-  }
   return (
     <PagePathContainer>
       <Link to='/'>Главная</Link>
