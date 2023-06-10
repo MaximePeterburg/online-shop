@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { SpinnerContainer } from '../spinner/spinner.styles';
 
 export const CartItemContainer = styled.div`
   display: flex;
@@ -25,16 +26,21 @@ export const CartItemCount = styled.div`
 `;
 export const ImageContainer = styled.div`
   width: 25%;
+  cursor: pointer;
   img {
     width: 100%;
   }
 `;
+export const CartSpinner = styled(SpinnerContainer)`
+  width: 25%;
+`;
 export const ItemDetails = styled.div`
   width: 80%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 0.75rem;
+  justify-content: space-evenly;
+  padding: 0 0.75rem;
   span {
     font-size: 16px;
   }

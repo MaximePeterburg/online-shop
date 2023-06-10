@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addItemToCart, removeItemFromCart } from '../../store/cart/cart.actions';
@@ -28,18 +28,29 @@ const ProductPage = () => {
   const { id } = useParams<keyof ProductRouteParams>() as ProductRouteParams;
   const cartItems = useSelector(selectCartItems);
   const isLoading = useSelector(selectProductIsLoading);
-  const product = useSelector(selectProduct);
-  const { name, price, imageUrl, description } = product;
+  const categoryItem = useSelector(selectProduct);
+  // const defaultProductState = {
+  //   name: '',
+  //   price: 0,
+  //   imageUrl: '',
+  //   description: '',
+  //   id: 0
+  // };
+  // const [product, setProduct] = useState(defaultProductState);
+  // useEffect(() => {
+  //   setProduct(categoryItem);
+  // }, [categoryItem, id]);
+  const { name, price, imageUrl, description } = categoryItem;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProductByIdStart(parseInt(id)));
-  }, []);
-  const existingCartItem = cartItems.find((item) => item.name === product.name);
+  }, [id]);
+  const existingCartItem = cartItems.find((item) => item.name === name);
   const removeItem = () =>
     existingCartItem && dispatch(removeItemFromCart(cartItems, existingCartItem));
   const addItem = () =>
     existingCartItem && dispatch(addItemToCart(cartItems, existingCartItem));
-  const addProductToCart = () => dispatch(addItemToCart(cartItems, product));
+  const addProductToCart = () => dispatch(addItemToCart(cartItems, categoryItem));
   return (
     <>
       {isLoading ? (

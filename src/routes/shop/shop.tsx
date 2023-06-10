@@ -10,9 +10,9 @@ import Category from '../category/category';
 const Shop = () => {
   const productIsLoading = useSelector(selectProductIsLoading);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchCategoriesStart());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchCategoriesStart());
+  // }, []);
   return (
     <>
       {!productIsLoading && <PagePath />}

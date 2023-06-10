@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   addItemToCart,
   clearItemFromCart,
@@ -6,7 +7,12 @@ import {
 } from '../../store/cart/cart.actions';
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { CartItem as TCartItem } from '../../store/cart/cart.types';
+import {
+  selectCategoriesIsLoading,
+  selectCategoriesMap
+} from '../../store/categories/category.selector';
 import { Arrow } from '../checkout-item/checkout-item.styles';
+import Spinner from '../spinner/spinner.component';
 import {
   CartItemContainer,
   CartItemCount,
@@ -18,9 +24,21 @@ export type CartItemProps = {
   cartItem: TCartItem;
 };
 const CartItem = ({ cartItem }: CartItemProps) => {
-  const { name, quantity, price, imageUrl } = cartItem;
+  const { name, quantity, price, imageUrl, id } = cartItem;
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const categoriesIsLoading = useSelector(selectCategoriesIsLoading);
+  const categoriesMap = useSelector(selectCategoriesMap);
+  const categoryToNavigate = Object.keys(categoriesMap).find((category) =>
+    categoriesMap[category].map((categoryItem) => {
+      if (categoryItem.id === id) return true;
+      return false;
+    })
+  );
+  const handleNavigate = () => {
+    navigate(`/shop/${categoryToNavigate}/${id}`);
+  };
   const removeItem = () => {
     dispatch(removeItemFromCart(cartItems, cartItem));
   };
@@ -33,10 +51,16 @@ const CartItem = ({ cartItem }: CartItemProps) => {
   return (
     <CartItemContainer>
       <ImageContainer>
-        <img src={imageUrl} alt={name}></img>
+        {categoriesIsLoading ? (
+          <Spinner />
+        ) : (
+          <img onClick={handleNavigate} src={imageUrl} alt={name}></img>
+        )}
       </ImageContainer>
       <ItemDetails>
-        <span>{name}</span>
+        <span style={{ cursor: 'pointer' }} onClick={handleNavigate}>
+          {name}
+        </span>
         <CartItemCount>
           <Arrow onClick={removeItem}>-</Arrow> {quantity}
           <Arrow onClick={addItem}>+</Arrow>
