@@ -3,7 +3,7 @@ import { UserData } from '../../utils/firebase/firebase.utils';
 import { signInSuccess, signOutSuccess, signUpFailed } from './user.action';
 
 export type UserState = {
-  readonly currentUser: UserData | null;
+  readonly currentUser: (UserData & { id: string }) | null;
   readonly isLoading: boolean;
   readonly error: Error | null;
 };

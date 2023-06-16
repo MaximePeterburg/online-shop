@@ -12,6 +12,7 @@ import {
   User
 } from 'firebase/auth';
 import {
+  addDoc,
   collection,
   doc,
   getDoc,
@@ -23,6 +24,7 @@ import {
   writeBatch
 } from 'firebase/firestore';
 import { Category, CategoryItem } from '../../store/categories/category.types';
+import { OrderItem } from '../../store/order/order.types';
 const firebaseConfig = {
   apiKey: 'AIzaSyC7c5o_BIiIkPfqa3_ksWHJcxdYRfiAWG8',
   authDomain: 'online-shop-b33e0.firebaseapp.com',
@@ -132,6 +134,15 @@ export const createUserDocumentFromAuth = async (
     }
   }
   return userSnapshot as QueryDocumentSnapshot<UserData>;
+};
+export const createOrderDocument = async (order: OrderItem) => {
+  const orderDocRef = doc(collection(db, 'orders'));
+  const createdAt = new Date();
+  try {
+    await setDoc(orderDocRef, { ...order, createdAt });
+  } catch (error) {
+    console.log('error createing order');
+  }
 };
 export const onAuthStateChangedListener = (callback: NextOrObserver<User>) => {
   onAuthStateChanged(auth, callback);

@@ -129,4 +129,3 @@ export function* userSagas() {
     call(onCheckUserSession)
   ]);
 }
-// НЕ ОЧИЩАЕТ currentUser ПОСЛЕ ВЫХОДА

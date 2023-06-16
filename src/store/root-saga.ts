@@ -1,5 +1,6 @@
 import { all, call } from 'typed-redux-saga';
 import { categoriesSaga } from './categories/category.saga';
+import { orderSaga } from './order/order.saga';
 import { productSaga } from './product/product.saga';
 import { searchSaga } from './search/search.saga';
 import { userSagas } from './user/user.saga';
@@ -9,6 +10,7 @@ export function* rootSaga() {
     call(categoriesSaga),
     call(userSagas),
     call(productSaga),
-    call(searchSaga)
+    call(searchSaga),
+    call(orderSaga)
   ]);
 }
