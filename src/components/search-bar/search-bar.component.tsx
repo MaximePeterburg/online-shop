@@ -30,7 +30,7 @@ const SearchBar = () => {
           onChange={handleChange}
           required
           type='search'></SearchBarInput>
-        <Button>Поиск</Button>
+        <Button type='submit'>Поиск</Button>
       </form>
     </SearchBarContainer>
   );

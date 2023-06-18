@@ -1,11 +1,24 @@
 import styled from 'styled-components';
-
 export const CheckoutContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+  }
+`;
+export const ContactInfoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+export const ToAuthConainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+export const CheckoutItemsContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
   width: 55%;
-  margin: 50px auto 0;
   @media screen and (max-width: 800px) {
     width: 100%;
   }
@@ -27,16 +40,4 @@ export const Total = styled.div`
   display: flex;
   justify-content: end;
   width: 100%;
-`;
-export const PaymentModal = styled.dialog``;
-export const ModalWrapper = styled.div``;
-export const ModalHeader = styled.div`
-  display: flex;
-  justify-content: end;
-  border-bottom: 1px lightgray solid;
-`;
-export const CloseButton = styled.div`
-  cursor: pointer;
-  color: #d50032;
-  padding: 0.5rem;
 `;

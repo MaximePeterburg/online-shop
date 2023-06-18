@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { StripeCardElement } from '@stripe/stripe-js';
 import { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { setCartItems } from '../../store/cart/cart.actions';
 import { selectCartItems, selectCartTotal } from '../../store/cart/cart.selector';
 import { createOrderStart } from '../../store/order/order.actions';
 import {
@@ -74,13 +75,21 @@ const PaymentForm = () => {
           userId: currentUser!.id
         };
         dispatch(createOrderStart(formedOrderItem));
+        dispatch(setCartItems([]));
       }
     }
   };
   return (
     <PaymentFormContainer onSubmit={paymentHandler}>
       <h2>Оплата картой:</h2>
-      <CardElement></CardElement>
+      <div style={{ color: 'red' }}>
+        <div>Тестовые данные:</div>
+        <span style={{ marginRight: '2rem' }}>4242 4242 4242 4242</span>
+        <span style={{ marginRight: '1rem' }}>04/24</span>
+        <span style={{ marginRight: '1rem' }}>424</span>
+        <span style={{ marginRight: '1rem' }}>24242</span>
+      </div>
+      <CardElement />
       <Button
         style={{ marginLeft: 'auto' }}
         isLoading={isProcessingPayment}
