@@ -11,7 +11,7 @@ const Authentication = () => {
   const navigate = useNavigate();
   const isFirstRender = useRef(true);
   useEffect(() => {
-    isFirstRender.current ? (isFirstRender.current = false) : navigate('/');
+    isFirstRender.current ? (isFirstRender.current = false) : navigate(-1);
   }, [currentUser]);
   return (
     <AuthenticationContainer>

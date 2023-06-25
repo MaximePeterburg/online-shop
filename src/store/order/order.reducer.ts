@@ -1,12 +1,11 @@
 import { AnyAction } from 'redux';
-import { CartItem } from '../cart/cart.types';
 import {
   createOrderFailed,
   createOrderStart,
   createOrderSuccess,
-  setContactInformation
+  setOrderItem
 } from './order.actions';
-import { ContactInfo, OrderItem } from './order.types';
+import { OrderItem } from './order.types';
 export type OrderState = {
   order: OrderItem;
   readonly isLoading: boolean;
@@ -25,8 +24,8 @@ export const orderReducer = (
   state = ORDER_INITIAL_STATE,
   action: AnyAction
 ): OrderState => {
-  if (setContactInformation.match(action)) {
-    return { ...state, order: { ...state.order, contactInfo: action.payload } };
+  if (setOrderItem.match(action)) {
+    return { ...state, order: action.payload };
   }
   if (createOrderStart.match(action)) {
     return { ...state, isLoading: true };

@@ -1,10 +1,13 @@
-import { ChangeEvent, FC, FormEvent, MouseEventHandler, useRef, useState } from 'react';
+import { ChangeEvent, FormEvent, MouseEventHandler, useRef, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { setContactInformation } from '../../store/order/order.actions';
-import { selectContactInfo } from '../../store/order/order.selector';
+import { selectCartItems } from '../../store/cart/cart.selector';
+import { addInfoToOrder } from '../../store/order/order.actions';
+import { selectOrderItem } from '../../store/order/order.selector';
 import { selectCurrentUser } from '../../store/user/user.selector';
+import { RU_CODE_LENGTH, RU_PHONE_LENGTH } from '../../utils/util/util.utils';
 import Button from '../button/button.component';
-import FormInput from '../form-input/form-input.component';
+import FormInput, { FormInputValues } from '../form-input/form-input.component';
 import PaymentForm from '../payment-form/payment-form.component';
 import {
   CloseButton,
@@ -20,15 +23,22 @@ const defaultContactInfoFields = {
 const ContactInfo = () => {
   const dispatch = useDispatch();
   const [contactInfo, setContactInfo] = useState(defaultContactInfoFields);
+  const [validatedPhone, setValidatedPhone] = useState(true);
   const { address, phoneNumber } = contactInfo;
+  const cartItems = useSelector(selectCartItems);
+  const orderItem = useSelector(selectOrderItem);
+  const currentUser = useSelector(selectCurrentUser);
   const modalRef = useRef<HTMLDialogElement>(null);
-  const debounceTimer = useRef<NodeJS.Timeout | null>(null);
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (modalRef.current) {
-      modalRef.current.showModal();
-    }
-  };
+
+  // const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   validateContactInfo(e);
+  //   if (modalRef.current && phoneNumber.length === RU_PHONE_LENGTH) {
+  //     dispatch(addInfoToOrder(orderItem, cartItems, contactInfo, currentUser!.id));
+  //     modalRef.current.showModal();
+  //   }
+  //   // setValidatedPhone(validatePhone(phoneNumber));
+  // };
   const handleClose = () => {
     modalRef.current?.close();
   };
@@ -45,42 +55,52 @@ const ContactInfo = () => {
       modalRef.current.close();
     }
   };
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-    setContactInfo((prevContactInfo) => ({ ...prevContactInfo, [name]: value }));
-    if (name === 'phoneNumber' && value.length === 12) {
-      dispatch(setContactInformation({ ...contactInfo, [name]: value }));
-    }
-    if (debounceTimer.current) {
-      clearTimeout(debounceTimer.current);
-    }
-    debounceTimer.current = setTimeout(() => {
-      dispatch(setContactInformation({ ...contactInfo, [name]: value }));
-    }, 1500);
+  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { value, name } = e.target;
+  //   if (
+  //     name === 'phoneNumber' &&
+  //     (value.length < RU_CODE_LENGTH ||
+  //       value.length > RU_PHONE_LENGTH ||
+  //       Number.isNaN(Number(value)))
+  //   ) {
+  //     return;
+  //   }
+  //   setContactInfo((prevContactInfo) => ({
+  //     ...prevContactInfo,
+  //     [name]: value
+  //   }));
+  // };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormInputValues>();
+  // const submitHandler = useForm<Inputs>().handleSubmit;
+  const onSubmit: SubmitHandler<FormInputValues> = (data) => {
+    dispatch(addInfoToOrder(orderItem, cartItems, contactInfo, currentUser!.id));
+    modalRef.current!.showModal();
   };
   return (
     <ContactInfoContianer>
       <h2>ДАННЫЕ ДЛЯ ОТПРАВКИ ЗАКАЗА</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <FormInput
-          value={address}
-          onChange={handleChange}
-          name='address'
+          register={register}
+          rules={{ required: true }}
+          label='address'
           type='text'
-          required
-          label='Адрес доставки'
         />
         <FormInput
-          value={phoneNumber}
-          onChange={handleChange}
-          name='phoneNumber'
-          type='text'
-          required
-          label='Номер телефона'
+          register={register}
+          rules={{ required: true }}
+          maxLength={12}
+          minLength={12}
+          defaultValue='+7'
+          type='tel'
+          label='phoneNumber'
         />
-        <Button type='submit' disabled={contactInfo.phoneNumber.length !== 12}>
-          Продолжить Оформление
-        </Button>
+        {errors.phoneNumber && <span>Не верный формат</span>}
+        <Button type='submit'>Продолжить Оформление</Button>
       </form>
       <PaymentModal ref={modalRef} onClick={handleBackdropClick}>
         <ModalHeader>

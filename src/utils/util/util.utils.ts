@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux';
 import { selectCategoriesMap } from '../../store/categories/category.selector';
 
+export const RU_CODE_LENGTH = 2;
+export const RU_PHONE_LENGTH = 12;
 export const getGoodsForm = (goodsCount: number) => {
   let goodsForm;
   switch (goodsCount) {

@@ -51,3 +51,6 @@ export const Group = styled.div`
     letter-spacing: 0.3em;
   }
 `;
+export const InputError = styled.div`
+  color: red;
+`;
