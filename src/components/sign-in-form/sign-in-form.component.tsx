@@ -16,6 +16,7 @@ const SignInForm = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors }
   } = useForm<FormInputValues>();
   const onSubmit: SubmitHandler<FormInputValues> = (formFields) => {
@@ -59,15 +60,17 @@ const SignInForm = () => {
           name='email'
           register={register}
           type='email'
-          label='email'
-          rules={{ required: true }}
+          label='Email'
+          uncontrolledValue={watch('email')}
+          rules={{ required: { value: true, message: 'Обязательное поле' } }}
         />
         <FormInput
           name='password'
           register={register}
           type='password'
-          rules={{ required: true }}
-          label='password'
+          uncontrolledValue={watch('password')}
+          rules={{ required: { value: true, message: 'Обязательное поле' } }}
+          label='Пароль'
         />
         <ButtonsContainer>
           <Button type='submit'>Войти</Button>

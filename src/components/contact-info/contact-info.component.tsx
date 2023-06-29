@@ -173,9 +173,9 @@ const ContactInfo = () => {
           name='address'
           label='Адрес доставки'
           type='text'
+          error={errors.address?.message}
           uncontrolledValue={watch('address')}
         />
-        {errors.address && <ErrorMessage>{errors.address?.message}</ErrorMessage>}
         <FormInput
           register={register}
           rules={{
@@ -193,8 +193,8 @@ const ContactInfo = () => {
           onInput={handleChange}
           // onkeydown={handlePhoneKeyDown}
           value={phoneNumber}
+          error={errors.phoneNumber?.message}
         />
-        {errors.phoneNumber && <ErrorMessage>{errors.phoneNumber?.message}</ErrorMessage>}
         <Button type='submit'>Продолжить Оформление</Button>
       </form>
       <PaymentModal ref={modalRef} onClick={handleBackdropClick}>

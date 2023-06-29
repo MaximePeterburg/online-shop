@@ -1,6 +1,7 @@
 import { InputHTMLAttributes } from 'react';
 import { Path, UseFormRegister, ValidationRule } from 'react-hook-form';
-import { FormInputLabel, Group, Input, InputError } from './form-input.styles';
+import { ErrorMessage } from '../contact-info/contact-info.styles';
+import { FormInputLabel, Group, Input, RequiredSign } from './form-input.styles';
 export type FormInputValues = {
   address: string;
   phoneNumber: string;
@@ -9,10 +10,6 @@ export type FormInputValues = {
   displayName: string;
   confirmPassword: string;
 };
-// export type ValidationRule = {
-//   value: string | boolean | number | RegExp;
-//   message: string;
-// };
 export type ValidationRules = {
   required?: ValidationRule<boolean>;
   minLength?: ValidationRule<number>;
@@ -23,6 +20,7 @@ export type FormInputProps = {
   name: Path<FormInputValues>;
   label: string;
   uncontrolledValue?: string;
+  error?: string;
   register: UseFormRegister<FormInputValues>;
   rules: ValidationRules;
 } & InputHTMLAttributes<HTMLInputElement>;
@@ -31,6 +29,7 @@ export const FormInput = ({
   name,
   register,
   uncontrolledValue,
+  error,
   rules: { required, minLength, maxLength, pattern },
   ...otherProps
 }: FormInputProps) => {
@@ -48,8 +47,10 @@ export const FormInput = ({
               (fieldValue && typeof fieldValue === 'string' && fieldValue.length)
           )}>
           {label}
+          {required && <RequiredSign>{'*'}</RequiredSign>}
         </FormInputLabel>
       )}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
     </Group>
   );
 };

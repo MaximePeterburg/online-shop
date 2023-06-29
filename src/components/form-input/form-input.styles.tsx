@@ -54,3 +54,6 @@ export const Group = styled.div`
 export const InputError = styled.div`
   color: red;
 `;
+export const RequiredSign = styled.span`
+  color: red;
+`;
