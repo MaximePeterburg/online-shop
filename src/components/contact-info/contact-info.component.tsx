@@ -1,3 +1,4 @@
+import { endAt } from 'firebase/firestore';
 import { ChangeEvent, FormEvent, MouseEventHandler, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -55,31 +56,102 @@ const ContactInfo = () => {
       modalRef.current.close();
     }
   };
-  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const { value, name } = e.target;
-  //   if (
-  //     name === 'phoneNumber' &&
-  //     (value.length < RU_CODE_LENGTH ||
-  //       value.length > RU_PHONE_LENGTH ||
-  //       Number.isNaN(Number(value)))
-  //   ) {
-  //     return;
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    // const { value, name } = e.target;
+    // if (
+    //   name === 'phoneNumber' &&
+    //   (value.length < RU_CODE_LENGTH ||
+    //     value.length > RU_PHONE_LENGTH ||
+    //     Number.isNaN(Number(value)))
+    // ) {
+    //   return;
+    // }
+    let { value, name } = e.target;
+    let numberInputValue = getNumbers(value);
+    let formattedInputValue = '';
+    if (!numberInputValue) {
+      return value === '+7';
+    }
+    if (['7', '8', '9'].indexOf(numberInputValue[0]) > -1) {
+      // Для российских номеров
+      if (numberInputValue[0] === '9') {
+        numberInputValue = '7' + numberInputValue;
+      }
+      const firstSymbols = numberInputValue[0] === '8' ? '8' : '+7';
+      formattedInputValue = firstSymbols + ' ';
+      if (numberInputValue.length > 1) {
+        formattedInputValue += '(' + numberInputValue.substring(1, 4);
+      }
+      if (numberInputValue.length >= 5) {
+        formattedInputValue += ') ' + numberInputValue.substring(4, 7);
+      }
+      if (numberInputValue.length >= 8) {
+        formattedInputValue += '-' + numberInputValue.substring(7, 9);
+      }
+      if (numberInputValue.length >= 10) {
+        formattedInputValue += '-' + numberInputValue.substring(9, 11);
+      }
+    } else {
+      // Для нероссийских номеров
+      formattedInputValue = '+' + numberInputValue.substring(0, 16);
+    }
+    value = formattedInputValue;
+    setContactInfo((prevContactInfo) => ({
+      ...prevContactInfo,
+      [name]: value
+    }));
+  };
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors }
+  } = useForm<FormInputValues>();
+  // const submitHandler = useForm<Inputs>().handleSubmit;
+  const onSubmit: SubmitHandler<FormInputValues> = (contactInfo) => {
+    dispatch(addInfoToOrder(orderItem, cartItems, contactInfo, currentUser!.id));
+    modalRef.current!.showModal();
+  };
+  const PATTERN = /\D/g;
+  const getNumbers = (value: string) => {
+    return value.replace(PATTERN, '');
+  };
+  // const handlePhoneChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   let { value, name } = event.target;
+  //   let numberInputValue = getNumbers(value);
+  //   let formattedInputValue = '';
+  //   if (!numberInputValue) {
+  //     return value === '+7';
   //   }
+  //   if (['7', '8', '9'].indexOf(numberInputValue[0]) > -1) {
+  //     // Для российских номеров
+  //     if (numberInputValue[0] === '9') {
+  //       numberInputValue = '7' + numberInputValue;
+  //     }
+  //     const firstSymbols = numberInputValue[0] === '8' ? '8' : '+7';
+  //     formattedInputValue = firstSymbols + ' ';
+  //     if (numberInputValue.length > 1) {
+  //       formattedInputValue += '(' + numberInputValue.substring(1, 4);
+  //     }
+  //     if (numberInputValue.length >= 5) {
+  //       formattedInputValue += ') ' + numberInputValue.substring(4, 7);
+  //     }
+  //     if (numberInputValue.length >= 8) {
+  //       formattedInputValue += '-' + numberInputValue.substring(7, 9);
+  //     }
+  //     if (numberInputValue.length >= 10) {
+  //       formattedInputValue += '-' + numberInputValue.substring(9, 11);
+  //     }
+  //   } else {
+  //     // Для нероссийских номеров
+  //     formattedInputValue = '+' + numberInputValue.substring(0, 16);
+  //   }
+  //   value = formattedInputValue;
   //   setContactInfo((prevContactInfo) => ({
   //     ...prevContactInfo,
   //     [name]: value
   //   }));
   // };
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<FormInputValues>();
-  // const submitHandler = useForm<Inputs>().handleSubmit;
-  const onSubmit: SubmitHandler<FormInputValues> = (data) => {
-    dispatch(addInfoToOrder(orderItem, cartItems, contactInfo, currentUser!.id));
-    modalRef.current!.showModal();
-  };
   return (
     <ContactInfoContianer>
       <h2>ДАННЫЕ ДЛЯ ОТПРАВКИ ЗАКАЗА</h2>
@@ -87,19 +159,22 @@ const ContactInfo = () => {
         <FormInput
           register={register}
           rules={{ required: true }}
-          label='address'
+          name='address'
+          label='Адрес доставки'
           type='text'
+          inputValue={watch('address')}
         />
         <FormInput
           register={register}
-          rules={{ required: true }}
-          maxLength={12}
-          minLength={12}
+          rules={{ required: true, maxLength: 12, minLength: 12 }}
           defaultValue='+7'
+          label='Номер телефона'
           type='tel'
-          label='phoneNumber'
+          name='phoneNumber'
+          onChange={handleChange}
+          value={phoneNumber}
         />
-        {errors.phoneNumber && <span>Не верный формат</span>}
+        {/* {errors.phoneNumber && <span>Не верный формат</span>} */}
         <Button type='submit'>Продолжить Оформление</Button>
       </form>
       <PaymentModal ref={modalRef} onClick={handleBackdropClick}>

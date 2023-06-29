@@ -1,8 +1,9 @@
 import { ChangeEvent, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
-import FormInput from '../form-input/form-input.component';
+import FormInput, { FormInputValues } from '../form-input/form-input.component';
 import { ButtonsContainer, SignInFormContainer } from './sign-in-form.styles';
 
 const defaultFormFields = {
@@ -12,12 +13,13 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-  const resetFormFields = () => {
-    setFormFields(defaultFormFields);
-  };
-  const dispatch = useDispatch();
-  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormInputValues>();
+  const onSubmit: SubmitHandler<FormInputValues> = (formFields) => {
+    const { email, password } = formFields;
     try {
       dispatch(emailSignInStart(email, password));
       resetFormFields();
@@ -25,6 +27,19 @@ const SignInForm = () => {
       console.log('Ошибка при входе', error);
     }
   };
+  const resetFormFields = () => {
+    setFormFields(defaultFormFields);
+  };
+  const dispatch = useDispatch();
+  // const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   try {
+  //     dispatch(emailSignInStart(email, password));
+  //     resetFormFields();
+  //   } catch (error) {
+  //     console.log('Ошибка при входе', error);
+  //   }
+  // };
   const signInWithGoogle = () => {
     try {
       dispatch(googleSignInStart());
@@ -39,22 +54,18 @@ const SignInForm = () => {
   return (
     <SignInFormContainer>
       <h2>Войти на Сайт</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <FormInput
-          name='email'
-          value={email}
-          type='text'
-          label='Email'
-          required
-          onChange={handleChange}
+          register={register}
+          type='email'
+          label='email'
+          rules={{ required: true }}
         />
         <FormInput
-          name='password'
-          value={password}
+          register={register}
           type='password'
-          label='Пароль'
-          required
-          onChange={handleChange}
+          rules={{ required: true }}
+          label='password'
         />
         <ButtonsContainer>
           <Button type='submit'>Войти</Button>

@@ -1,9 +1,14 @@
 import { InputHTMLAttributes } from 'react';
 import { Path, UseFormRegister } from 'react-hook-form';
+import { Subscription } from 'react-hook-form/dist/utils/createSubject';
 import { FormInputLabel, Group, Input, InputError } from './form-input.styles';
 export type FormInputValues = {
   address: string;
   phoneNumber: string;
+  email: string;
+  password: string;
+  displayName: string;
+  confirmPassword: string;
 };
 export type ValidationRules = {
   required?: boolean;
@@ -12,28 +17,33 @@ export type ValidationRules = {
   pattern?: RegExp;
 };
 export type FormInputProps = {
-  label: Path<FormInputValues>;
+  name: Path<FormInputValues>;
+  label: string;
+  // inputValue: string;
   register: UseFormRegister<FormInputValues>;
   rules: ValidationRules;
 } & InputHTMLAttributes<HTMLInputElement>;
 export const FormInput = ({
   label,
+  name,
   register,
+  // inputValue,
   rules: { required, minLength, maxLength, pattern },
   ...otherProps
 }: FormInputProps) => {
   return (
     <Group>
       <Input
-        {...register(label, { required, minLength, maxLength, pattern })}
+        {...register(name, { required, minLength, maxLength, pattern })}
         {...otherProps}
       />
       {label && (
         <FormInputLabel
           shrink={Boolean(
-            otherProps.value &&
-              typeof otherProps.value === 'string' &&
-              otherProps.value.length
+            otherProps.defaultValue ||
+              (otherProps.value &&
+                typeof otherProps.value === 'string' &&
+                otherProps.value.length)
           )}>
           {label}
         </FormInputLabel>
