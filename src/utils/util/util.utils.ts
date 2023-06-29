@@ -1,8 +1,12 @@
 import { useSelector } from 'react-redux';
 import { selectCategoriesMap } from '../../store/categories/category.selector';
 
+const PATTERN = /\D/g;
+export const normalizePhoneNumber = (value: string): string => {
+  return value.replace(PATTERN, '');
+};
 export const RU_CODE_LENGTH = 2;
-export const RU_PHONE_LENGTH = 12;
+export const FORMATTED_RU_PHONE_LENGTH = 18;
 export const getGoodsForm = (goodsCount: number) => {
   let goodsForm;
   switch (goodsCount) {

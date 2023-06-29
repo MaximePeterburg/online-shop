@@ -11,7 +11,7 @@ import {
   ContactInfoContainer,
   HeaderBlock,
   HeaderContainer,
-  ToAuthConainer,
+  RedirectConainer,
   Total
 } from './checkout.styles';
 
@@ -20,7 +20,9 @@ const Checkout = () => {
   const currentUser = useSelector(selectCurrentUser);
   const cartItems = useSelector(selectCartItems);
   const total = useSelector(selectCartTotal);
-  const handleNavigation = () => navigate('/auth');
+  const handleAuthNavigation = () => navigate('/auth');
+  const handleCatalogNavigation = () => navigate('/shop');
+
   return (
     <CheckoutContainer>
       <CheckoutItemsContainer>
@@ -46,16 +48,23 @@ const Checkout = () => {
         ))}
         <Total>Итого: {total} &#8381;</Total>
       </CheckoutItemsContainer>
-      <ContactInfoContainer>
-        {currentUser ? (
-          <ContactInfo />
-        ) : (
-          <ToAuthConainer>
-            <h2>Войти или зарегистрироваться</h2>
-            <Button onClick={handleNavigation}>Войдите</Button>
-          </ToAuthConainer>
-        )}
-      </ContactInfoContainer>
+      {cartItems.length ? (
+        <ContactInfoContainer>
+          {currentUser ? (
+            <ContactInfo />
+          ) : (
+            <RedirectConainer>
+              <h2>Войти или зарегистрироваться</h2>
+              <Button onClick={handleAuthNavigation}>Войдите</Button>
+            </RedirectConainer>
+          )}
+        </ContactInfoContainer>
+      ) : (
+        <RedirectConainer>
+          <h2> К сожалению, в настоящее время ваша корзина пуста.</h2>
+          <Button onClick={handleCatalogNavigation}>Перейти в каталог</Button>
+        </RedirectConainer>
+      )}
     </CheckoutContainer>
   );
 };

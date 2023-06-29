@@ -18,3 +18,6 @@ export const CloseButton = styled.div`
   padding: 0.5rem;
   font-weight: bold;
 `;
+export const ErrorMessage = styled.div`
+  color: #d50032;
+`;

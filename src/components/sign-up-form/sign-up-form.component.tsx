@@ -64,24 +64,28 @@ function SignUpForm() {
       <h2>Зарегистрироваться</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormInput
+          name='displayName'
           type='text'
           register={register}
           rules={{ required: true }}
           label='displayName'
         />
         <FormInput
+          name='email'
           register={register}
           type='email'
           rules={{ required: true }}
           label='email'
         />
         <FormInput
+          name='password'
           type='password'
           register={register}
           label='password'
           rules={{ required: true }}
         />
         <FormInput
+          name='confirmPassword'
           type='password'
           rules={{ required: true }}
           label='confirmPassword'

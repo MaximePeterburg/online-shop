@@ -56,12 +56,14 @@ const SignInForm = () => {
       <h2>Войти на Сайт</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormInput
+          name='email'
           register={register}
           type='email'
           label='email'
           rules={{ required: true }}
         />
         <FormInput
+          name='password'
           register={register}
           type='password'
           rules={{ required: true }}

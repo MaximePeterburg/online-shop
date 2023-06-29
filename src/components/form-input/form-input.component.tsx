@@ -1,6 +1,5 @@
 import { InputHTMLAttributes } from 'react';
-import { Path, UseFormRegister } from 'react-hook-form';
-import { Subscription } from 'react-hook-form/dist/utils/createSubject';
+import { Path, UseFormRegister, ValidationRule } from 'react-hook-form';
 import { FormInputLabel, Group, Input, InputError } from './form-input.styles';
 export type FormInputValues = {
   address: string;
@@ -10,16 +9,20 @@ export type FormInputValues = {
   displayName: string;
   confirmPassword: string;
 };
+// export type ValidationRule = {
+//   value: string | boolean | number | RegExp;
+//   message: string;
+// };
 export type ValidationRules = {
-  required?: boolean;
-  minLength?: number;
-  maxLength?: number;
+  required?: ValidationRule<boolean>;
+  minLength?: ValidationRule<number>;
+  maxLength?: ValidationRule<number>;
   pattern?: RegExp;
 };
 export type FormInputProps = {
   name: Path<FormInputValues>;
   label: string;
-  // inputValue: string;
+  uncontrolledValue?: string;
   register: UseFormRegister<FormInputValues>;
   rules: ValidationRules;
 } & InputHTMLAttributes<HTMLInputElement>;
@@ -27,10 +30,11 @@ export const FormInput = ({
   label,
   name,
   register,
-  // inputValue,
+  uncontrolledValue,
   rules: { required, minLength, maxLength, pattern },
   ...otherProps
 }: FormInputProps) => {
+  const fieldValue = otherProps.value ? otherProps.value : uncontrolledValue;
   return (
     <Group>
       <Input
@@ -41,9 +45,7 @@ export const FormInput = ({
         <FormInputLabel
           shrink={Boolean(
             otherProps.defaultValue ||
-              (otherProps.value &&
-                typeof otherProps.value === 'string' &&
-                otherProps.value.length)
+              (fieldValue && typeof fieldValue === 'string' && fieldValue.length)
           )}>
           {label}
         </FormInputLabel>
