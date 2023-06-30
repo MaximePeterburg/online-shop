@@ -1,10 +1,10 @@
 import { AuthError, AuthErrorCodes } from 'firebase/auth';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signUpStart } from '../../store/user/user.action';
+import { selectUserError } from '../../store/user/user.selector';
 import Button from '../button/button.component';
-import { ErrorMessage } from '../contact-info/contact-info.styles';
 import FormInput, { FormInputValues } from '../form-input/form-input.component';
 import { SignUpFormContainer } from './sign-up-form.styles';
 
@@ -17,6 +17,7 @@ const defaultFormFields = {
 function SignUpForm() {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [isPasswordsMatch, setIsPasswordsMatch] = useState(true);
+  const userError = useSelector(selectUserError);
   const dispatch = useDispatch();
   const {
     register,
@@ -29,6 +30,7 @@ function SignUpForm() {
   };
   const onSubmit: SubmitHandler<FormInputValues> = (formFields) => {
     const { email, password, displayName, confirmPassword } = formFields;
+    console.log(email);
     if (password === confirmPassword) {
       setIsPasswordsMatch(true);
     } else {
@@ -36,6 +38,8 @@ function SignUpForm() {
       return;
     }
     try {
+      dispatch(signUpStart(email, password, displayName));
+      resetFormFields();
     } catch (error) {
       if ((error as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {
         alert('Cannot create user, email already in use');
@@ -102,7 +106,7 @@ function SignUpForm() {
           label='Пароль'
           rules={{
             required: { value: true, message: 'Обязательное поле' },
-            minLength: { value: 8, message: 'Минимальная длина пароля - 8 символов' }
+            minLength: { value: 6, message: 'Минимальная длина пароля - 6 символов' }
           }}
           error={getErrorPasswordMessage(errors.password?.message)}
           uncontrolledValue={watch('password')}

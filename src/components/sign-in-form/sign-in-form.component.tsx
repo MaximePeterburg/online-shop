@@ -1,8 +1,10 @@
-import { ChangeEvent, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
+import { selectCurrentUser, selectUserError } from '../../store/user/user.selector';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
+import { ErrorMessage } from '../contact-info/contact-info.styles';
 import FormInput, { FormInputValues } from '../form-input/form-input.component';
 import { ButtonsContainer, SignInFormContainer } from './sign-in-form.styles';
 
@@ -12,7 +14,9 @@ const defaultFormFields = {
 };
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { email, password } = formFields;
+  const userError = useSelector(selectUserError);
+  const [userErrorMessage, setUserErrorMessage] = useState('');
+  // const { email, password } = formFields;
   const {
     register,
     handleSubmit,
@@ -28,10 +32,22 @@ const SignInForm = () => {
       console.log('Ошибка при входе', error);
     }
   };
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
+    setUserErrorMessage('');
   };
   const dispatch = useDispatch();
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    isFirstRender.current
+      ? (isFirstRender.current = false)
+      : setUserErrorMessage(getSignInErrorMessage());
+  }, [onSubmit]);
+  useEffect(() => {
+    isFirstRender.current ? (isFirstRender.current = false) : setUserErrorMessage('');
+  }, [emailSignInStart]);
+
   // const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
   //   event.preventDefault();
   //   try {
@@ -48,10 +64,23 @@ const SignInForm = () => {
       console.log('Что-то пошло не так ...', error);
     }
   };
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormFields({ ...formFields, [name]: value });
+  const getSignInErrorMessage = () => {
+    switch (userError?.message) {
+      case 'Firebase: Error (auth/user-not-found).':
+        return 'Пользователь не найден';
+      case 'Firebase: Error (auth/wrong-password).':
+        return 'Неверный пароль';
+      case 'Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).':
+        return 'Слишком много попыток. Попробуйте войти позже.';
+      default:
+        return '';
+    }
   };
+
+  // const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = event.target;
+  //   setFormFields({ ...formFields, [name]: value });
+  // };
   return (
     <SignInFormContainer>
       <h2>Войти на Сайт</h2>
@@ -63,15 +92,25 @@ const SignInForm = () => {
           label='Email'
           uncontrolledValue={watch('email')}
           rules={{ required: { value: true, message: 'Обязательное поле' } }}
+          error={errors.email?.message}
         />
         <FormInput
           name='password'
           register={register}
           type='password'
           uncontrolledValue={watch('password')}
-          rules={{ required: { value: true, message: 'Обязательное поле' } }}
+          rules={{
+            required: { value: true, message: 'Обязательное поле' },
+            minLength: { value: 6, message: 'Минимальная длина пароля - 6 символов' }
+          }}
           label='Пароль'
+          error={errors.password?.message}
         />
+        {userErrorMessage.length > 1 && (
+          <ErrorMessage style={{ display: 'flex', justifyContent: 'center' }}>
+            {userErrorMessage}
+          </ErrorMessage>
+        )}
         <ButtonsContainer>
           <Button type='submit'>Войти</Button>
           <Button
