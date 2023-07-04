@@ -42,9 +42,9 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   return (
     <ProductCardContainer>
       <img src={imageUrl} alt={name} onClick={handleNavigation}></img>
-      <Footer onClick={handleNavigation}>
-        <Name>{name}</Name>
-        <Price>{price} &#8381;</Price>
+      <Footer>
+        <Name onClick={handleNavigation}>{name}</Name>
+        <Price onClick={handleNavigation}>{price} &#8381;</Price>
       </Footer>
       {!existingCartItem ? (
         <Button onClick={addProductToCart} buttonType={BUTTON_TYPE_CLASSES.base}>

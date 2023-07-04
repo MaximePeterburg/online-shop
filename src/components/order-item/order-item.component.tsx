@@ -1,5 +1,6 @@
 import { OrderItem as TOrderItem } from '../../store/order/order.types';
 import OrderItemCard from '../order-item-card/order-item-card.component';
+import { OrderItemContainer } from './order-item.styles';
 
 type OrderItemProps = {
   orderItem: TOrderItem;
@@ -7,11 +8,11 @@ type OrderItemProps = {
 
 const OrderItem = ({ orderItem }: OrderItemProps) => {
   return (
-    <div>
+    <OrderItemContainer>
       {orderItem.cartItems.map((cartItem) => (
-        <OrderItemCard orderCartItem={cartItem} />
+        <OrderItemCard key={cartItem.id} orderCartItem={cartItem} />
       ))}
-    </div>
+    </OrderItemContainer>
   );
 };
 
