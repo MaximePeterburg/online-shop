@@ -9,12 +9,21 @@ export const NavigationContainer = styled.div`
   @media screen and (max-width: 800px) {
   }
 `;
+export const LinkList = styled.div`
+  @media screen and (max-width: 800px) {
+    visibility: hidden;
+  }
+`;
 export const NavLinks = styled.div`
   width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+`;
+export const HamburgerMenu = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 export const NavLink = styled(Link)`
   padding: 10px 15px;

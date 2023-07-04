@@ -1,12 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
+import { ReactComponent as HamburgerIcon } from '../../assets/hamburger-menu.svg';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 import CartIcon from '../../components/cart-icon/cart-icon.component';
+import HamburgerMenuIcon from '../../components/hamburger-menu-icon/hamburger-menu-icon.component';
 import SearchBar from '../../components/search-bar/search-bar.component';
 import { selectIsCartOpen } from '../../store/cart/cart.selector';
 import { signOutStart } from '../../store/user/user.action';
 import { selectCurrentUser } from '../../store/user/user.selector';
 import {
+  HamburgerMenu,
+  LinkList,
   LogoContainer,
   NavLink,
   NavLinks,
@@ -21,9 +25,8 @@ function Navigation() {
   return (
     <>
       <NavigationContainer>
-        <LogoContainer to='/'></LogoContainer>
-        <SearchBar />
-        <NavLinks>
+        <HamburgerMenu>
+          <HamburgerMenuIcon />
           <NavLink to='/shop'>КАТАЛОГ</NavLink>
           {currentUser ? (
             <>
@@ -35,9 +38,26 @@ function Navigation() {
           ) : (
             <NavLink to='/auth'>ВОЙТИ</NavLink>
           )}
+        </HamburgerMenu>
+        <LogoContainer to='/'></LogoContainer>
+        <SearchBar />
+        <NavLinks>
+          <LinkList>
+            <NavLink to='/shop'>КАТАЛОГ</NavLink>
+            {currentUser ? (
+              <>
+                <NavLink to='/orders'>ЗАКАЗЫ</NavLink>
+                <NavLink as='span' onClick={signOutUser}>
+                  ВЫЙТИ
+                </NavLink>
+              </>
+            ) : (
+              <NavLink to='/auth'>ВОЙТИ</NavLink>
+            )}
+          </LinkList>
           <CartIcon />
+          {isCartOpen && <CartDropdown />}
         </NavLinks>
-        {isCartOpen && <CartDropdown></CartDropdown>}
       </NavigationContainer>
       <Outlet />
     </>
