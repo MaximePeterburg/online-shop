@@ -11,7 +11,7 @@ export const NavigationContainer = styled.div`
 `;
 export const LinkList = styled.div`
   @media screen and (max-width: 800px) {
-    visibility: hidden;
+    display: none;
   }
 `;
 export const NavLinks = styled.div`
@@ -22,8 +22,10 @@ export const NavLinks = styled.div`
   justify-content: flex-end;
 `;
 export const HamburgerMenu = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: none;
+  @media screen and (max-width: 800px) {
+    display: unset;
+  }
 `;
 export const NavLink = styled(Link)`
   padding: 10px 15px;
