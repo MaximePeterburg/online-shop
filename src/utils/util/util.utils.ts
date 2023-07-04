@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { selectCategoriesMap } from '../../store/categories/category.selector';
+import { CategoryMap } from '../../store/categories/category.types';
 
 const PATTERN = /\D/g;
 export const normalizePhoneNumber = (value: string): string => {
@@ -41,4 +42,11 @@ export const translateRoutePart = (routePart: string) => {
     default:
       return 'ошибка';
   }
+};
+export const getCategoryByItemId = (categoriesMap: CategoryMap, id: number) => {
+  let category: string;
+  Object.keys(categoriesMap).flatMap((title) =>
+    categoriesMap[title].find((item) => item.id === id && (category = title))
+  );
+  return category!;
 };

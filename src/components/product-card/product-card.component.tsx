@@ -5,6 +5,7 @@ import { addItemToCart, removeItemFromCart } from '../../store/cart/cart.actions
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { selectCategoriesMap } from '../../store/categories/category.selector';
 import { CategoryItem } from '../../store/categories/category.types';
+import { getCategoryByItemId } from '../../utils/util/util.utils';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { Arrow } from '../checkout-item/checkout-item.styles';
 import {
@@ -24,10 +25,11 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const cartItems = useSelector(selectCartItems);
   const { name, price, imageUrl, id } = product;
   const categoriesMap = useSelector(selectCategoriesMap);
-  let category: string;
-  Object.keys(categoriesMap).flatMap((title) =>
-    categoriesMap[title].find((item) => item.id === id && (category = title))
-  );
+  const category = getCategoryByItemId(categoriesMap, id);
+  // let category: string;
+  // Object.keys(categoriesMap).flatMap((title) =>
+  //   categoriesMap[title].find((item) => item.id === id && (category = title))
+  // );
   const handleNavigation = () => {
     navigate(`/shop/${category}/${id}`);
   };
