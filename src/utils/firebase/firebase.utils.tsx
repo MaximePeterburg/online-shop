@@ -12,7 +12,6 @@ import {
   User
 } from 'firebase/auth';
 import {
-  addDoc,
   collection,
   doc,
   getDoc,
@@ -51,6 +50,16 @@ export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
   });
   await batch.commit();
   console.log('done');
+};
+export const getUserOrdersFromCollection = async (
+  userId: string
+): Promise<OrderItem[]> => {
+  const collectionRef = collection(db, 'orders');
+  const q = query(collectionRef);
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs
+    .map((docSnapshot) => docSnapshot.data())
+    .filter((order) => order.userId === userId) as OrderItem[];
 };
 export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
   const collectionRef = collection(db, 'categories');
