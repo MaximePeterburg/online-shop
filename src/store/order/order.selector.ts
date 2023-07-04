@@ -3,12 +3,12 @@ import { RootState } from '../store';
 import { OrderState } from './order.reducer';
 
 export const selectOrderReducer = (state: RootState): OrderState => state.order;
-export const selectOrderDetails = createSelector(
+export const selectOrderItem = createSelector(
   [selectOrderReducer],
-  (order) => order.orderDetails
+  (order) => order.order
 );
 export const selectContactInfo = createSelector(
-  [selectOrderDetails],
+  [selectOrderItem],
   (order) => order.contactInfo
 );
 export const selectContactAddress = createSelector(

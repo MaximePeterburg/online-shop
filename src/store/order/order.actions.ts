@@ -1,3 +1,4 @@
+import { UserData } from '../../utils/firebase/firebase.utils';
 import {
   Action,
   ActionWithPayload,
@@ -5,16 +6,16 @@ import {
   withMatcher
 } from '../../utils/reducer/reducer.utils';
 import { CartItem } from '../cart/cart.types';
-import { ContactInfo, ORDER_ACTION_TYPES, OrderDetails } from './order.types';
+import { ContactInfo, ORDER_ACTION_TYPES, OrderItem } from './order.types';
 
 export const addInfoToOrder = (
-  orderDetails: OrderDetails,
+  orderItem: OrderItem,
   cartItems: CartItem[],
   contactInfo: ContactInfo,
   userId: string
 ): SetOrderItem => {
   const newOrderItem = {
-    ...orderDetails,
+    ...orderItem,
     cartItems: cartItems,
     contactInfo: contactInfo,
     userId: userId
@@ -23,21 +24,19 @@ export const addInfoToOrder = (
 };
 export type SetOrderItem = ActionWithPayload<
   ORDER_ACTION_TYPES.SET_ORDER_ITEM,
-  OrderDetails
+  OrderItem
 >;
 export const setOrderItem = withMatcher(
-  (orderDetails: OrderDetails): SetOrderItem =>
-    createAction(ORDER_ACTION_TYPES.SET_ORDER_ITEM, orderDetails)
+  (orderItem: OrderItem): SetOrderItem =>
+    createAction(ORDER_ACTION_TYPES.SET_ORDER_ITEM, orderItem)
 );
-
 export type CreateOrderStart = ActionWithPayload<
   ORDER_ACTION_TYPES.CREATE_ORDER_START,
-  OrderDetails
+  OrderItem
 >;
-
 export const createOrderStart = withMatcher(
-  (orderDetails: OrderDetails): CreateOrderStart =>
-    createAction(ORDER_ACTION_TYPES.CREATE_ORDER_START, orderDetails)
+  (order: OrderItem): CreateOrderStart =>
+    createAction(ORDER_ACTION_TYPES.CREATE_ORDER_START, order)
 );
 export type CreateOrderSuccess = Action<ORDER_ACTION_TYPES.CREATE_ORDER_SUCCESS>;
 export const createOrderSuccess = withMatcher(

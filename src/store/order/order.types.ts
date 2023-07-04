@@ -11,7 +11,7 @@ export type ContactInfo = {
   address: string;
   phoneNumber: string;
 };
-export type OrderDetails = {
+export type OrderItem = {
   cartItems: CartItem[];
   contactInfo: ContactInfo;
   userId: string;

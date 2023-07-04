@@ -3,7 +3,6 @@ import { categoriesSaga } from './categories/category.saga';
 import { orderSaga } from './order/order.saga';
 import { productSaga } from './product/product.saga';
 import { searchSaga } from './search/search.saga';
-import { userOrdersSaga } from './user-orders/user-orders.saga';
 import { userSagas } from './user/user.saga';
 
 export function* rootSaga() {
@@ -12,7 +11,6 @@ export function* rootSaga() {
     call(userSagas),
     call(productSaga),
     call(searchSaga),
-    call(orderSaga),
-    call(userOrdersSaga)
+    call(orderSaga)
   ]);
 }

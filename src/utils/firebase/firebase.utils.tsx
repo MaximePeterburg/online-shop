@@ -1,4 +1,3 @@
-import { Order } from '@stripe/stripe-js';
 import { initializeApp } from 'firebase/app';
 import {
   createUserWithEmailAndPassword,
@@ -13,6 +12,7 @@ import {
   User
 } from 'firebase/auth';
 import {
+  addDoc,
   collection,
   doc,
   getDoc,
@@ -24,7 +24,7 @@ import {
   writeBatch
 } from 'firebase/firestore';
 import { Category, CategoryItem } from '../../store/categories/category.types';
-import { OrderDetails } from '../../store/order/order.types';
+import { OrderItem } from '../../store/order/order.types';
 const firebaseConfig = {
   apiKey: 'AIzaSyC7c5o_BIiIkPfqa3_ksWHJcxdYRfiAWG8',
   authDomain: 'online-shop-b33e0.firebaseapp.com',
@@ -51,16 +51,6 @@ export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
   });
   await batch.commit();
   console.log('done');
-};
-export const getUserOrdersFromCollection = async (
-  id: string
-): Promise<OrderDetails[]> => {
-  const collectionRef = collection(db, 'orders');
-  const q = query(collectionRef);
-  const querySnapshot = await getDocs(q);
-  return querySnapshot.docs
-    .map((docSnapshot) => docSnapshot.data())
-    .filter((order) => order.userId === id) as OrderDetails[];
 };
 export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
   const collectionRef = collection(db, 'categories');
@@ -145,7 +135,7 @@ export const createUserDocumentFromAuth = async (
   }
   return userSnapshot as QueryDocumentSnapshot<UserData>;
 };
-export const createOrderDocument = async (order: OrderDetails) => {
+export const createOrderDocument = async (order: OrderItem) => {
   const orderDocRef = doc(collection(db, 'orders'));
   const createdAt = new Date();
   try {

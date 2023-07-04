@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
-import { selectUserError } from '../../store/user/user.selector';
+import { selectCurrentUser, selectUserError } from '../../store/user/user.selector';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { ErrorMessage } from '../contact-info/contact-info.styles';
 import FormInput, { FormInputValues } from '../form-input/form-input.component';
@@ -16,6 +16,7 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const userError = useSelector(selectUserError);
   const [userErrorMessage, setUserErrorMessage] = useState('');
+  // const { email, password } = formFields;
   const {
     register,
     handleSubmit,
@@ -47,7 +48,15 @@ const SignInForm = () => {
     isFirstRender.current ? (isFirstRender.current = false) : setUserErrorMessage('');
   }, [emailSignInStart]);
 
-
+  // const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   try {
+  //     dispatch(emailSignInStart(email, password));
+  //     resetFormFields();
+  //   } catch (error) {
+  //     console.log('Ошибка при входе', error);
+  //   }
+  // };
   const signInWithGoogle = () => {
     try {
       dispatch(googleSignInStart());
@@ -68,6 +77,10 @@ const SignInForm = () => {
     }
   };
 
+  // const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = event.target;
+  //   setFormFields({ ...formFields, [name]: value });
+  // };
   return (
     <SignInFormContainer>
       <h2>Войти на Сайт</h2>

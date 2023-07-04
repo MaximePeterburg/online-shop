@@ -9,7 +9,7 @@ import Category from '../category/category';
 
 const Shop = () => {
   const productIsLoading = useSelector(selectProductIsLoading);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // useEffect(() => {
   //   dispatch(fetchCategoriesStart());
   // }, []);
