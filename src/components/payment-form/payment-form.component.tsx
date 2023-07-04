@@ -8,8 +8,8 @@ import { createOrderStart } from '../../store/order/order.actions';
 import {
   selectContactAddress,
   selectContactPhoneNumber,
-  selectOrderItem,
-  selectOrderReducer
+  selectOrderDetails,
+
 } from '../../store/order/order.selector';
 import { selectCurrentUser } from '../../store/user/user.selector';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
@@ -24,7 +24,7 @@ const PaymentForm = () => {
   const currentUser = useSelector(selectCurrentUser);
   const address = useSelector(selectContactAddress);
   const phoneNumber = useSelector(selectContactPhoneNumber);
-  const orderItem = useSelector(selectOrderItem);
+  const orderDetails = useSelector(selectOrderDetails);
   const dispatch = useDispatch();
   const stripe = useStripe();
   const elements = useElements();
@@ -70,7 +70,7 @@ const PaymentForm = () => {
       if (paymentResult.paymentIntent.status === 'succeeded') {
         alert('Оплата прошла успешно');
         const formedOrderItem = {
-          ...orderItem,
+          ...orderDetails,
           cartItems: cartItems,
           userId: currentUser!.id
         };

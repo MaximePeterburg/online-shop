@@ -29,9 +29,12 @@ function Navigation() {
         <NavLinks>
           <NavLink to='/shop'>КАТАЛОГ</NavLink>
           {currentUser ? (
-            <NavLink as='span' onClick={signOutUser}>
-              ВЫЙТИ
-            </NavLink>
+            <>
+              <NavLink to='/orders'>ЗАКАЗЫ</NavLink>
+              <NavLink as='span' onClick={signOutUser}>
+                ВЫЙТИ
+              </NavLink>
+            </>
           ) : (
             <NavLink to='/auth'>ВОЙТИ</NavLink>
           )}

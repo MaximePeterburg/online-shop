@@ -5,15 +5,15 @@ import {
   createOrderSuccess,
   setOrderItem
 } from './order.actions';
-import { OrderItem } from './order.types';
+import { OrderDetails } from './order.types';
 export type OrderState = {
-  order: OrderItem;
+  readonly orderDetails: OrderDetails;
   readonly isLoading: boolean;
   readonly error: Error | null;
 };
 export const ORDER_INITIAL_STATE: OrderState = {
-  order: {
-    cartItems: [],
+  orderDetails: {
+    orderItems: [],
     contactInfo: { address: '', phoneNumber: '+7' },
     userId: ''
   },
@@ -25,7 +25,7 @@ export const orderReducer = (
   action: AnyAction
 ): OrderState => {
   if (setOrderItem.match(action)) {
-    return { ...state, order: action.payload };
+    return { ...state, orderDetails: action.payload };
   }
   if (createOrderStart.match(action)) {
     return { ...state, isLoading: true };

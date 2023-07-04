@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import Checkout from './components/checkout/checkout.component';
+import Orders from './components/orders-page/orders-page.component';
 import Search from './components/search/search.component';
 import { GlobalStyle } from './global.styles';
-import Authentication from './routes/authentication/authentication';
+import Authentication from './routes/authentication/authentication.component';
 import Home from './routes/home/home';
 import Navigation from './routes/navigation/navigation';
 import Shop from './routes/shop/shop';
@@ -24,6 +25,7 @@ function App() {
           <Route path='auth' element={<Authentication />} />
           <Route path='checkout' element={<Checkout />} />
           <Route path='search' element={<Search />} />
+          <Route path='orders' element={<Orders />} />
         </Route>
       </Routes>
     </>

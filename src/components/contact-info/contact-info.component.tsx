@@ -1,10 +1,9 @@
-import { endAt } from 'firebase/firestore';
-import { ChangeEvent, KeyboardEvent, MouseEventHandler, useRef, useState } from 'react';
+import { ChangeEvent, MouseEventHandler, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { addInfoToOrder } from '../../store/order/order.actions';
-import { selectOrderItem } from '../../store/order/order.selector';
+import { selectOrderDetails } from '../../store/order/order.selector';
 import { selectCurrentUser } from '../../store/user/user.selector';
 import {
   FORMATTED_RU_PHONE_LENGTH,
@@ -17,7 +16,6 @@ import PaymentForm from '../payment-form/payment-form.component';
 import {
   CloseButton,
   ContactInfoContianer,
-  ErrorMessage,
   ModalHeader,
   PaymentModal
 } from './contact-info.styles';
@@ -26,7 +24,7 @@ const ContactInfo = () => {
   const dispatch = useDispatch();
   const [phoneNumber, setPhoneNumber] = useState('+7 (');
   const cartItems = useSelector(selectCartItems);
-  const orderItem = useSelector(selectOrderItem);
+  const orderDetails = useSelector(selectOrderDetails);
   const currentUser = useSelector(selectCurrentUser);
   const modalRef = useRef<HTMLDialogElement>(null);
 
@@ -123,7 +121,7 @@ const ContactInfo = () => {
   } = useForm<FormInputValues>();
   // const submitHandler = useForm<Inputs>().handleSubmit;
   const onSubmit: SubmitHandler<FormInputValues> = (contactInfo) => {
-    dispatch(addInfoToOrder(orderItem, cartItems, contactInfo, currentUser!.id));
+    dispatch(addInfoToOrder(orderDetails, cartItems, contactInfo, currentUser!.id));
     modalRef.current!.showModal();
   };
 
