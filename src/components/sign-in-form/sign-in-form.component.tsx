@@ -48,15 +48,6 @@ const SignInForm = () => {
     isFirstRender.current ? (isFirstRender.current = false) : setUserErrorMessage('');
   }, [emailSignInStart]);
 
-  // const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   try {
-  //     dispatch(emailSignInStart(email, password));
-  //     resetFormFields();
-  //   } catch (error) {
-  //     console.log('Ошибка при входе', error);
-  //   }
-  // };
   const signInWithGoogle = () => {
     try {
       dispatch(googleSignInStart());
@@ -77,14 +68,16 @@ const SignInForm = () => {
     }
   };
 
-  // const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = event.target;
-  //   setFormFields({ ...formFields, [name]: value });
-  // };
   return (
     <SignInFormContainer>
       <h2>Войти на Сайт</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <div style={{ color: 'red' }}>
+          Test account:
+          <div>
+            Email: <b>qwe@qwe.com </b> password: <b>qweqwe</b>
+          </div>
+        </div>
         <FormInput
           name='email'
           register={register}
