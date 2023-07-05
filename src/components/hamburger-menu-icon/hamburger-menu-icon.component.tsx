@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as HamburgerIcon } from '../../assets/hamburger-menu.svg';
 import {
@@ -8,7 +9,8 @@ import { HamburgerMenuIconContainer } from './hamburger-menu-icon.styles';
 const HamburgerMenuIcon = () => {
   const isHamburgerMenuOpen = useSelector(selectIsHamburgerMenuOpen);
   const dispatch = useDispatch();
-  const clickHandler = () => {
+  const clickHandler = (event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
     dispatch(switchIsHamburgerMenuOpen(isHamburgerMenuOpen));
   };
   return (

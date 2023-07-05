@@ -1,23 +1,36 @@
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from '../../routes/navigation/navigation.styles';
 import {
   selectIsHamburgerMenuOpen,
   switchIsHamburgerMenuOpen
 } from '../../store/hamburger-menu/hamburger-menu.store';
 import { signOutStart } from '../../store/user/user.action';
 import { selectCurrentUser } from '../../store/user/user.selector';
-import { CloseButton, LinkList, SideBarContainer, SidebarLink } from './sidebar.styles';
+import { LinkList, SideBarContainer, SidebarLink } from './sidebar.styles';
 
 const Sidebar = () => {
   const currentUser = useSelector(selectCurrentUser);
   const isHamburgerMenuOpen = useSelector(selectIsHamburgerMenuOpen);
   const dispatch = useDispatch();
   const signOutUser = () => dispatch(signOutStart());
-  const handleClose = () => {
-    dispatch(switchIsHamburgerMenuOpen(isHamburgerMenuOpen));
-  };
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        sidebarRef.current &&
+        event.target instanceof Node &&
+        !sidebarRef.current.contains(event.target)
+      )
+        dispatch(switchIsHamburgerMenuOpen(isHamburgerMenuOpen));
+    };
+    document.addEventListener('click', handleOutsideClick);
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
+
   return (
-    <SideBarContainer>
+    <SideBarContainer ref={sidebarRef}>
       <LinkList>
         <SidebarLink to='/shop'>КАТАЛОГ</SidebarLink>
         {currentUser ? (
@@ -31,9 +44,6 @@ const Sidebar = () => {
           <SidebarLink to='/auth'>ВОЙТИ</SidebarLink>
         )}
       </LinkList>
-      <CloseButton as='span' onClick={handleClose}>
-        Закрыть
-      </CloseButton>
     </SideBarContainer>
   );
 };
