@@ -3,18 +3,20 @@ import { NavLink } from '../../routes/navigation/navigation.styles';
 
 export const SideBarContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  align-items: center;
   position: fixed;
   overflow: auto;
   background-color: white;
   top: 0px;
-  width: 15rem;
+  left: 0px;
   height: 100vh;
   z-index: 1;
+  box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.5);
 `;
 export const SidebarLink = styled(NavLink)``;
 export const LinkList = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
+  align-items: center;
 `;

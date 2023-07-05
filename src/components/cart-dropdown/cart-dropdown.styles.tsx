@@ -20,13 +20,15 @@ export const CloseDropdown = styled.div`
 `;
 export const CartDropdownContainer = styled.div`
   display: flex;
+  box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.5);
+
   flex-direction: column;
   position: absolute;
   width: 400px;
   height: 440px;
   top: 75px;
   right: 40px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   background-color: white;
   z-index: 1;
   ${BaseButton}, ${InvertedButton}, ${GoogleSignInButton} {

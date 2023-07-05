@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { switchIsCartOpen } from '../../store/cart/cart.actions';
@@ -28,12 +29,27 @@ const CartDropdown = () => {
     dispatch(switchIsCartOpen(isCartOpen));
     navigate('/checkout');
   };
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        event.target instanceof Node &&
+        !dropdownRef.current.contains(event.target)
+      )
+        dispatch(switchIsCartOpen(isCartOpen));
+    };
+    document.addEventListener('click', handleOutsideClick);
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
   const handleClose = () => dispatch(switchIsCartOpen(isCartOpen));
   const cartCount = useSelector(selectCartCount);
   const cartItems = useSelector(selectCartItems);
   const cartTotal = useSelector(selectCartTotal);
   return (
-    <CartDropdownContainer>
+    <CartDropdownContainer ref={dropdownRef}>
       <Header>
         <span>Добавлено: {cartCount} шт.</span>
         <CloseDropdown onClick={handleClose}>Закрыть</CloseDropdown>
