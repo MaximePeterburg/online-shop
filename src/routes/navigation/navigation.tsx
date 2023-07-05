@@ -12,7 +12,7 @@ import { signOutStart } from '../../store/user/user.action';
 import { selectCurrentUser } from '../../store/user/user.selector';
 import {
   HamburgerMenu,
-  LinkList,
+  HidebleLinkList,
   LogoContainer,
   NavLink,
   NavLinks,
@@ -28,26 +28,13 @@ function Navigation() {
   return (
     <>
       <NavigationContainer>
-        <HamburgerMenu>
-          <HamburgerMenuIcon />
-          {isHamburgerMenuOpen && <Sidebar />}
-        </HamburgerMenu>
         <LogoContainer to='/'></LogoContainer>
         <SearchBar />
         <NavLinks>
-          <LinkList>
+          <HidebleLinkList>
             <NavLink to='/shop'>КАТАЛОГ</NavLink>
-            {currentUser ? (
-              <>
-                <NavLink to='/orders'>ЗАКАЗЫ</NavLink>
-                <NavLink as='span' onClick={signOutUser}>
-                  ВЫЙТИ
-                </NavLink>
-              </>
-            ) : (
-              <NavLink to='/auth'>ВОЙТИ</NavLink>
-            )}
-          </LinkList>
+            {currentUser && <NavLink to='/orders'>ЗАКАЗЫ</NavLink>}
+          </HidebleLinkList>
           {currentUser ? (
             <>
               <NavLink as='span' onClick={signOutUser}>
@@ -60,6 +47,10 @@ function Navigation() {
           <CartIcon />
           {isCartOpen && <CartDropdown />}
         </NavLinks>
+        <HamburgerMenu>
+          <HamburgerMenuIcon />
+          {isHamburgerMenuOpen && <Sidebar />}
+        </HamburgerMenu>
       </NavigationContainer>
       <Outlet />
     </>

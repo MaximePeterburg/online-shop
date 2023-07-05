@@ -8,10 +8,10 @@ export const SideBarContainer = styled.div`
   overflow: auto;
   background-color: white;
   top: 0px;
-  left: 0px;
+  right: 0px;
   height: 100vh;
   z-index: 1;
-  box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 1px 4px 4px rgba(0, 0, 0, 0.5);
 `;
 export const SidebarLink = styled(NavLink)``;
 export const LinkList = styled.div`

@@ -9,7 +9,7 @@ export const NavigationContainer = styled.div`
   @media screen and (max-width: 800px) {
   }
 `;
-export const LinkList = styled.div`
+export const HidebleLinkList = styled.div`
   @media screen and (max-width: 800px) {
     display: none;
   }
@@ -30,6 +30,11 @@ export const HamburgerMenu = styled.div`
 export const NavLink = styled(Link)`
   padding: 10px 15px;
   cursor: pointer;
+`;
+export const HidebleNavLink = styled(NavLink)`
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
 `;
 export const LogoContainer = styled(Link)`
   height: 100%;
