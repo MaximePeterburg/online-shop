@@ -61,7 +61,9 @@ const Checkout = () => {
         </ContactInfoContainer>
       ) : (
         <RedirectConainer>
-          <h2> К сожалению, в настоящее время ваша корзина пуста.</h2>
+          <h2 style={{ textAlign: 'center' }}>
+            К сожалению, в настоящее время ваша корзина пуста.
+          </h2>
           <Button onClick={handleCatalogNavigation}>Перейти в каталог</Button>
         </RedirectConainer>
       )}

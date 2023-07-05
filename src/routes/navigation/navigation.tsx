@@ -48,6 +48,15 @@ function Navigation() {
               <NavLink to='/auth'>ВОЙТИ</NavLink>
             )}
           </LinkList>
+          {currentUser ? (
+            <>
+              <NavLink as='span' onClick={signOutUser}>
+                ВЫЙТИ
+              </NavLink>
+            </>
+          ) : (
+            <NavLink to='/auth'>ВОЙТИ</NavLink>
+          )}
           <CartIcon />
           {isCartOpen && <CartDropdown />}
         </NavLinks>

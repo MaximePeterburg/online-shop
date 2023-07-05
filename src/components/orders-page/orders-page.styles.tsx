@@ -7,3 +7,8 @@ export const OrdersPageContainer = styled.div`
     width: 100%;
   }
 `;
+export const NoItemsError = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
