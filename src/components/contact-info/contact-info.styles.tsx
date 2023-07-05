@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { FormInputLabel } from '../form-input/form-input.styles';
 
 export const ContactInfoContianer = styled.div``;
 export const AuthLink = styled(Link)`
@@ -20,4 +21,10 @@ export const CloseButton = styled.div`
 `;
 export const ErrorMessage = styled.div`
   color: #d50032;
+`;
+
+export const StyledAddressSuggestions = styled.div`
+  color: red;
+  padding: 2rem;
+  border: 1px solid red;
 `;
