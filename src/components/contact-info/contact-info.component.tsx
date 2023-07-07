@@ -1,5 +1,5 @@
 import { ChangeEvent, MouseEventHandler, useRef, useState } from 'react';
-import { AddressSuggestions } from 'react-dadata';
+import { AddressSuggestions, DaDataAddress, DaDataSuggestion } from 'react-dadata';
 import 'react-dadata/dist/react-dadata.css';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +13,7 @@ import {
 } from '../../utils/util/util.utils';
 import Button from '../button/button.component';
 import FormInput, { FormInputValues } from '../form-input/form-input.component';
+import { FormInputLabel, Group, Input } from '../form-input/form-input.styles';
 import PaymentForm from '../payment-form/payment-form.component';
 import {
   CloseButton,
@@ -24,12 +25,8 @@ import {
 
 const ContactInfo = () => {
   const dispatch = useDispatch();
-  const defaultContactInfo = {
-    address: '',
-    phoneNumber: '+7 ('
-  };
-  const [contactInfo, setContactInfo] = useState(defaultContactInfo);
-  const { address, phoneNumber } = contactInfo;
+  const [address, setAddress] = useState<DaDataSuggestion<DaDataAddress>>();
+  const [phoneNumber, setPhoneNumber] = useState('+7 (');
 
   const cartItems = useSelector(selectCartItems);
   const orderItem = useSelector(selectOrderItem);
@@ -52,8 +49,8 @@ const ContactInfo = () => {
       modalRef.current.close();
     }
   };
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    let { value, name } = e.target;
+  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
     let normalizedValue = normalizePhoneNumber(value);
     let formattedValue = '+7 (';
     if (normalizedValue.length > 1) {
@@ -68,9 +65,8 @@ const ContactInfo = () => {
     if (normalizedValue.length >= 10) {
       formattedValue += '-' + normalizedValue.substring(9, 11);
     }
-    setContactInfo({ ...contactInfo, [name]: formattedValue });
+    setPhoneNumber(formattedValue);
   };
-
   const {
     register,
     handleSubmit,
@@ -85,13 +81,16 @@ const ContactInfo = () => {
     <ContactInfoContianer>
       <h2>ДАННЫЕ ДЛЯ ОТПРАВКИ ЗАКАЗА</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* Dont know how to style <AddressSuggestions/> component*/}
+        {/* Dont know how to style <AddressSuggestions /> component
         <StyledAddressSuggestions>
           <div>Im using styles that are provided in dadata library</div>
           <div>But i want to make AddressSuggestions to look like</div>
           <div>the rest of the inputs on the website</div>
-
-          <AddressSuggestions token={import.meta.env.VITE_DADATA_API_KEY} />
+          <AddressSuggestions
+            token={import.meta.env.VITE_DADATA_API_KEY}
+            value={address}
+            onChange={setAddress}
+          />
         </StyledAddressSuggestions>
         <FormInput
           register={register}
@@ -101,7 +100,18 @@ const ContactInfo = () => {
           type='text'
           error={errors.address?.message}
           uncontrolledValue={watch('address')}
-        />
+        /> */}
+        <Group>
+          <AddressSuggestions
+            token={import.meta.env.VITE_DADATA_API_KEY}
+            value={address}
+            onChange={setAddress}
+            count={5}
+            inputProps={{ required: true, minLength: 5 }}
+            customInput={Input}
+          />
+          <FormInputLabel shrink={true}>Адрес доставки</FormInputLabel>
+        </Group>
         <FormInput
           register={register}
           rules={{
@@ -114,7 +124,7 @@ const ContactInfo = () => {
           label='Номер телефона'
           type='tel'
           name='phoneNumber'
-          onInput={handleChange}
+          onInput={handlePhoneChange}
           value={phoneNumber}
           error={errors.phoneNumber?.message}
         />

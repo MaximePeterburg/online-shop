@@ -1,3 +1,4 @@
+import { DaDataAddress, DaDataSuggestion } from 'react-dadata';
 import { CartItem } from '../cart/cart.types';
 
 export enum ORDER_ACTION_TYPES {
