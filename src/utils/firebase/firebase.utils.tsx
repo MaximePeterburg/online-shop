@@ -24,6 +24,7 @@ import {
 } from 'firebase/firestore';
 import { Category, CategoryItem } from '../../store/categories/category.types';
 import { OrderItem } from '../../store/order/order.types';
+import { UserOrderItem } from '../../store/user-orders/user-orders.types';
 const firebaseConfig = {
   apiKey: 'AIzaSyC7c5o_BIiIkPfqa3_ksWHJcxdYRfiAWG8',
   authDomain: 'online-shop-b33e0.firebaseapp.com',
@@ -58,8 +59,12 @@ export const getUserOrdersFromCollection = async (
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs
-    .map((docSnapshot) => docSnapshot.data())
-    .filter((order) => order.userId === userId) as OrderItem[];
+    .map((docSnapshot) => {
+      const data = docSnapshot.data();
+      const id = docSnapshot.id;
+      return { ...data, createdAt: data.createdAt.toDate(), id } as UserOrderItem;
+    })
+    .filter((order) => order.userId === userId);
 };
 export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
   const collectionRef = collection(db, 'categories');

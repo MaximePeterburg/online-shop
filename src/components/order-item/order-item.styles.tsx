@@ -1,8 +1,17 @@
 import styled from 'styled-components';
 export const UserInfo = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
   margin-bottom: 1rem;
 `;
-export const Total = styled.div``;
+export const HeaderBlock = styled.div``;
+export const Total = styled.h2``;
+export const Id = styled.div`
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem;
+`;
 export const OrderItemContainer = styled.div`
   background-image: linear-gradient(#d5003243, rgb(220, 223, 232));
   border-radius: 1rem;

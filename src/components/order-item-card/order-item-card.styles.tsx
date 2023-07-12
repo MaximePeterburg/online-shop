@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { redColor } from '../category-preview/category-preview.styles';
 
 export const OrderItemCardContainer = styled.div`
   display: flex;
@@ -16,6 +17,8 @@ export const Name = styled.div`
   overflow: hidden;
 `;
 export const Price = styled.div`
+  font-weight: bold;
+  color: ${redColor};
   white-space: nowrap;
 `;
 export const ProductDetails = styled.div``;

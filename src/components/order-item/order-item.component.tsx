@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { OrderItem as TOrderItem } from '../../store/order/order.types';
+import { UserOrderItem } from '../../store/user-orders/user-orders.types';
 import OrderItemCard from '../order-item-card/order-item-card.component';
 import {
   Header,
+  HeaderBlock,
+  Id,
   OrderItemContainer,
   OrderItems,
   Total,
@@ -10,23 +11,47 @@ import {
 } from './order-item.styles';
 
 type OrderItemProps = {
-  orderItem: TOrderItem;
+  orderItem: UserOrderItem;
 };
 
 const OrderItem = ({ orderItem }: OrderItemProps) => {
+  const { userName, createdAt, id } = orderItem;
   const { phoneNumber, address } = orderItem.contactInfo;
+  let total = 0;
+  orderItem.cartItems.map((cartItem) => {
+    total = total + cartItem.price * cartItem.quantity;
+  });
   return (
     <OrderItemContainer>
+      <Id>
+        Код заказа: <b>{id}</b>
+      </Id>
       <Header>
         <UserInfo>
-          Адрес доставки:
-          <br />
-          <b> {address}</b>
-          <br />
-          Получатель:
-          <br />
-          <b>{phoneNumber}</b>
-          <br />
+          <HeaderBlock>
+            <span>Адрес доставки:</span>
+            <div>
+              <b>{address}</b>
+            </div>
+          </HeaderBlock>
+          <HeaderBlock>
+            <span>Номер телефона:</span>
+            <div>
+              <b>{phoneNumber}</b>
+            </div>
+          </HeaderBlock>
+          <HeaderBlock>
+            <span>Получатель:</span>
+            <div>
+              <b>{userName}</b>
+            </div>
+          </HeaderBlock>
+          <HeaderBlock>
+            <span>Дата заказа:</span>
+            <div>
+              <b>{createdAt.toLocaleDateString()}</b>
+            </div>
+          </HeaderBlock>
         </UserInfo>
       </Header>
       <OrderItems>
@@ -34,6 +59,7 @@ const OrderItem = ({ orderItem }: OrderItemProps) => {
           <OrderItemCard key={cartItem.id} orderCartItem={cartItem} />
         ))}
       </OrderItems>
+      <Total>Всего: {total} &#8381;</Total>
     </OrderItemContainer>
   );
 };
