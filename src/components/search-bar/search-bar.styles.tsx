@@ -10,3 +10,8 @@ export const SearchBarContainer = styled.div`
     }
   }
 `;
+export const SearchContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { BaseButton, GoogleSignInButton, InvertedButton } from '../button/button.styles';
+import { redColor } from '../category-preview/category-preview.styles';
 
 export const Header = styled.div`
   font-size: 0.89rem;
@@ -14,14 +15,13 @@ export const Header = styled.div`
   }
 `;
 export const CloseDropdown = styled.div`
-  color: #d50032;
+  color: ${redColor};
   opacity: 0.9;
   cursor: pointer;
 `;
 export const CartDropdownContainer = styled.div`
   display: flex;
   box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.5);
-
   flex-direction: column;
   position: absolute;
   width: 400px;
@@ -56,7 +56,7 @@ export const Footer = styled.div`
 `;
 export const CartTotal = styled.div`
   font-weight: bold;
-  color: #d50032;
+  color: ${redColor};
 `;
 export const CartItems = styled.div`
   display: flex;

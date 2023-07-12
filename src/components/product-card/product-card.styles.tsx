@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { CartItemCount } from '../cart-item/cart-item.styles';
+import { redColor } from '../category-preview/category-preview.styles';
 export const ProductCardContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,5 +38,5 @@ export const Name = styled.span`
   -webkit-box-orient: vertical;
 `;
 export const Price = styled.span`
-  color: #d50032;
+  color: ${redColor};
 `;

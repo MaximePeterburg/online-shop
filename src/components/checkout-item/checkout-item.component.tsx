@@ -12,6 +12,7 @@ import {
   selectCategoriesIsLoading,
   selectCategoriesMap
 } from '../../store/categories/category.selector';
+import { redColor } from '../category-preview/category-preview.styles';
 import Spinner from '../spinner/spinner.component';
 import {
   Arrow,
@@ -70,7 +71,7 @@ export const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
         {/* <Arrow onClick={addItem}> &#10095;</Arrow> */}
         <Arrow onClick={addItem}> +</Arrow>
       </Quantity>
-      <BaseSpan style={{ color: '#d50032' }}>{price} &#8381;</BaseSpan>
+      <BaseSpan style={{ color: redColor }}>{price} &#8381;</BaseSpan>
       <RemoveButton onClick={clearItem}>
         <p>X</p>
       </RemoveButton>

@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import { SpinnerContainer } from '../spinner/spinner.styles';
 
+export const lightBlueColor = '#dcdfe8';
 export const CartItemContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
   padding: 1rem 0px 1rem 2rem;
   &:hover {
-    background-color: rgb(220, 223, 232);
+    background-color: ${lightBlueColor};
   }
   @media screen and (max-width: 800px) {
     padding: 0.2rem 0 0.2rem 0.4rem;

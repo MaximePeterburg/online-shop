@@ -81,26 +81,6 @@ const ContactInfo = () => {
     <ContactInfoContianer>
       <h2>ДАННЫЕ ДЛЯ ОТПРАВКИ ЗАКАЗА</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* Dont know how to style <AddressSuggestions /> component
-        <StyledAddressSuggestions>
-          <div>Im using styles that are provided in dadata library</div>
-          <div>But i want to make AddressSuggestions to look like</div>
-          <div>the rest of the inputs on the website</div>
-          <AddressSuggestions
-            token={import.meta.env.VITE_DADATA_API_KEY}
-            value={address}
-            onChange={setAddress}
-          />
-        </StyledAddressSuggestions>
-        <FormInput
-          register={register}
-          rules={{ required: { value: true, message: 'Обязательное поле' } }}
-          name='address'
-          label='Адрес доставки'
-          type='text'
-          error={errors.address?.message}
-          uncontrolledValue={watch('address')}
-        /> */}
         <Group>
           <AddressSuggestions
             token={import.meta.env.VITE_DADATA_API_KEY}

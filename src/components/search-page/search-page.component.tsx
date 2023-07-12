@@ -7,9 +7,10 @@ import {
   selectSearchItems
 } from '../../store/search/search.selector';
 import { Title } from '../category-page/category-page.styles';
+import { redColor } from '../category-preview/category-preview.styles';
 import { ProductCard } from '../product-card/product-card.component';
 import Spinner from '../spinner/spinner.component';
-import { ResultsContainer, SearchResults } from './search.styles';
+import { ResultsContainer, SearchResults } from './search-page.styles';
 export type SearchRouteParams = {
   search: string;
 };
@@ -32,11 +33,11 @@ const Search = () => {
         <SearchResults>
           {searchItems.length > 0 ? (
             <Title>
-              Результаты поиска: <span style={{ color: '#d50032' }}>{query}</span>
+              Результаты поиска: <span style={{ color: redColor }}>{query}</span>
             </Title>
           ) : (
             <Title>
-              По запросу <span style={{ color: '#d50032' }}>{query}</span> ничего не
+              По запросу <span style={{ color: redColor }}>{query}</span> ничего не
               найдено
             </Title>
           )}

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import { redColor } from '../category-preview/category-preview.styles';
 import { FormInputLabel } from '../form-input/form-input.styles';
 
 export const ContactInfoContianer = styled.div``;
@@ -15,12 +16,12 @@ export const ModalHeader = styled.div`
 `;
 export const CloseButton = styled.div`
   cursor: pointer;
-  color: #d50032;
+  color: ${redColor};
   padding: 0.5rem;
   font-weight: bold;
 `;
 export const ErrorMessage = styled.div`
-  color: #d50032;
+  color: ${redColor};
 `;
 
 export const StyledAddressSuggestions = styled.div`

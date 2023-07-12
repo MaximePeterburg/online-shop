@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { BaseButton } from '../button/button.styles';
+import { lightBlueColor } from '../cart-item/cart-item.styles';
+import { redColor } from '../category-preview/category-preview.styles';
 import { ProductCardCounter } from '../product-card/product-card.styles';
 
 export const ProductPageContainer = styled.div`
@@ -28,7 +30,7 @@ export const ProductDescription = styled.div`
   width: 50%;
   flex-direction: column;
   justify-content: space-between;
-  background-color: rgb(220, 223, 232);
+  background-color: ${lightBlueColor};
   padding: 2rem;
   @media screen and (max-width: 800px) {
     padding: 0.2rem;
@@ -40,7 +42,7 @@ export const Price = styled.div`
   justify-content: end;
   width: 100%;
   font-size: 3rem;
-  color: #d50032;
+  color: ${redColor};
   @media screen and (max-width: 800px) {
     font-size: 2rem;
   }

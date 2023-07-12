@@ -11,6 +11,7 @@ import {
   selectCategoriesIsLoading,
   selectCategoriesMap
 } from '../../store/categories/category.selector';
+import { redColor } from '../category-preview/category-preview.styles';
 import { Arrow } from '../checkout-item/checkout-item.styles';
 import Spinner from '../spinner/spinner.component';
 import {
@@ -64,7 +65,7 @@ const CartItem = ({ cartItem }: CartItemProps) => {
         <CartItemCount>
           <Arrow onClick={removeItem}>-</Arrow> {quantity}
           <Arrow onClick={addItem}>+</Arrow>
-          <span style={{ color: '#d50032' }}>{price} &#8381;</span>
+          <span style={{ color: redColor }}>{price} &#8381;</span>
           <DeleteItemButton onClick={clearItem}>X</DeleteItemButton>
         </CartItemCount>
       </ItemDetails>

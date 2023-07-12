@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { lightBlueColor } from '../cart-item/cart-item.styles';
 
 export const CategoryPreviewContainer = styled.div`
   display: flex;
@@ -9,8 +10,8 @@ export const CategoryPreviewContainer = styled.div`
   margin: 1rem;
   padding: 1rem;
   border-radius: 1rem;
-  background-color: rgb(220, 223, 232);
-  background-image: linear-gradient(rgb(220, 223, 232), #fbfbfb);
+  background-color: ${lightBlueColor};
+  background-image: linear-gradient(#dcdfe8, #fbfbfb);
   @media screen and (max-width: 800px) {
     min-width: 19rem;
     margin: 1rem 0.1rem;
@@ -43,8 +44,9 @@ export const Title = styled.h2`
     color: black;
   } */
 `;
+export const redColor = '#d50032';
 export const CategoryLink = styled(Link)`
-  color: #d50032;
+  color: ${redColor};
   font-weight: bold;
   @media screen and (max-width: 800px) {
     font-size: 0.8rem;

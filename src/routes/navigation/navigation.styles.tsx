@@ -20,6 +20,9 @@ export const NavLinks = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  @media screen and (max-width: 800px) {
+    width: unset;
+  }
 `;
 export const HamburgerMenu = styled.div`
   display: none;
