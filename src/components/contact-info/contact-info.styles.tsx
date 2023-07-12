@@ -3,12 +3,9 @@ import styled, { css } from 'styled-components';
 import { redColor } from '../category-preview/category-preview.styles';
 import { FormInputLabel } from '../form-input/form-input.styles';
 
-export const ContactInfoContianer = styled.div``;
 export const AuthLink = styled(Link)`
   font-size: 2rem;
 `;
-export const PaymentModal = styled.dialog``;
-export const ModalWrapper = styled.div``;
 export const ModalHeader = styled.div`
   display: flex;
   justify-content: end;

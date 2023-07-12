@@ -5,8 +5,6 @@ export const UserInfo = styled.div`
   gap: 1rem;
   margin-bottom: 1rem;
 `;
-export const HeaderBlock = styled.div``;
-export const Total = styled.h2``;
 export const Id = styled.div`
   display: flex;
   justify-content: center;

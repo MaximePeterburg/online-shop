@@ -2,11 +2,9 @@ import { UserOrderItem } from '../../store/user-orders/user-orders.types';
 import OrderItemCard from '../order-item-card/order-item-card.component';
 import {
   Header,
-  HeaderBlock,
   Id,
   OrderItemContainer,
   OrderItems,
-  Total,
   UserInfo
 } from './order-item.styles';
 
@@ -28,30 +26,30 @@ const OrderItem = ({ orderItem }: OrderItemProps) => {
       </Id>
       <Header>
         <UserInfo>
-          <HeaderBlock>
+          <div>
             <span>Адрес доставки:</span>
             <div>
               <b>{address}</b>
             </div>
-          </HeaderBlock>
-          <HeaderBlock>
+          </div>
+          <div>
             <span>Номер телефона:</span>
             <div>
               <b>{phoneNumber}</b>
             </div>
-          </HeaderBlock>
-          <HeaderBlock>
+          </div>
+          <div>
             <span>Получатель:</span>
             <div>
-              <b>{userName}</b>
+              <b>{userName ? userName : 'Гость'}</b>
             </div>
-          </HeaderBlock>
-          <HeaderBlock>
+          </div>
+          <div>
             <span>Дата заказа:</span>
             <div>
               <b>{createdAt.toLocaleDateString()}</b>
             </div>
-          </HeaderBlock>
+          </div>
         </UserInfo>
       </Header>
       <OrderItems>
@@ -59,7 +57,7 @@ const OrderItem = ({ orderItem }: OrderItemProps) => {
           <OrderItemCard key={cartItem.id} orderCartItem={cartItem} />
         ))}
       </OrderItems>
-      <Total>Всего: {total} &#8381;</Total>
+      <h2>Всего: {total} &#8381;</h2>
     </OrderItemContainer>
   );
 };

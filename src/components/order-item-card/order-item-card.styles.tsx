@@ -21,7 +21,6 @@ export const Price = styled.div`
   color: ${redColor};
   white-space: nowrap;
 `;
-export const ProductDetails = styled.div``;
 export const Quantity = styled.div`
   width: 100%;
   display: flex;

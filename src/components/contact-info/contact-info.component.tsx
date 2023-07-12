@@ -15,12 +15,7 @@ import Button from '../button/button.component';
 import FormInput, { FormInputValues } from '../form-input/form-input.component';
 import { FormInputLabel, Group, Input } from '../form-input/form-input.styles';
 import PaymentForm from '../payment-form/payment-form.component';
-import {
-  CloseButton,
-  ContactInfoContianer,
-  ModalHeader,
-  PaymentModal
-} from './contact-info.styles';
+import { CloseButton, ModalHeader } from './contact-info.styles';
 
 const ContactInfo = () => {
   const dispatch = useDispatch();
@@ -86,7 +81,7 @@ const ContactInfo = () => {
     modalRef.current!.showModal();
   };
   return (
-    <ContactInfoContianer>
+    <div>
       <h2>ДАННЫЕ ДЛЯ ОТПРАВКИ ЗАКАЗА</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Group>
@@ -118,13 +113,13 @@ const ContactInfo = () => {
         />
         <Button type='submit'>Продолжить Оформление</Button>
       </form>
-      <PaymentModal ref={modalRef} onClick={handleBackdropClick}>
+      <dialog ref={modalRef} onClick={handleBackdropClick}>
         <ModalHeader>
           <CloseButton onClick={handleClose}>X</CloseButton>
         </ModalHeader>
         <PaymentForm />
-      </PaymentModal>
-    </ContactInfoContianer>
+      </dialog>
+    </div>
   );
 };
 export default ContactInfo;

@@ -9,7 +9,6 @@ export const BackgroundImage = styled.div<BackgroundImageProps>`
   background-position: center;
   background-image: ${({ imageUrl }) => `url(${imageUrl})`};
 `;
-export const DirectoryImageContainer = styled.div``;
 export const DirectoryItemContainer = styled.div`
   min-width: 30%;
   height: 300px;
