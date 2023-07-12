@@ -19,8 +19,7 @@ import {
   CloseButton,
   ContactInfoContianer,
   ModalHeader,
-  PaymentModal,
-  StyledAddressSuggestions
+  PaymentModal
 } from './contact-info.styles';
 
 const ContactInfo = () => {
@@ -74,7 +73,16 @@ const ContactInfo = () => {
     formState: { errors }
   } = useForm<FormInputValues>();
   const onSubmit: SubmitHandler<FormInputValues> = (contactInfo) => {
-    dispatch(addInfoToOrder(orderItem, cartItems, contactInfo, currentUser!.id));
+    contactInfo = { ...contactInfo, address: address!.value };
+    dispatch(
+      addInfoToOrder(
+        orderItem,
+        cartItems,
+        contactInfo,
+        currentUser!.id,
+        currentUser!.displayName
+      )
+    );
     modalRef.current!.showModal();
   };
   return (

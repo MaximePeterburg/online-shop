@@ -15,7 +15,8 @@ export const ORDER_INITIAL_STATE: OrderState = {
   order: {
     cartItems: [],
     contactInfo: { address: '', phoneNumber: '+7' },
-    userId: ''
+    userId: '',
+    userName: ''
   },
   isLoading: false,
   error: null

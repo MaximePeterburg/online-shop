@@ -1,4 +1,3 @@
-import { UserData } from '../../utils/firebase/firebase.utils';
 import {
   Action,
   ActionWithPayload,
@@ -12,13 +11,15 @@ export const addInfoToOrder = (
   orderItem: OrderItem,
   cartItems: CartItem[],
   contactInfo: ContactInfo,
-  userId: string
+  userId: string,
+  userName: string
 ): SetOrderItem => {
   const newOrderItem = {
     ...orderItem,
     cartItems: cartItems,
     contactInfo: contactInfo,
-    userId: userId
+    userId: userId,
+    userName: userName
   };
   return setOrderItem(newOrderItem);
 };

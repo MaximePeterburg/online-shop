@@ -1,5 +1,4 @@
 import { InputHTMLAttributes } from 'react';
-import { DaDataAddress, DaDataSuggestion } from 'react-dadata';
 import { Path, UseFormRegister, ValidationRule } from 'react-hook-form';
 import { ErrorMessage } from '../contact-info/contact-info.styles';
 import { FormInputLabel, Group, Input, RequiredSign } from './form-input.styles';

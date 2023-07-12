@@ -5,12 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCartItems } from '../../store/cart/cart.actions';
 import { selectCartItems, selectCartTotal } from '../../store/cart/cart.selector';
 import { createOrderStart } from '../../store/order/order.actions';
-import {
-  selectContactAddress,
-  selectContactPhoneNumber,
-  selectOrderItem,
-  selectOrderReducer
-} from '../../store/order/order.selector';
+import { selectContactInfo, selectOrderItem } from '../../store/order/order.selector';
 import { selectCurrentUser } from '../../store/user/user.selector';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { PaymentFormContainer } from './payment-form.styles';
@@ -22,8 +17,8 @@ const PaymentForm = () => {
   const amount = useSelector(selectCartTotal) * 100;
   const cartItems = useSelector(selectCartItems);
   const currentUser = useSelector(selectCurrentUser);
-  const address = useSelector(selectContactAddress);
-  const phoneNumber = useSelector(selectContactPhoneNumber);
+  const contactInfo = useSelector(selectContactInfo);
+  const { address, phoneNumber } = contactInfo;
   const orderItem = useSelector(selectOrderItem);
   const dispatch = useDispatch();
   const stripe = useStripe();
@@ -35,6 +30,8 @@ const PaymentForm = () => {
       return;
     }
     if (!address || !(phoneNumber.length > 2)) {
+      console.log(address);
+      console.log(phoneNumber);
       alert('Заполните контактные данные');
       return;
     }
@@ -72,7 +69,8 @@ const PaymentForm = () => {
         const formedOrderItem = {
           ...orderItem,
           cartItems: cartItems,
-          userId: currentUser!.id
+          userId: currentUser!.id,
+          userName: currentUser!.displayName
         };
         dispatch(createOrderStart(formedOrderItem));
         dispatch(setCartItems([]));
