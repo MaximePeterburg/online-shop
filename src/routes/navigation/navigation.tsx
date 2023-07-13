@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-import { ReactComponent as HamburgerIcon } from '../../assets/hamburger-menu.svg';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 import CartIcon from '../../components/cart-icon/cart-icon.component';
+import Footer from '../../components/footer/footer.component';
 import HamburgerMenuIcon from '../../components/hamburger-menu-icon/hamburger-menu-icon.component';
 import SearchBar from '../../components/search-bar/search-bar.component';
 import Sidebar from '../../components/sidebar/sidebar.component';
@@ -53,6 +53,7 @@ function Navigation() {
         </HamburgerMenu>
       </NavigationContainer>
       <Outlet />
+      <Footer />
     </>
   );
 }

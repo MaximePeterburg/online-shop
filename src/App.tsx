@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import Checkout from './components/checkout/checkout.component';
+import Footer from './components/footer/footer.component';
 import OrdersPage from './components/orders-page/orders-page.component';
 import Search from './components/search-page/search-page.component';
 import { GlobalStyle } from './global.styles';

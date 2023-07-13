@@ -5,13 +5,13 @@ export const CategoryContainer = styled.div`
   width: 80%;
   grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
   grid-column-gap: 3rem;
-  row-gap: 7%;
+  row-gap: 1rem;
   margin: 3rem auto;
   @media screen and (max-width: 800px) {
     width: 100%;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 1rem;
-    row-gap: 2%;
+    row-gap: 0.5rem;
     margin: 1rem auto;
   }
 `;
