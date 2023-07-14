@@ -14,7 +14,7 @@ export const isHamburgerMenuOpen = (hamburgerMenuStatus = true): boolean => {
   return !hamburgerMenuStatus;
 };
 export type SetIsHamburgerMenuOpen = ActionWithPayload<
-  HAMBURGER_MENU_ACTION_TYPES,
+  HAMBURGER_MENU_ACTION_TYPES.SET_IS_HAMBURGER_MENU_OPEN,
   boolean
 >;
 export const setIsHamburgerMenuOpen = withMatcher(

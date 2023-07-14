@@ -5,6 +5,7 @@ import { hamburgerMenuReducer } from './hamburger-menu/hamburger-menu.store';
 import { orderReducer } from './order/order.reducer';
 import { productReducer } from './product/product.reducer';
 import { searchReducer } from './search/search.reducer';
+import { sortingReducer } from './sorting/sorting.store';
 import { userOrdersReducer } from './user-orders/user-orders.reducer';
 import { userReducer } from './user/user.reducer';
 
@@ -16,5 +17,6 @@ export const rootReducer = combineReducers({
   search: searchReducer,
   product: productReducer,
   order: orderReducer,
-  userOrders: userOrdersReducer
+  userOrders: userOrdersReducer,
+  sorting: sortingReducer
 });

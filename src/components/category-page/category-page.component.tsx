@@ -5,6 +5,7 @@ import {
   selectCategoriesIsLoading,
   selectCategoriesMap
 } from '../../store/categories/category.selector';
+import { selectSortedCategoryItems } from '../../store/sorting/sorting.store';
 import { translateRoutePart } from '../../utils/util/util.utils';
 import { ProductCard } from '../product-card/product-card.component';
 import SortSelector from '../sort-selector/sort-selector.component';
@@ -21,20 +22,18 @@ const CategoryPage = () => {
   // select categories
   const categoriesMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectCategoriesIsLoading);
+  const sortedCategoryItems = useSelector(selectSortedCategoryItems);
+
   // add state for products from categories
   const initialProductsState = categoriesMap[category];
   const [products, setProducts] = useState(initialProductsState);
   useEffect(() => {
     setProducts(categoriesMap[category]);
   }, [category, categoriesMap]);
-  const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    let sortedProducts = [...products];
-    const { value } = event.target;
-    if (value === 'price-ascening') sortedProducts.sort((a, b) => a.price - b.price);
-    if (value === 'price-descending') sortedProducts.sort((a, b) => b.price - a.price);
-    if (value === 'newest-first') sortedProducts = initialProductsState.reverse();
-    setProducts(sortedProducts);
-  };
+  useEffect(() => {
+    setProducts(sortedCategoryItems);
+  }, [sortedCategoryItems]);
+
   return (
     <>
       <Title>{translateRoutePart(category).toUpperCase()}</Title>
