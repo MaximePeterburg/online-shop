@@ -34,7 +34,9 @@ const OrdersPage = () => {
           <Button onClick={handleNavigation}>Перейти в каталог</Button>
         </NoItemsError>
       ) : (
-        userOrders.map((orderItem) => <OrderItem orderItem={orderItem} />)
+        userOrders.map((orderItem) => (
+          <OrderItem key={orderItem.id} orderItem={orderItem} />
+        ))
       )}
     </OrdersPageContainer>
   );

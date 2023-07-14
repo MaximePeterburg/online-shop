@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { LogoContainer } from '../../routes/navigation/navigation.styles';
 
 export const FooterContainer = styled.div`
+  padding: 1rem 0;
   display: flex;
   align-items: end;
   justify-content: space-around;

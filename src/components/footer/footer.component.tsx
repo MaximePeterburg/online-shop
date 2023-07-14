@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ReactComponent as GithubIcon } from '../../assets/github.svg';
-import { ContactLinks, Copyright, FooterContainer, FooterLogo } from './footer.styles';
+import { Copyright, FooterContainer, FooterLogo } from './footer.styles';
 const Footer = () => {
   return (
     <FooterContainer>

@@ -1,13 +1,13 @@
 import { AnyAction } from 'redux';
-import { OrderItem } from '../order/order.types';
 import {
   fetchUserOrdersFailed,
   fetchUserOrdersStart,
   fetchUserOrdersSuccess
 } from './user-orders.action';
+import { UserOrderItem } from './user-orders.types';
 
 export type UserOrdersState = {
-  readonly userOrders: OrderItem[];
+  readonly userOrders: UserOrderItem[];
   readonly isLoading: boolean;
   readonly error: Error | null;
 };

@@ -3,8 +3,7 @@ import {
   createAction,
   withMatcher
 } from '../../utils/reducer/reducer.utils';
-import { OrderItem } from '../order/order.types';
-import { USER_ORDERS_ACTION_TYPES } from './user-orders.types';
+import { USER_ORDERS_ACTION_TYPES, UserOrderItem } from './user-orders.types';
 
 export type FetchUserOrdersStart = ActionWithPayload<
   USER_ORDERS_ACTION_TYPES.FETCH_USER_ORDERS_START,
@@ -16,10 +15,10 @@ export const fetchUserOrdersStart = withMatcher(
 );
 export type FetchUserOrdersSuccess = ActionWithPayload<
   USER_ORDERS_ACTION_TYPES.FETCH_USER_ORDERS_SUCCESS,
-  OrderItem[]
+  UserOrderItem[]
 >;
 export const fetchUserOrdersSuccess = withMatcher(
-  (ordersArray: OrderItem[]): FetchUserOrdersSuccess =>
+  (ordersArray: UserOrderItem[]): FetchUserOrdersSuccess =>
     createAction(USER_ORDERS_ACTION_TYPES.FETCH_USER_ORDERS_SUCCESS, ordersArray)
 );
 export type FetchUserOrdersFailed = ActionWithPayload<

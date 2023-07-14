@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
@@ -7,6 +7,7 @@ import {
 } from '../../store/categories/category.selector';
 import { translateRoutePart } from '../../utils/util/util.utils';
 import { ProductCard } from '../product-card/product-card.component';
+import SortSelector from '../sort-selector/sort-selector.component';
 import Spinner from '../spinner/spinner.component';
 import { CategoryContainer, Title } from './category-page.styles';
 
@@ -21,22 +22,34 @@ const CategoryPage = () => {
   const categoriesMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectCategoriesIsLoading);
   // add state for products from categories
-  const [products, setProducts] = useState(categoriesMap[category]);
+  const initialProductsState = categoriesMap[category];
+  const [products, setProducts] = useState(initialProductsState);
   useEffect(() => {
     setProducts(categoriesMap[category]);
   }, [category, categoriesMap]);
+  const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    let sortedProducts = [...products];
+    const { value } = event.target;
+    if (value === 'price-ascening') sortedProducts.sort((a, b) => a.price - b.price);
+    if (value === 'price-descending') sortedProducts.sort((a, b) => b.price - a.price);
+    if (value === 'newest-first') sortedProducts = initialProductsState.reverse();
+    setProducts(sortedProducts);
+  };
   return (
     <>
       <Title>{translateRoutePart(category).toUpperCase()}</Title>
       {isLoading ? (
         <Spinner />
       ) : (
-        <CategoryContainer>
-          {products &&
-            products.map((product) => (
-              <ProductCard product={product} key={product.id}></ProductCard>
-            ))}
-        </CategoryContainer>
+        <>
+          <SortSelector products={products} />
+          <CategoryContainer>
+            {products &&
+              products.map((product) => (
+                <ProductCard product={product} key={product.id}></ProductCard>
+              ))}
+          </CategoryContainer>
+        </>
       )}
     </>
   );

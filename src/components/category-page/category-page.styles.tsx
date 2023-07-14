@@ -15,6 +15,7 @@ export const CategoryContainer = styled.div`
     margin: 1rem auto;
   }
 `;
+
 export const Title = styled.h2`
   text-transform: uppercase;
   font-size: 38px;
