@@ -32,7 +32,6 @@ const SignInForm = () => {
       console.log('Ошибка при входе', error);
     }
   };
-
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
     setUserErrorMessage('');

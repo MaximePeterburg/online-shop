@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
@@ -23,15 +23,17 @@ const CategoryPage = () => {
   const categoriesMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectCategoriesIsLoading);
   const sortedCategoryItems = useSelector(selectSortedCategoryItems);
-
   // add state for products from categories
   const initialProductsState = categoriesMap[category];
   const [products, setProducts] = useState(initialProductsState);
   useEffect(() => {
     setProducts(categoriesMap[category]);
   }, [category, categoriesMap]);
+  const isNotAFirstRender = useRef(false);
   useEffect(() => {
-    setProducts(sortedCategoryItems);
+    isNotAFirstRender.current
+      ? setProducts(sortedCategoryItems)
+      : (isNotAFirstRender.current = true);
   }, [sortedCategoryItems]);
 
   return (
