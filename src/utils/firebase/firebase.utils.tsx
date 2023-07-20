@@ -54,7 +54,7 @@ export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
 };
 export const getUserOrdersFromCollection = async (
   userId: string
-): Promise<OrderItem[]> => {
+): Promise<UserOrderItem[]> => {
   const collectionRef = collection(db, 'orders');
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
