@@ -84,8 +84,8 @@ const PaymentForm = () => {
         <div>Тестовые данные:</div>
         <span style={{ marginRight: '2rem' }}>4242 4242 4242 4242</span>
         <span style={{ marginRight: '1rem' }}>04/24</span>
-        <span style={{ marginRight: '1rem' }}>424</span>
-        <span style={{ marginRight: '1rem' }}>24242</span>
+        <span style={{ marginRight: '1rem' }}>242</span>
+        <span style={{ marginRight: '1rem' }}>424242</span>
       </div>
       <CardElement />
       <Button
