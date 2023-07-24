@@ -50,3 +50,25 @@ export const fetchAllOrdersFailed = withMatcher(
   (error: Error): FetchAllOrdersFailed =>
     createAction(USER_ORDERS_ACTION_TYPES.FETCH_ALL_ORDERS_FAILED, error)
 );
+export type SetOrderIsDeliveredStart = ActionWithPayload<
+  USER_ORDERS_ACTION_TYPES.SET_ORDER_IS_DELIVERED_START,
+  string
+>;
+export type SetOrderIsDeliveredSuccess =
+  Action<USER_ORDERS_ACTION_TYPES.SET_ORDER_IS_DELIVERED_SUCCESS>;
+export type SetOrderIsDeliveredFailed = ActionWithPayload<
+  USER_ORDERS_ACTION_TYPES.SET_ORDER_IS_DELIVERED_FAILED,
+  Error
+>;
+export const setOrderIsDeliveredStart = withMatcher(
+  (orderId: string): SetOrderIsDeliveredStart =>
+    createAction(USER_ORDERS_ACTION_TYPES.SET_ORDER_IS_DELIVERED_START, orderId)
+);
+export const setOrderIsDeliveredFailed = withMatcher(
+  (error: Error): SetOrderIsDeliveredFailed =>
+    createAction(USER_ORDERS_ACTION_TYPES.SET_ORDER_IS_DELIVERED_FAILED, error)
+);
+export const setOrderIsDeliveredSuccess = withMatcher(
+  (): SetOrderIsDeliveredSuccess =>
+    createAction(USER_ORDERS_ACTION_TYPES.SET_ORDER_IS_DELIVERED_SUCCESS)
+);

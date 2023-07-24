@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { setOrderIsDeliveredStart } from '../../store/user-orders/user-orders.action';
 import {
   USER_ORDER_DELIVERY_STATUSES,
   UserOrderItem
@@ -27,7 +28,7 @@ const AdminOrderItem = ({ orderItem }: OrderItemProps) => {
     total = total + cartItem.price * cartItem.quantity;
   });
   const handleClick = () => {
-    // dispatch();
+    dispatch(setOrderIsDeliveredStart(id));
   };
   return (
     <OrderItemContainer>

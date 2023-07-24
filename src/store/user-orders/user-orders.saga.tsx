@@ -1,14 +1,18 @@
 import { all, call, put, takeLatest } from 'typed-redux-saga';
 import {
   getOrdersFromCollection,
-  getUserOrdersFromCollection
+  getUserOrdersFromCollection,
+  setDeliveredOrderStatusInDocument
 } from '../../utils/firebase/firebase.utils';
 import {
   FetchUserOrdersStart,
+  SetOrderIsDeliveredStart,
   fetchAllOrdersFailed,
   fetchAllOrdersSuccess,
   fetchUserOrdersFailed,
-  fetchUserOrdersSuccess
+  fetchUserOrdersSuccess,
+  setOrderIsDeliveredFailed,
+  setOrderIsDeliveredSuccess
 } from './user-orders.action';
 import { USER_ORDERS_ACTION_TYPES } from './user-orders.types';
 
@@ -38,6 +42,24 @@ export function* fetchAllOrdersAsync() {
 export function* onFetchAllOrders() {
   yield* takeLatest(USER_ORDERS_ACTION_TYPES.FETCH_ALL_ORDERS_START, fetchAllOrdersAsync);
 }
+export function* setOrderIsDeliveredAsync({ payload }: SetOrderIsDeliveredStart) {
+  try {
+    yield* call(setDeliveredOrderStatusInDocument, payload);
+    yield* put(setOrderIsDeliveredSuccess());
+  } catch (error) {
+    yield* put(setOrderIsDeliveredFailed(error as Error));
+  }
+}
+export function* onSetOrderIsDelivered() {
+  yield* takeLatest(
+    USER_ORDERS_ACTION_TYPES.SET_ORDER_IS_DELIVERED_START,
+    setOrderIsDeliveredAsync
+  );
+}
 export function* userOrdersSaga() {
-  yield* all([call(onFetchUserOrders), call(onFetchAllOrders)]);
+  yield* all([
+    call(onFetchUserOrders),
+    call(onFetchAllOrders),
+    call(onSetOrderIsDelivered)
+  ]);
 }

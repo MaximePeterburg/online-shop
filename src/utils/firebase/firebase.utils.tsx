@@ -20,11 +20,15 @@ import {
   query,
   QueryDocumentSnapshot,
   setDoc,
+  updateDoc,
   writeBatch
 } from 'firebase/firestore';
 import { Category, CategoryItem } from '../../store/categories/category.types';
 import { OrderItem } from '../../store/order/order.types';
-import { UserOrderItem } from '../../store/user-orders/user-orders.types';
+import {
+  USER_ORDER_DELIVERY_STATUSES,
+  UserOrderItem
+} from '../../store/user-orders/user-orders.types';
 const firebaseConfig = {
   apiKey: 'AIzaSyC7c5o_BIiIkPfqa3_ksWHJcxdYRfiAWG8',
   authDomain: 'online-shop-b33e0.firebaseapp.com',
@@ -76,6 +80,7 @@ export const getOrdersFromCollection = async (): Promise<UserOrderItem[]> => {
     return { ...data, createdAt: data.createdAt.toDate(), id } as UserOrderItem;
   });
 };
+
 export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
   const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
@@ -168,7 +173,17 @@ export const createOrderDocument = async (order: OrderItem) => {
   try {
     await setDoc(orderDocRef, { ...order, createdAt });
   } catch (error) {
-    console.log('error createing order');
+    console.log('error createing order', error);
+  }
+};
+export const setDeliveredOrderStatusInDocument = async (orderId: string) => {
+  const orderDocRef = doc(collection(db, 'orders'), orderId);
+  try {
+    await updateDoc(orderDocRef, {
+      status: USER_ORDER_DELIVERY_STATUSES.USER_ORDER_DELIVERY_DELIVERED
+    });
+  } catch (error) {
+    console.log('error updating order status', error);
   }
 };
 export const onAuthStateChangedListener = (callback: NextOrObserver<User>) => {
