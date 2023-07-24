@@ -1,5 +1,4 @@
 import { all, call } from 'typed-redux-saga';
-import { adminOrdersSaga } from './admin-orders/admin-orders.store';
 import { categoriesSaga } from './categories/category.saga';
 import { orderSaga } from './order/order.saga';
 import { productSaga } from './product/product.saga';
@@ -14,7 +13,6 @@ export function* rootSaga() {
     call(productSaga),
     call(searchSaga),
     call(orderSaga),
-    call(userOrdersSaga),
-    call(adminOrdersSaga)
+    call(userOrdersSaga)
   ]);
 }

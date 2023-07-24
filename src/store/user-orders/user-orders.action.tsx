@@ -1,4 +1,5 @@
 import {
+  Action,
   ActionWithPayload,
   createAction,
   withMatcher
@@ -28,4 +29,24 @@ export type FetchUserOrdersFailed = ActionWithPayload<
 export const fetchUserOrdersFailed = withMatcher(
   (error: Error): FetchUserOrdersFailed =>
     createAction(USER_ORDERS_ACTION_TYPES.FETCH_USER_ORDERS_FAILED, error)
+);
+export type FetchAllOrdersStart = Action<USER_ORDERS_ACTION_TYPES.FETCH_ALL_ORDERS_START>;
+export type FetchAllOrdersSuccess = ActionWithPayload<
+  USER_ORDERS_ACTION_TYPES.FETCH_ALL_ORDERS_SUCCESS,
+  UserOrderItem[]
+>;
+export type FetchAllOrdersFailed = ActionWithPayload<
+  USER_ORDERS_ACTION_TYPES.FETCH_ALL_ORDERS_FAILED,
+  Error
+>;
+export const fetchAllOrdersStart = withMatcher(
+  (): FetchAllOrdersStart => createAction(USER_ORDERS_ACTION_TYPES.FETCH_ALL_ORDERS_START)
+);
+export const fetchAllOrdersSuccess = withMatcher(
+  (orders: UserOrderItem[]): FetchAllOrdersSuccess =>
+    createAction(USER_ORDERS_ACTION_TYPES.FETCH_ALL_ORDERS_SUCCESS, orders)
+);
+export const fetchAllOrdersFailed = withMatcher(
+  (error: Error): FetchAllOrdersFailed =>
+    createAction(USER_ORDERS_ACTION_TYPES.FETCH_ALL_ORDERS_FAILED, error)
 );

@@ -8,6 +8,10 @@ export const selectUserOrders = createSelector(
   [selectUserOrdersReducer],
   (userOrdersSlice) => userOrdersSlice.userOrders
 );
+export const selectAllOrders = createSelector(
+  [selectUserOrdersReducer],
+  (userOrdersSlice) => userOrdersSlice.adminOrders
+);
 export const selectUserOrdersIsLoading = createSelector(
   [selectUserOrdersReducer],
   (userOrdersSlice) => userOrdersSlice.isLoading
