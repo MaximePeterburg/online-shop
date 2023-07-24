@@ -67,7 +67,7 @@ const CartDropdown = () => {
         Итого ({cartCount} {getGoodsForm(cartCount)}):
         <CartTotal>{cartTotal} &#8381;</CartTotal>
       </Footer>
-      <Button onClick={handleNavigation}>Корзина</Button>
+      <Button onClick={handleNavigation}>Оформить</Button>
     </CartDropdownContainer>
   );
 };

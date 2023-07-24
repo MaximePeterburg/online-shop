@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { adminOrdersReducer } from './admin-orders/admin-orders.store';
 import { cartReducer } from './cart/cart.reducer';
 import { categoriesReducer } from './categories/category.reducer';
 import { hamburgerMenuReducer } from './hamburger-menu/hamburger-menu.store';
@@ -18,5 +19,6 @@ export const rootReducer = combineReducers({
   product: productReducer,
   order: orderReducer,
   userOrders: userOrdersReducer,
-  sorting: sortingReducer
+  sorting: sortingReducer,
+  adminOrders: adminOrdersReducer
 });

@@ -66,6 +66,16 @@ export const getUserOrdersFromCollection = async (
     })
     .filter((order) => order.userId === userId);
 };
+export const getOrdersFromCollection = async (): Promise<UserOrderItem[]> => {
+  const collectionRef = collection(db, 'orders');
+  const q = query(collectionRef);
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map((docSnapshot) => {
+    const data = docSnapshot.data();
+    const id = docSnapshot.id;
+    return { ...data, createdAt: data.createdAt.toDate(), id } as UserOrderItem;
+  });
+};
 export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
   const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
@@ -92,6 +102,7 @@ export const getItemsFromDocumentsByTerm = async (
     .flatMap((category) => category.items)
     .filter(({ name }) => name.toLocaleLowerCase().includes(term.toLocaleLowerCase()));
 };
+
 export type AdditionalInformation = {
   displayName?: string;
 };
@@ -99,6 +110,7 @@ export type UserData = {
   email: string;
   displayName: string;
   createdAt: Date;
+  isAdmin: boolean;
 };
 
 const googleProvider = new GoogleAuthProvider();
@@ -141,6 +153,7 @@ export const createUserDocumentFromAuth = async (
         displayName,
         email,
         createdAt,
+        isAdmin: false,
         ...additionalInformation
       });
     } catch (error) {

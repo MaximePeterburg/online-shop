@@ -7,7 +7,6 @@ export const FooterContainer = styled.div`
   align-items: end;
   justify-content: space-around;
   width: 100%;
-  height: 100%;
   margin-top: auto;
 `;
 export const FooterLogo = styled(LogoContainer)``;

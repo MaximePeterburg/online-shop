@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import Footer from '../../components/footer/footer.component';
@@ -23,7 +23,11 @@ function Navigation() {
   const currentUser = useSelector(selectCurrentUser);
   const isHamburgerMenuOpen = useSelector(selectIsHamburgerMenuOpen);
   const dispatch = useDispatch();
-  const signOutUser = () => dispatch(signOutStart());
+  const navigate = useNavigate();
+  const signOutUser = () => {
+    dispatch(signOutStart());
+    navigate('/');
+  };
   const isCartOpen = useSelector(selectIsCartOpen);
   return (
     <>
@@ -32,6 +36,7 @@ function Navigation() {
         <SearchBar />
         <NavLinks>
           <HidebleLinkList>
+            {currentUser?.isAdmin && <NavLink to='/dashboard'>ПАНЕЛЬ УПРАВЛЕНИЯ</NavLink>}
             <NavLink to='/shop'>КАТАЛОГ</NavLink>
             {currentUser && <NavLink to='/orders'>ЗАКАЗЫ</NavLink>}
           </HidebleLinkList>

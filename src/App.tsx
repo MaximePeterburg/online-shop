@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
+import AdminDashboard from './components/admin-dashboard-page/admin-dashboard-page.component';
 import Checkout from './components/checkout/checkout.component';
 import Footer from './components/footer/footer.component';
+import OrdersHandlingPage from './components/orders-handling-page/orders-handling-page.component';
 import OrdersPage from './components/orders-page/orders-page.component';
 import Search from './components/search-page/search-page.component';
 import { GlobalStyle } from './global.styles';
@@ -27,6 +29,9 @@ function App() {
           <Route path='checkout' element={<Checkout />} />
           <Route path='search' element={<Search />} />
           <Route path='orders' element={<OrdersPage />} />
+          <Route path='dashboard/' element={<AdminDashboard />}>
+            <Route path='orders-handling' element={<OrdersHandlingPage />} />
+          </Route>
         </Route>
       </Routes>
     </>

@@ -64,7 +64,6 @@ const ContactInfo = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors }
   } = useForm<FormInputValues>();
   const onSubmit: SubmitHandler<FormInputValues> = (contactInfo) => {

@@ -32,6 +32,9 @@ const Sidebar = () => {
   return (
     <SideBarContainer ref={sidebarRef}>
       <LinkList>
+        {currentUser?.isAdmin && (
+          <SidebarLink to='/dashboard'>ПАНЕЛЬ УПРАВЛЕНИЯ</SidebarLink>
+        )}
         <SidebarLink to='/shop'>КАТАЛОГ</SidebarLink>
         {currentUser ? (
           <>

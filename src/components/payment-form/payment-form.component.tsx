@@ -6,6 +6,7 @@ import { setCartItems } from '../../store/cart/cart.actions';
 import { selectCartItems, selectCartTotal } from '../../store/cart/cart.selector';
 import { createOrderStart } from '../../store/order/order.actions';
 import { selectContactInfo, selectOrderItem } from '../../store/order/order.selector';
+import { USER_ORDER_DELIVERY_STATUSES } from '../../store/user-orders/user-orders.types';
 import { selectCurrentUser } from '../../store/user/user.selector';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { PaymentFormContainer } from './payment-form.styles';
@@ -70,7 +71,8 @@ const PaymentForm = () => {
           ...orderItem,
           cartItems: cartItems,
           userId: currentUser!.id,
-          userName: currentUser!.displayName
+          userName: currentUser!.displayName,
+          status: USER_ORDER_DELIVERY_STATUSES.USER_ORDER_DELIVERY_CREATED
         };
         dispatch(createOrderStart(formedOrderItem));
         dispatch(setCartItems([]));
@@ -85,7 +87,7 @@ const PaymentForm = () => {
         <span style={{ marginRight: '2rem' }}>4242 4242 4242 4242</span>
         <span style={{ marginRight: '1rem' }}>04/24</span>
         <span style={{ marginRight: '1rem' }}>242</span>
-        <span style={{ marginRight: '1rem' }}>424242</span>
+        <span style={{ marginRight: '1rem' }}>42424</span>
       </div>
       <CardElement />
       <Button

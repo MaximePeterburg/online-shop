@@ -11,11 +11,3 @@ export const selectContactInfo = createSelector(
   [selectOrderItem],
   (order) => order.contactInfo
 );
-// export const selectContactAddress = createSelector(
-//   [selectContactInfo],
-//   (contactInfo) => contactInfo.address
-// );
-// export const selectContactPhoneNumber = createSelector(
-//   [selectContactInfo],
-//   (contactInfo) => contactInfo.phoneNumber
-// );
