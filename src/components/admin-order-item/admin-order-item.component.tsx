@@ -1,5 +1,9 @@
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setOrderIsDeliveredStart } from '../../store/user-orders/user-orders.action';
+import {
+  fetchAllOrdersStart,
+  setOrderIsDeliveredStart
+} from '../../store/user-orders/user-orders.action';
 import {
   USER_ORDER_DELIVERY_STATUSES,
   UserOrderItem
@@ -8,7 +12,6 @@ import Button from '../button/button.component';
 import OrderItemCard from '../order-item-card/order-item-card.component';
 import {
   Header,
-  Id,
   OrderItemContainer,
   OrderItems,
   UserInfo
@@ -22,6 +25,7 @@ type OrderItemProps = {
 const AdminOrderItem = ({ orderItem }: OrderItemProps) => {
   const dispatch = useDispatch();
   const { userName, createdAt, id, userId, status } = orderItem;
+  const [statusStr, setStatusStr] = useState('создан');
   const { phoneNumber, address } = orderItem.contactInfo;
   let total = 0;
   orderItem.cartItems.map((cartItem) => {
@@ -29,17 +33,28 @@ const AdminOrderItem = ({ orderItem }: OrderItemProps) => {
   });
   const handleClick = () => {
     dispatch(setOrderIsDeliveredStart(id));
+    setStatusStr('доставлен');
   };
+  // const isFirstRender = useRef(true);
+  // useEffect(() => {
+  //   console.log(isFirstRender);
+  //   if (!isFirstRender.current) {
+  //     dispatch(fetchAllOrdersStart());
+  //     console.log('orders fetched');
+  //   }
+  //   isFirstRender.current = false;
+  // }, [statusIsSet]);
+
   return (
     <OrderItemContainer>
-      <div>
-        Код заказа: <b>{id}</b>
-      </div>
-      <div>
-        ID Пользователя: <b>{userId}</b>
-      </div>
       <Header>
         <UserInfo>
+          <div>
+            Код заказа: <b>{id}</b>
+          </div>
+          <div>
+            ID Пользователя: <b>{userId}</b>
+          </div>
           <div>
             <span>Адрес доставки:</span>
             <div>
@@ -75,6 +90,9 @@ const AdminOrderItem = ({ orderItem }: OrderItemProps) => {
       <Status>
         <div>
           Статус заказа:{' '}
+          {statusStr === USER_ORDER_DELIVERY_STATUSES.USER_ORDER_DELIVERY_CREATED && (
+            <StatusSpan color='red'>создан</StatusSpan>
+          )}
           {status === USER_ORDER_DELIVERY_STATUSES.USER_ORDER_DELIVERY_CREATED && (
             <StatusSpan color='red'>создан</StatusSpan>
           )}
