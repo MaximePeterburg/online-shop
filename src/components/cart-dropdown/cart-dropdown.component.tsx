@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { switchIsCartOpen } from '../../store/cart/cart.actions';
@@ -25,10 +25,10 @@ const CartDropdown = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isCartOpen = useSelector(selectIsCartOpen);
-  const handleNavigation = () => {
+  const handleNavigation = useCallback(() => {
     dispatch(switchIsCartOpen(isCartOpen));
     navigate('/checkout');
-  };
+  }, []);
   const dropdownRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {

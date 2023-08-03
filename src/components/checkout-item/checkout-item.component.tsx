@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -27,7 +27,7 @@ export type CheckoutItemProps = {
   cartItem: CartItem;
 };
 
-export const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
+export const CheckoutItem: FC<CheckoutItemProps> = memo(({ cartItem }) => {
   const { name, quantity, price, imageUrl, id } = cartItem;
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
@@ -77,4 +77,4 @@ export const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
       </RemoveButton>
     </CheckoutItemContainer>
   );
-};
+});

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -24,7 +25,7 @@ import {
 export type CartItemProps = {
   cartItem: TCartItem;
 };
-const CartItem = ({ cartItem }: CartItemProps) => {
+const CartItem = memo(({ cartItem }: CartItemProps) => {
   const { name, quantity, price, imageUrl, id } = cartItem;
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
@@ -71,6 +72,6 @@ const CartItem = ({ cartItem }: CartItemProps) => {
       </ItemDetails>
     </CartItemContainer>
   );
-};
+});
 
 export default CartItem;
