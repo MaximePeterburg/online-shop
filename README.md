@@ -16,4 +16,23 @@ Welcome to "TopShop Parfumes," your premium online destination for exquisite fra
   <img src="https://i.ytimg.com/vi/nF4vw3efUwY/maxresdefault.jpg" height='64' />
 </span>
 <h2>Demo</h2>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/a8ho3Jz208k?si=WpEqj97vo9g_IwXt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<img src="https://i.imgur.com/K8sMHFj.gif" height="512" />
+<a href="https://www.youtube.com/watch?v=Qesd0xe01Mw">Watch demo on Youtube</a>
+<div><a href='https://topshop-parfumes.netlify.app/'>Tryout Website</a></div>
+<h2>Features</h2>
+<h3>Authentication</h3>
+Email and password fields are required, display name is optional. The password and email fields are being validated. Also there is an option to login using Google.
+<h3>Catalogue</h3>
+All products are divided into 2 categories: men's and women's. Each product has its own page with a scent description and price. There are breadcrumbs for ease of navigation inside of the catalogue. You can sort the category by price and newest first.
+<h3>Cart</h3>
+You can add items to cart, and then inside of it you can control the ammount of each product, track total price and ammount of items. After you added all of the wanted items, you can proceed to checkout.
+<h3>Checkout</h3>
+On checkout page you can control ammount of products, and a user can change contains of the cart. Before paying for the products, a user has to fill in contact info. The address field input is being standartized, a user chooses options in the dropdown. The phone number is also being normalized. Both fields are then validated.
+<h3>Payment form modal</h3>
+A user pays for the products using payment form.
+<h3>Orders</h3>
+On orders page a user can track the status of their order. Orders page also contains information about all of the previous orders.
+<h3>Search</h3>
+A user can look for desired parfumes by name using the search field. On every input, the dropdown with products fitting the query input are being shown. A user then can choose to click on the dropdown, or proceed to the search page and look at the all of the fitting options.
+<h3>Administrative panel</h3>
+Users marked as admin can access dashboard. They can mark orders as delivered.
