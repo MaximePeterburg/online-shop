@@ -14,6 +14,9 @@ Welcome to "TopShop Parfumes," your premium online destination for exquisite fra
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" width="64" height="64"/>
   <img src="https://user-images.githubusercontent.com/36799589/69492522-e6b41b80-0ec9-11ea-90d3-b37bacad7ca8.png" height='64'/>
   <img src="https://i.ytimg.com/vi/nF4vw3efUwY/maxresdefault.jpg" height='64' />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain-wordmark.svg" width="64" height="64" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Netlify_logo_%282%29.svg/1200px-Netlify_logo_%282%29.svg.png" height="64"/>
+  <img src="https://user-images.githubusercontent.com/2752551/30405068-a7733b34-989e-11e7-8f66-7badaf1373ed.png" height="64"/>
 </span>
 <h2>Demo</h2>
 <img src="https://i.imgur.com/K8sMHFj.gif" height="512" />
